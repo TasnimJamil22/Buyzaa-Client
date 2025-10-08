@@ -1,5 +1,6 @@
 import Container from "@/components/UI/Container";
 import ProductCard from "@/components/UI/Products";
+
 import ProductDetail from "@/components/UI/Products/ProductDetail";
 import ProductReview from "@/components/UI/Products/ProductReview";
 import { getAProdudctById } from "@/services/Product";

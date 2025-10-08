@@ -1,22 +1,26 @@
 "use client";
 
+import BZModal from "@/components/modals/BZModal";
 import { TProduct } from "@/types"; // adjust path to your interface
+import CreateProductForm from "./CreateProductForm";
+import UpdateProductForm from "./UpdateProductForm";
 
-interface ProductDetailProps {
+interface IProps {
   product: TProduct;
 }
 
-export default function ProductDetail({ product }: ProductDetailProps) {
+export default function ProductDetail({ product }: IProps) {
   console.log(product);
+  console.log(product?.category?.name);
   return (
     <div className="max-w-10xl mx-auto p-6 sm:p-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-lg shadow-lg overflow-hidden mx-auto">
         {/* Left: Product Image */}
-        <div className="flex items-center justify-center bg-gray-100">
+        <div className="flex items-center justify-center bg-gray-100 rounded-lg">
           <img
             src={product.images?.[0] || "/placeholder.jpg"}
             alt={product.name}
-            className="w-full h-auto max-h-[500px] object-contain"
+            className="w-full h-auto max-h-[500px] object-contain rounded-lg"
           />
         </div>
 
@@ -25,7 +29,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <div>
             <h1 className="text-2xl font-bold text-gray-800">{product.name}</h1>
             <p className="text-sm text-gray-500 mt-1">
-              Category: {product.category?._id}
+              Category: {product?.category?.name}
             </p>
             <p className="text-lg text-gray-700 mt-4">{product.description}</p>
           </div>
@@ -61,6 +65,13 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           >
             Add to Cart
           </button>
+        </div>
+        <div className="mx-auto my-10">
+          <BZModal
+            buttonText="Update Product"
+            //we are sending product={product} to <UpdateProductForm/>
+            body={<UpdateProductForm product={product} />}
+          />
         </div>
       </div>
     </div>

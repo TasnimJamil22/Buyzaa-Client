@@ -63,6 +63,12 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem className="hidden sm:flex gap-2">
+          <NextLink href="/login">Login</NextLink>
+        </NavbarItem>
+        <NavbarItem className="hidden sm:flex gap-2">
+          <NextLink href="/register">Register</NextLink>
+        </NavbarItem>
+        <NavbarItem className="hidden sm:flex gap-2">
           <NextLink href="/cart">
             <CartIcon />
           </NextLink>

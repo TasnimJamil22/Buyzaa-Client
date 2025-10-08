@@ -7,6 +7,7 @@ import { revalidateTag } from "next/cache";
 
 //get all user
 //data fetching : using fetch
+// they get arguments from whatever function calls them
 export const getAllUser = async () => {
   const res = await fetch(`${envConfig.baseApi}/users`);
 

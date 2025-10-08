@@ -28,6 +28,18 @@ export const siteConfig = {
       //   // add more sub-links later
       // ],
     },
+    {
+      label: "Categories",
+      href: "/admin/categories",
+    },
+    {
+      lebel: "Login",
+      href: "/login",
+    },
+    {
+      lebel: "Register",
+      href: "/register",
+    },
 
     {
       label: "About",

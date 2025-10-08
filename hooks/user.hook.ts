@@ -21,11 +21,14 @@ export const useGetAllUser = () => {
 };
 
 // Create user
+
 export const useCreateUser = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (userData: Partial<TUser>) => createUser(userData),
+    mutationFn: async (userData: TUser) => {
+      return await createUser(userData);
+    },
     onSuccess: () => {
       // ✅ Refetch the list of users
       queryClient.invalidateQueries({ queryKey: ["GET-ALL-USER"] });
@@ -35,7 +38,7 @@ export const useCreateUser = () => {
         color: "success",
       });
       // ✅ Refetch the list of users
-      queryClient.invalidateQueries({ queryKey: ["GET-ALL-USER"] });
+      // queryClient.invalidateQueries({ queryKey: ["GET-ALL-USER"] });
     },
     onError: (error: any) => {
       addToast({
@@ -48,6 +51,7 @@ export const useCreateUser = () => {
 };
 
 //delete a user by id
+// 👇 argument 'userId' comes from the component that called useDeleteUser(userId)
 export const useDeleteUser = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -72,6 +76,7 @@ export const useDeleteUser = () => {
   });
 };
 //update user
+//partial = it makes each property optional
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
   return useMutation({

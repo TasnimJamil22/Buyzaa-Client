@@ -12,7 +12,7 @@ interface IProps extends formConfig {
   onSubmit: SubmitHandler<any>;
 }
 
-export default function BZFrom({
+export default function BZForm({
   children,
   onSubmit,
   defaultValues,

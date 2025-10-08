@@ -4,6 +4,14 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
+//category
+export interface TCategory {
+  _id?: string;
+  name: string;
+  description: string;
+  images?: string[];
+  isDeleted?: boolean;
+}
 export interface TProduct {
   _id?: string;
   name: string;
@@ -12,14 +20,6 @@ export interface TProduct {
   quantity: number;
   // category: string;
   category: TCategory;
-  images?: string[];
-}
-
-//category
-export interface TCategory {
-  _id?: string;
-  name: string;
-  description: string;
   images?: string[];
 }
 

@@ -20,7 +20,7 @@ export default function ProductCard({ product }: IProps) {
         <Image
           alt="Sunglasses"
           src={images && images.length > 0 ? images[0] : undefined}
-          className="w-full h-48 object-cover mx-auto "
+          className="w-96 h-48 object-cover mx-auto "
         />
       </CardHeader>
 

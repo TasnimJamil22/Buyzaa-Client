@@ -73,7 +73,7 @@ export default function Cart({ initialItems = [] }: CartProps) {
               />
               <div>
                 <h2 className="font-semibold">{item.name}</h2>
-                <p className="text-gray-500">{item.category}</p>
+                <p className="text-gray-500">{item.category.name}</p>
                 <p className="text-gray-700 font-semibold">${item.price}</p>
               </div>
             </div>
