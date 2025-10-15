@@ -23,7 +23,7 @@ export default async function Products() {
           <ProductCard key={product.id} product={product} />
         ))} */}
         {/* {products?.map((product: any) => (
-          <ProductCard key={product._id} product={product} />
+          <ProductCard key={product._id} product={product}  />
         ))} */}
       </div>
       <div>
@@ -35,7 +35,6 @@ export default async function Products() {
           body={<CreateProductForm products={products} />}
         />
       </div> */}
-      
     </div>
   );
 }

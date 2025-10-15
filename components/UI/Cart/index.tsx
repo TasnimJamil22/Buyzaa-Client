@@ -1,116 +1,90 @@
-"use client";
-
+import { useCart } from "@/context/cart.provider";
+import { Divider } from "@heroui/divider";
 import { useState } from "react";
-import { TProduct } from "@/types"; // your product interface
-import { Button } from "@heroui/button";
+import CartQuantity from "./CartQuantity";
 
-interface CartItem extends TProduct {
-  quantity: number;
-}
-
-interface CartProps {
-  initialItems?: CartItem[];
-}
-
-export default function Cart({ initialItems = [] }: CartProps) {
-  const [cartItems, setCartItems] = useState<CartItem[]>(initialItems);
-
-  // Increase quantity
-  const increaseQty = (id?: string) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item._id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
-
-  // Decrease quantity
-  const decreaseQty = (id?: string) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item._id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
-  };
-
-  // Remove item
-  const removeItem = (id?: string) => {
-    setCartItems((prev) => prev.filter((item) => item._id !== id));
-  };
-
-  // Calculate total price
-  const totalPrice = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
-
-  if (cartItems.length === 0) {
-    return (
-      <p className="text-center mt-10 text-gray-500 text-lg">
-        Your cart is empty.
-      </p>
-    );
-  }
+export default function MyCart() {
+  const {
+    cartItems,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+    clearCart,
+  } = useCart();
 
   return (
-    <div className="max-w-6xl mx-auto p-4 space-y-6">
-      <h1 className="text-2xl font-bold">Your Cart</h1>
+    <div>
+      {cartItems?.length === 0 ? (
+        <div className="text-center text-default-900 rounded-lg">
+          🛒 Your cart is empty
+        </div>
+      ) : (
+        <ul className="">
+          {cartItems?.map((item) => (
+            // <li
+            //   key={item.productId}
+            //   className="flex justify-between items-center bg-white border border-gray-200 rounded-lg shadow-sm p-3 hover:bg-yellow-50 transition-all"
+            // >
+            //   <span className="font-semibold text-gray-800">{item.name}</span>
+            //   <span className="text-sm text-gray-600">
+            //     Qty: {item.quantity}
+            //   </span>
+            // </li>
+            <li key={item.productId} className="">
+              {/* Quantity controls (vertical) */}
 
-      <div className="space-y-4">
-        {cartItems.map((item) => (
-          <div
-            key={item._id}
-            className="flex flex-col sm:flex-row items-center justify-between bg-white p-4 rounded-lg shadow-md"
-          >
-            {/* Product Info */}
-            <div className="flex items-center space-x-4">
-              <img
-                src={item.images?.[0] || "/placeholder.jpg"}
-                alt={item.name}
-                className="w-24 h-24 object-cover rounded"
-              />
-              <div>
-                <h2 className="font-semibold">{item.name}</h2>
-                <p className="text-gray-500">{item.category.name}</p>
-                <p className="text-gray-700 font-semibold">${item.price}</p>
-              </div>
-            </div>
+              <div className="flex items-center gap-3">
+                <div className="flex flex-col items-center  px-2 py-1">
+                  <button
+                    onClick={() => increaseQuantity(item.productId)}
+                    className="w-6 h-6 flex items-center justify-center hover:bg-gray-100 rounded "
+                  >
+                    +
+                  </button>
 
-            {/* Quantity and Remove */}
-            <div className="flex items-center space-x-4 mt-4 sm:mt-0">
-              <div className="flex items-center border rounded-lg">
+                  {/* <span className="text-sm">{item.quantity}</span> */}
+                  <span className="text-sm text-green-600">
+                    {item.quantity}
+                  </span>
+
+                  <button
+                    onClick={() => decreaseQuantity(item.productId)}
+                    className="w-6 h-6 flex items-center justify-center hover:bg-gray-100 rounded"
+                  >
+                    −
+                  </button>
+                </div>
+
+                <div className="flex flex-col mr-5 w-3/5">
+                  {/* Product name */}
+                  <span>{item.name}</span>
+                  <span className="text-sm text-default-500">
+                    ${item.price}/each
+                  </span>
+                </div>
+                {/* price per quantity */}
+                <div>
+                  {item.quantity === 1 ? (
+                    <span>${item.price}</span>
+                  ) : (
+                    <span>${(item.price * item.quantity).toFixed(2)} </span>
+                    // <span>${item.price * item.quantity} </span>
+                  )}
+                </div>
+                {/* Remove button */}
                 <button
-                  onClick={() => decreaseQty(item._id)}
-                  className="px-3 py-1 hover:bg-gray-200"
+                  onClick={() => removeFromCart(item.productId)}
+                  className="text-red-500 hover:text-red-700"
+                  title="Remove item"
                 >
-                  -
-                </button>
-                <span className="px-4">{item.quantity}</span>
-                <button
-                  onClick={() => increaseQty(item._id)}
-                  className="px-3 py-1 hover:bg-gray-200"
-                >
-                  +
+                  X
                 </button>
               </div>
-
-              <Button variant="bordered" onClick={() => removeItem(item._id)}>
-                Remove
-              </Button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Total */}
-      <div className="flex justify-between items-center mt-6 p-4 bg-gray-100 rounded-lg">
-        <p className="text-xl font-semibold">Total: ${totalPrice.toFixed(2)}</p>
-        <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
-          Checkout
-        </Button>
-      </div>
+              <Divider />
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

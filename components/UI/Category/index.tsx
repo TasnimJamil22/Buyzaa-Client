@@ -11,10 +11,12 @@ interface IProps {
   categories: TCategory[];
 }
 
-export default function CategoryList({ categories }: IProps) {
-  console.log("Categories", categories);
+export default function CategoryList() {
+  // export default function CategoryList({ categories }: IProps) {
+  // console.log("Categories", categories);
 
-  //   const { data, isLoading, error } = useGetAllCategories();
+  const { data, isLoading, error } = useGetAllCategories();
+  const categories: TCategory[] = data?.data || [];
 
   //   if (isLoading)
   //     return <p className="text-center mt-10">Loading categories...</p>;

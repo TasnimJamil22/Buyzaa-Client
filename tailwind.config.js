@@ -13,6 +13,10 @@ const config = {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
       },
+      colors: {
+        accent: "oklch(83.7% 0.128 66.29)",
+         
+      },
     },
   },
   darkMode: "class",

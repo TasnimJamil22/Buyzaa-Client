@@ -4,6 +4,7 @@ import BZInput from "@/components/form/BZInput";
 import { useRegisterUser } from "@/hooks/auth.hook";
 import { TUser } from "@/types";
 import { Button } from "@heroui/button";
+import Link from "next/link";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
 export default function RegisterPage() {
@@ -17,8 +18,8 @@ export default function RegisterPage() {
   };
   return (
     <div className=" w-full max-w-md mx-auto my-32 ">
-      <div className="w-full max-w-md  py-12 px-8 rounded-2xl shadow-md">
-        <h1 className="text-3xl text-default-700 font-semibold mb-6 font-[Manrope] mx-auto">
+      <div className="w-full max-w-md  py-12 px-8 rounded-2xl shadow-md items-center">
+        <h1 className="text-4xl font-semibold mb-6 text-accent font-[Manrope]">
           Please Register
         </h1>
         <BZForm onSubmit={onSubmit}>
@@ -29,9 +30,15 @@ export default function RegisterPage() {
             <BZInput name="mobileNumber" label="Mobile Number" />
           </div>
           <div className="mt-4">
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full bg-accent">
               Register
             </Button>
+            <p className="text-default-500 py-3">
+              Alreadly have an account?
+              <Link className="text-amber-800" href="/login">
+                Log in
+              </Link>
+            </p>
           </div>
         </BZForm>
       </div>

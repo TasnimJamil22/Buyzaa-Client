@@ -3,7 +3,7 @@
 
 import {
   createCategory,
-  deleteCatagory,
+  deleteCategory,
   getAllCategories,
   updateCategory,
 } from "@/services/Category";
@@ -50,7 +50,7 @@ export const useCreateCategory = () => {
 export const useDeleteCategory = () => {
   return useMutation({
     mutationFn: async (categoryId: string) => {
-      return await deleteCatagory(categoryId);
+      return await deleteCategory(categoryId);
     },
   });
 };

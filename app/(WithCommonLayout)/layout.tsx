@@ -1,9 +1,11 @@
-import { Navbar } from "@/components/navbar";
+"use client";
+import Navbar from "@/components/navbar";
+import Sidebar from "@/components/UI/Sidebar";
 import { ReactNode } from "react";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div>
+    <div className="relative flex flex-col h-screen">
       <Navbar />
       <main> {children}</main>
     </div>

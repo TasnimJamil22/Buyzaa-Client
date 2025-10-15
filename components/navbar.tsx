@@ -1,3 +1,4 @@
+"use client";
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
@@ -26,8 +27,28 @@ import {
   Logo,
   CartIcon,
 } from "@/components/icons";
+import { useUser } from "@/context/user.provider";
+import { logoutUser } from "@/services/AuthService";
+import { usePathname, useRouter } from "next/navigation";
+import { protectedRoutes } from "@/constant";
+import NavbarDropdown from "./NavbarDropdown";
+import { Badge } from "@heroui/badge";
+import { useCart } from "@/context/cart.provider";
 
-export const Navbar = () => {
+export default function Navbar() {
+  //this is our hook useUser to get user from UserContext
+  const { user, setUser, setIsLoading } = useUser();
+  const router = useRouter();
+  const pathname = usePathname();
+  const { cartItems } = useCart();
+  // const handleLogout = () => {
+  //   logoutUser();
+  //   setUser(null);
+  //   setIsLoading(true);
+  //   if (protectedRoutes.some((route) => pathname.match(route))) {
+  //     router.push("/");
+  //   }
+  // };
   return (
     <HeroUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -62,20 +83,21 @@ export const Navbar = () => {
         <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem className="hidden sm:flex gap-2">
-          <NextLink href="/login">Login</NextLink>
-        </NavbarItem>
-        <NavbarItem className="hidden sm:flex gap-2">
-          <NextLink href="/register">Register</NextLink>
-        </NavbarItem>
-        <NavbarItem className="hidden sm:flex gap-2">
+        {user?.email ? (
+          <NavbarItem className="hidden sm:flex gap-2">
+            <NavbarDropdown />
+          </NavbarItem>
+        ) : (
+          <NavbarItem className="hidden sm:flex gap-2">
+            <NextLink href="/login">Login</NextLink>
+          </NavbarItem>
+        )}
+        {/* cart icon */}
+        {/* <NavbarItem className="hidden sm:flex gap-2">
           <NextLink href="/cart">
-            <CartIcon />
-          </NextLink>
-        </NavbarItem>
-        {/* <NavbarItem className="sm:flex gap-2">
-          <NextLink href="/admin/userManage/">
-            <CartIcon />
+            <Badge content={cartItems.length} color="danger">
+              <CartIcon />
+            </Badge>
           </NextLink>
         </NavbarItem> */}
       </NavbarContent>
@@ -108,4 +130,4 @@ export const Navbar = () => {
       </NavbarMenu>
     </HeroUINavbar>
   );
-};
+}

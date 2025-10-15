@@ -1,1 +1,9 @@
-1.user delete and update not instant
+// problems happened
+// 1.user delete and update not instant
+
+//tasks to do later:
+// 1.login/register validation
+// sidebar -done
+//sidebar- responsive for mobile
+//delivery slot for admin and user
+//need to rewatch: react-hook-form control

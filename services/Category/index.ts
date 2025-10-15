@@ -3,7 +3,8 @@ import axiosInstance from "@/lib/AxiosInstance";
 import { TCategory } from "@/types";
 //get all categories
 export const getAllCategories = async () => {
-  const { data } = await axiosInstance.get(`${envConfig.baseApi}/categories`);
+  const { data } = await axiosInstance.get("/categories");
+
   return data;
 };
 //get a single category: by fetch
@@ -23,7 +24,7 @@ export const createCategory = async (categoryData: TCategory) => {
 };
 
 //delete a category by id
-export const deleteCatagory = async (categoryId: string) => {
+export const deleteCategory = async (categoryId: string) => {
   const { data } = await axiosInstance.delete(`/categories/${categoryId}`);
   return data;
 };
@@ -34,7 +35,7 @@ export const updateCategory = async (
 ) => {
   const data = await axiosInstance.patch(
     `/categories/${categoryId}`,
-    updateCategory
+    updatedCategory
   );
   return data;
 };

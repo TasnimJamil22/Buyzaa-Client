@@ -12,34 +12,15 @@ export const siteConfig = {
       label: "Products",
       href: "/products",
     },
-    // {
-    //   label: "Cart",
-    //   href: "/cart",
-    // },
 
-    {
-      label: "UserList",
-      href: "/admin/manageUser/userList",
-      // children: [
-      //   {
-      //     label: "User List",
-      //     href: "/admin/manageUser/userList",
-      //   },
-      //   // add more sub-links later
-      // ],
-    },
-    {
-      label: "Categories",
-      href: "/admin/categories",
-    },
-    {
-      lebel: "Login",
-      href: "/login",
-    },
-    {
-      lebel: "Register",
-      href: "/register",
-    },
+    // {
+    //   label: "UserList",
+    //   href: "/admin/manageUser/userList",
+    // },
+    // {
+    //   label: "Categories",
+    //   href: "/admin/categories",
+    // },
 
     {
       label: "About",

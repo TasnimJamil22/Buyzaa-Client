@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastProvider } from "@heroui/toast";
+import UserProvider from "@/context/user.provider";
+import { CartProvider } from "@/context/cart.provider";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -29,10 +31,19 @@ export function Providers({ children, themeProps }: ProvidersProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <HeroUIProvider navigate={router.push}>
-        <ToastProvider />
-        <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
-      </HeroUIProvider>
+      <UserProvider>
+        <HeroUIProvider navigate={router.push}>
+          <ToastProvider />
+          <NextThemesProvider {...themeProps}>
+            {/* {children} */}
+            <CartProvider>
+              {" "}
+              {/* <-- Add your cart provider here */}
+              {children}
+            </CartProvider>
+          </NextThemesProvider>
+        </HeroUIProvider>
+      </UserProvider>
     </QueryClientProvider>
   );
 }
