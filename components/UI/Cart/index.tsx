@@ -1,7 +1,11 @@
+"use client";
 import { useCart } from "@/context/cart.provider";
 import { Divider } from "@heroui/divider";
 import { useState } from "react";
 import CartQuantity from "./CartQuantity";
+import Link from "next/link";
+import { Button } from "@heroui/button";
+import { TItem } from "@/types";
 
 export default function MyCart() {
   const {
@@ -11,6 +15,12 @@ export default function MyCart() {
     removeFromCart,
     clearCart,
   } = useCart();
+
+  //  Calculate total
+  const total = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   return (
     <div>
@@ -85,6 +95,19 @@ export default function MyCart() {
           ))}
         </ul>
       )}
+      <div className="flex  py-5 w-full  rounded-sm justify-between">
+        <Link
+          href="/profile/checkout"
+          // href={`/profile/payment/{paymentId}`}
+          className="  text-center w-1/2 mx-auto  py-5 bg-accent rounded-l-md hover:bg-red-300"
+        >
+          Checkout
+        </Link>
+
+        <span className="w-1/2 text-center py-5 bg-orange-400 rounded-r-md">
+          {/* calculate total */}${total.toFixed(2)}
+        </span>
+      </div>
     </div>
   );
 }

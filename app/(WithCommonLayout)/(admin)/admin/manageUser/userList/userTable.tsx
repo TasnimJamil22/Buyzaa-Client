@@ -74,9 +74,12 @@ export default function UserTable() {
 
   const { handleSubmit } = methods;
 
-  const onSubmit: SubmitHandler<Partial<TUser>> = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log("Submitting user:", data);
-    handleCreateUser(data); // service wraps it in { user: ... }
+    const userData = {
+      ...data,
+    };
+    handleCreateUser(userData as TUser); // service wraps it in { user: ... }
   };
 
   return (

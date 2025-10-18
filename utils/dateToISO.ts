@@ -1,4 +1,4 @@
-interface IDate {
+export interface IDate {
   calender: {
     identifier: string;
   };
@@ -7,7 +7,9 @@ interface IDate {
   month: number;
   year: number;
 }
-const dateToISO = (date: IDate) => {
+
+// }
+export const dateToISO = (date?: IDate) => {
   if (!date) {
     return new Date().toISOString();
   }

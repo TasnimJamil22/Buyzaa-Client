@@ -43,6 +43,7 @@
 import { CartIcon } from "@/components/icons";
 import MyCart from "@/components/UI/Cart";
 import { useCart } from "@/context/cart.provider";
+import { TOrder } from "@/types";
 import { Badge } from "@heroui/badge";
 import { Button } from "@heroui/button";
 import {
@@ -71,7 +72,7 @@ export default function Cart() {
     | "5xl"
     | "full";
 
-  const [size, setSize] = React.useState<DrawerSize>("xs");
+  const [size, setSize] = React.useState<DrawerSize>("sm");
 
   const handleOpen = (drawaeSize: DrawerSize) => {
     setSize(drawaeSize);
@@ -79,11 +80,11 @@ export default function Cart() {
   };
   const { cartItems } = useCart();
 
-  // 🧮 Calculate total
-  const total = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  // //  Calculate total
+  // const total = cartItems.reduce(
+  //   (acc, item) => acc + item.price * item.quantity,
+  //   0
+  // );
 
   return (
     // <div>
@@ -116,7 +117,7 @@ export default function Cart() {
               <DrawerFooter>
                 {/* Checkout Section */}
 
-                <div className="flex  py-5 w-full  rounded-sm justify-between">
+                {/* <div className="flex  py-5 w-full  rounded-sm justify-between">
                   <Link
                     href={`/profile/payment/{paymentId}`}
                     className="  text-center w-1/2 mx-auto  py-5 bg-accent rounded-l-md hover:bg-red-300"
@@ -125,9 +126,9 @@ export default function Cart() {
                   </Link>
 
                   <span className="w-1/2 text-center py-5 bg-orange-400 rounded-r-md">
-                    {/* calculate total */}${total.toFixed(2)}
+                     ${total.toFixed(2)}
                   </span>
-                </div>
+                </div> */}
 
                 {/* <Button color="danger" variant="light" onPress={onClose}>
                   Close

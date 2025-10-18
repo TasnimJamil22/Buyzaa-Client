@@ -28,7 +28,7 @@ export const getASingleUser = async (userId: string) => {
 };
 
 //Create user service
-export const createUser = async (userData: Partial<TUser>) => {
+export const createUser = async (userData: TUser) => {
   try {
     // Wrap userData in { user: ... } as backend expects
     const payload = { user: userData };

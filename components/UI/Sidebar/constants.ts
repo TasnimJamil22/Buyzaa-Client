@@ -2,7 +2,8 @@ export const userLinks = [
   { href: "/profile", label: "Profile" },
   { href: "/products", label: "Products" },
   { href: "/cart", label: "My Cart" },
-  { href: "profile/checkout", label: "Checkout" },
+  { href: "/profile/checkout", label: "Checkout" },
+  { href: "/profile/orders", label: "My Orders" },
 ];
 export const adminLinks = [
   { href: "/admin", label: "Admin" },

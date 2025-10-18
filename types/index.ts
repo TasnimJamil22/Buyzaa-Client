@@ -59,3 +59,32 @@ export interface IInput {
   name: string;
   disabled?: boolean;
 }
+
+export interface TItem {
+  productId: string;
+  name: string;
+  quantity: number;
+  price: number;
+}
+[];
+// export interface IDate {
+//   calender: {
+//     identifier: string;
+//   };
+//   day: number;
+//   era: string;
+//   month: number;
+//   year: number;
+// }
+
+export interface TOrder {
+  _id?: string;
+  name: string;
+  email: string;
+  mobileNo: string;
+  address: string;
+  city: string;
+  deliveryDate: String;
+  cartItems: TItem[];
+  totalAmount: number;
+}

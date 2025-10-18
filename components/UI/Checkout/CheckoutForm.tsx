@@ -3,9 +3,16 @@ import BZDatePicker from "@/components/form/BZDatePicker";
 import BZForm from "@/components/form/BZForm";
 import BZInput from "@/components/form/BZInput";
 import BZSelect from "@/components/form/BZSelect";
+import { useCart } from "@/context/cart.provider";
+import { useUser } from "@/context/user.provider";
+import { useCreateOrder } from "@/hooks/checkout.hook";
+import { TItem, TOrder } from "@/types";
+import { dateToISO, IDate } from "@/utils/dateToISO";
 import { allDistict } from "@bangladeshi/bangladesh-address";
 import { Button } from "@heroui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 import {
   FieldValues,
   FormProvider,
@@ -14,6 +21,10 @@ import {
 } from "react-hook-form";
 
 export default function CheckoutForm() {
+  const { mutate: handleCreateOrder } = useCreateOrder();
+  const { user } = useUser();
+  const { cartItems } = useCart();
+  const router = useRouter();
   //address - city selection
   const cityOptions = allDistict()
     .sort()
@@ -23,24 +34,37 @@ export default function CheckoutForm() {
         label: city,
       };
     });
-  const methods = useForm();
-  const { control, handleSubmit } = methods;
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    const formData = {
-      ...data,
-      deliveryDate: dateToISO(data.deliveryDate),
+  const totalAmount = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const methods = useForm();
+  const { handleSubmit, reset } = methods;
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const formData: TOrder = {
+      name: data.name || "",
+      email: user?.email || data.email || "",
+      mobileNo: data.mobileNo || "",
+      address: data.address || "",
+      city: data.city || "",
+      deliveryDate: dateToISO(data.deliveryDate as IDate), // convert IDate → ISO string
+      cartItems,
+      totalAmount,
     };
+    console.log(formData);
+    handleCreateOrder(formData);
+    router.push("/profile/orders");
   };
-  const today = new Date();
-  console.log(today);
+
   return (
     <div className="w-full flex flex-col items-center ">
       <h1 className="w-full flex justify-center items-center text-4xl font-semibold mb-6 text-accent font-[Manrope]">
         Checkout
       </h1>
 
-      <div className="w-full flex justify-center items-center   mt-2 rounded-2xl shadow-md">
+      <div className="w-full flex justify-center items-center mt-2 rounded-2xl shadow-md">
         <FormProvider {...methods}>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -56,7 +80,9 @@ export default function CheckoutForm() {
             </div>
 
             <Button type="submit" className="w-full bg-accent my-4">
-              Proceed
+              {/* <Link href="/profile/orders"> */}
+              Proceed ${totalAmount.toFixed(2)}
+              {/* </Link> */}
             </Button>
           </form>
         </FormProvider>

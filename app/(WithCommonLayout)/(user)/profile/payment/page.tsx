@@ -7,8 +7,11 @@ import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
 export default function Payment() {
   return (
-    <Elements stripe={stripePromise}>
-      <PaymentForm />
-    </Elements>
+    <div>
+      <h1>Payment page</h1>
+    </div>
+    // <Elements stripe={stripePromise}>
+    //   <PaymentForm />
+    // </Elements>
   );
 }
