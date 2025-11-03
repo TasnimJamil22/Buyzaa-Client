@@ -43,6 +43,7 @@
 import { CartIcon } from "@/components/icons";
 import MyCart from "@/components/UI/Cart";
 import { useCart } from "@/context/cart.provider";
+import { useUser } from "@/context/user.provider";
 import { TOrder } from "@/types";
 import { Badge } from "@heroui/badge";
 import { Button } from "@heroui/button";
@@ -59,6 +60,8 @@ import { useParams } from "next/navigation";
 import React from "react";
 
 export default function Cart() {
+  const { user } = useUser();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   type DrawerSize =
     | "xs"
@@ -94,11 +97,21 @@ export default function Cart() {
 
     <>
       <div className="flex justify-center items-center h-screen">
-        <Button key={size} onPress={() => handleOpen(size)}>
+        {/* <Button key={size} onPress={() => handleOpen(size)}>
           <Badge content={cartItems.length} color="danger">
             <CartIcon />
           </Badge>
-        </Button>
+        </Button> */}
+
+        {/* Only render Cart button for users */}
+
+        {user?.role === "USER" && (
+          <Button key={size} onPress={() => handleOpen(size)}>
+            <Badge content={cartItems.length} color="danger">
+              <CartIcon />
+            </Badge>
+          </Button>
+        )}
       </div>
       <Drawer isOpen={isOpen} size={size} onClose={onClose}>
         <DrawerContent>

@@ -26,9 +26,7 @@ export default async function Products() {
           <ProductCard key={product._id} product={product}  />
         ))} */}
       </div>
-      <div>
-        <CreateProductForm products={products} />
-      </div>
+
       {/* <div>
         <BZModal
           buttonText="Create a new product"

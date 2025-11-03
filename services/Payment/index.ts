@@ -1,7 +1,10 @@
 // import axiosInstance from "@/lib/AxiosInstance";
 
+import axiosInstance from "@/lib/AxiosInstance";
+import { TPayment } from "@/types";
 import axios from "axios";
 
+//with nextjs server api
 // 2️⃣ Create payment intent (calls your server route)
 export const createPaymentIntent = async (
   amountInCents: number,
@@ -17,9 +20,21 @@ export const createPaymentIntent = async (
     });
     const clientSecret = data.clientSecret;
     console.log("res from intent", data);
-    return data.clientSecret; // client secret from backend
+    return clientSecret; // client secret from backend
   } catch (err: any) {
     console.log(err.message);
     return null;
+  }
+};
+//to mongodb
+//payment create in db after payment success
+export const createPaymentRecord = async (paymentData: TPayment) => {
+  try {
+    const { data } = await axiosInstance.post("/payment/payment-success", {
+      payment: paymentData,
+    });
+    return data;
+  } catch (err: any) {
+    console.log(err.message);
   }
 };

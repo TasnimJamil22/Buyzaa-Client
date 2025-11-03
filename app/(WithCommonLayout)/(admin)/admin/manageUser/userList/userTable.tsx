@@ -84,7 +84,7 @@ export default function UserTable() {
 
   return (
     <div>
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center mt-10 mb-10">
         <div className="w-full max-w-3xl bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
             Create New User
@@ -128,6 +128,10 @@ export default function UserTable() {
       </div>
 
       {/* user table */}
+      <h1 className="text-2xl font-semibold text-gray-800 mb-6 border-b pb-2">
+        Users List
+      </h1>
+
       <Table aria-label="Example static collection table mb-5">
         <TableHeader>
           <TableColumn>NAME</TableColumn>

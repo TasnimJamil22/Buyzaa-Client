@@ -10,10 +10,12 @@ export default function Layout({ children }: { children: ReactNode }) {
       {/* <h1>User Profile Layout</h1> */}
 
       {/* <main> {children}</main> */}
-      <div>
-        <Sidebar />
+      <div className="flex gap-6">
+        <div className="w-1/3  ">
+          <Sidebar />
+        </div>
+        <div className="w-2/3">{children}</div>
       </div>
-      <div>{children}</div>
     </Container>
   );
 }

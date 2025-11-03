@@ -11,9 +11,21 @@ import { FieldValues } from "react-hook-form";
 // };
 export const createOrder = async (orderData: TOrder) => {
   try {
-    const { data } = await axiosInstance.post("/checkout/create-order", {
-      order: orderData, //<--------------------this is so imp . it should sent to backend like this,
-    });
+    const token = localStorage.getItem("accessToken"); // get the logged-in user's JWT
+    // const { data } = await axiosInstance.post("/checkout/create-order", {
+    //   order: orderData, //<--------------------this is so imp . it should sent to backend like this,
+    // });
+    const { data } = await axiosInstance.post(
+      "/checkout/create-order",
+      {
+        order: orderData,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // attach token
+        },
+      }
+    );
     console.log("Response from backend:", data);
     return data;
   } catch (err: any) {
@@ -22,13 +34,24 @@ export const createOrder = async (orderData: TOrder) => {
   }
 };
 
-//get all orders
+//get all orders (for admin only)
 export const getAllOrders = async () => {
   try {
     const { data } = await axiosInstance.get("/checkout");
     return data;
   } catch (err: any) {
     console.log(err.message);
+  }
+};
+
+//get my orders (for logged in user)
+export const getMyOrders = async () => {
+  try {
+    const { data } = await axiosInstance.get("/checkout/my-orders");
+    return data;
+  } catch (err: any) {
+    console.log(err.message);
+    throw new Error(err.message); // ✅ React Query will call onError instead of onSuccess
   }
 };
 

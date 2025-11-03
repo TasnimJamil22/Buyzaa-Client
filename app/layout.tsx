@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
-import { Navbar } from "@/components/navbar";
+// import { Navbar } from "@/components/navbar";
 import { Providers } from "@/lib/Providers";
 
 export const metadata: Metadata = {
@@ -33,7 +33,13 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang="en">
-      <head />
+      {/* <head /> */}
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background font-sans antialiased",

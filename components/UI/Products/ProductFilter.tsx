@@ -70,7 +70,8 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
           placeholder="Search products..."
           value={search}
           onChange={(e: any) => setSearch(e.target.value)}
-          className="flex-1"
+          className="flex-1 max-w-md" // max width 28rem
+          // className="w-full md:w-64" // full width on mobile, 16rem on desktop
         />
         <select
           className="border rounded p-2"

@@ -1,5 +1,5 @@
 "use client";
-import { useGetAllOrders } from "@/hooks/checkout.hook";
+import { useGetAllOrders, useGetMyOrders } from "@/hooks/checkout.hook";
 import { TOrder } from "@/types";
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
@@ -13,7 +13,8 @@ import {
 } from "@heroui/table";
 
 export default function Orders() {
-  const { data } = useGetAllOrders();
+  // const { data } = useGetAllOrders();
+  const { data } = useGetMyOrders();
   const orders: TOrder[] = data?.data || [];
   console.log(orders);
   return (
@@ -23,29 +24,53 @@ export default function Orders() {
       {/* user table */}
       <Table aria-label="Example static collection table mb-5">
         <TableHeader>
+          <TableColumn>#</TableColumn>
           <TableColumn>NAME</TableColumn>
           <TableColumn>Email</TableColumn>
 
-          <TableColumn>Mobile No</TableColumn>
+          <TableColumn>Created At</TableColumn>
+          <TableColumn>Cost</TableColumn>
 
           <TableColumn>Details</TableColumn>
           <TableColumn>Pay</TableColumn>
         </TableHeader>
         <TableBody>
-          {orders?.map((order: any) => (
+          {orders?.map((order: any, index) => (
             <TableRow key={order._id}>
+              <TableCell>{index + 1}.</TableCell>
               <TableCell>{order.name}</TableCell>
               <TableCell>{order.email}</TableCell>
-
-              <TableCell>{order.mobileNo}</TableCell>
-
+              {/* <TableCell>{order.createdAt}</TableCell> */}
+              <TableCell>
+                {new Date(order.createdAt).toLocaleString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: true,
+                })}
+              </TableCell>
+              <TableCell>${order.totalAmount}</TableCell>
               <TableCell>
                 <Link href={`/admin/manageUser/userList/${order._id}`}>
-                  view detalis
+                  detalis
                 </Link>
               </TableCell>
               <TableCell>
-                <Link href={`/profile/payment/${order._id}`}>Pay</Link>
+                {/* <Link href={`/profile/payment/${order._id}`}>Pay</Link> */}
+                {order.payment?.isPaid ? (
+                  <Button
+                    disabled
+                    className="bg-green-700 text-white cursor-not-allowed"
+                  >
+                    Paid
+                  </Button>
+                ) : (
+                  <Link href={`/profile/payment/${order._id}`}>
+                    <Button>Pay</Button>
+                  </Link>
+                )}
               </TableCell>
             </TableRow>
           ))}

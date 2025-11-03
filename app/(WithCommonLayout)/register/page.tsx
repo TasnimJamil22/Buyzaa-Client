@@ -1,21 +1,36 @@
 "use client";
 import BZForm from "@/components/form/BZForm";
 import BZInput from "@/components/form/BZInput";
+import { useUser } from "@/context/user.provider";
 import { useRegisterUser } from "@/hooks/auth.hook";
 import { TUser } from "@/types";
 import { Button } from "@heroui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
 export default function RegisterPage() {
-  const { mutate: handleRegisterUser } = useRegisterUser();
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const {
+    mutate: handleRegisterUser,
+    isPending,
+    isSuccess,
+  } = useRegisterUser();
+  const { setIsLoading } = useUser();
+  const router = useRouter();
+  const onSubmit: SubmitHandler<TUser> = (data) => {
     const userData = {
       ...data,
     };
     handleRegisterUser(userData);
     console.log(userData);
+    setIsLoading(true);
   };
+  useEffect(() => {
+    if (!isPending && isSuccess) {
+      router.push("/");
+    }
+  }, [isPending, isSuccess]);
   return (
     <div className=" w-full max-w-md mx-auto my-32 ">
       <div className="w-full max-w-md  py-12 px-8 rounded-2xl shadow-md items-center">

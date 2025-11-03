@@ -72,40 +72,50 @@ import { SearchIcon } from "lucide-react";
 
 export default function Landing() {
   return (
-    <div>
-      <div className="relative h-[calc(100vh-100px)] w-full bg-[url('/bannerImg2.png')] bg-cover bg-no-repeat bg-center flex items-center justify-center ">
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40 rounded-lg"></div>
+    <div className="relative h-[calc(100vh-100px)] w-full bg-[url('/bannerImg2.png')] bg-cover bg-no-repeat bg-center flex items-center justify-center rounded-lg">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40 rounded-lg"></div>
 
-        {/* Content */}
-        <div className="relative z-10 text-center px-4">
-          {/* Headline */}
-          <h1 className="text-white text-3xl sm:text-5xl font-bold mb-4 drop-shadow-lg">
-            Find Your Perfect Art Piece
-          </h1>
+      {/* Content */}
+      <div className="relative z-10 text-center px-4">
+        {/* Headline */}
+        <h1 className="font-dancing text-white text-3xl sm:text-5xl font-bold mb-4 drop-shadow-lg">
+          Find Your Perfect Art Piece
+        </h1>
 
-          {/* Tagline */}
-          <p className="text-white/80 mb-8 max-w-xl mx-auto">
-            Explore unique collections of paintings, sculptures, and creative
-            crafts tailored just for you.
-          </p>
+        {/* Tagline */}
+        <p className="text-white/80 mb-8 max-w-xl mx-auto">
+          Explore unique collections of paintings, sculptures, and creative
+          crafts tailored just for you.
+        </p>
 
-          {/* Search Section */}
-          <div className="max-w-xl mx-auto w-full px-4">
-            <form className="flex-1">
-              <Input
-                placeholder="Search"
-                classNames={{
-                  inputWrapper: "bg-default-100",
-                  input: "text-sm",
-                }}
-                startContent={<SearchIcon />}
-                type="text"
-              />
-            </form>
-          </div>
+        {/* Search Section */}
+        <div className="max-w-xl mx-auto w-full px-4">
+          <form className="flex-1">
+            <Input
+              placeholder="Search"
+              classNames={{
+                inputWrapper: "bg-default-100",
+                input: "text-sm",
+              }}
+              startContent={<SearchIcon />}
+              type="text"
+            />
+          </form>
         </div>
       </div>
     </div>
   );
 }
+
+// module.exports = {
+//   plugins: {
+//     "@tailwindcss/postcss": {},
+//   },
+// };
+// module.exports = {
+//   plugins: {
+//     "@tailwindcss/postcss": {},
+//     autoprefixer: {},
+//   },
+// };

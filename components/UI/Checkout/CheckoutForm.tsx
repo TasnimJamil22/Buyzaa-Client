@@ -39,13 +39,17 @@ export default function CheckoutForm() {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-  const methods = useForm();
+  const methods = useForm({
+    defaultValues: {
+      email: user?.email || "",
+    },
+  });
   const { handleSubmit, reset } = methods;
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const formData: TOrder = {
       name: data.name || "",
-      email: user?.email || data.email || "",
+      email: user?.email || "",
       mobileNo: data.mobileNo || "",
       address: data.address || "",
       city: data.city || "",
@@ -72,7 +76,13 @@ export default function CheckoutForm() {
           >
             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
               <BZInput name="name" label="Name" />
-              <BZInput name="email" label="Email" type="email" />
+              <BZInput
+                name="email"
+                label="Email"
+                type="email"
+                disabled={true}
+                variant="faded"
+              />
               <BZInput name="mobileNo" label="Mobile Number" />
               <BZInput name="address" label="Address" />
               <BZSelect name="city" label="City" options={cityOptions} />

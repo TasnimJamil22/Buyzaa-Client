@@ -2,6 +2,7 @@ import BZFrom from "@/components/form/BZForm";
 import BZInput from "@/components/form/BZInput";
 import { useUpdateUser } from "@/hooks/user.hook";
 import { TUser } from "@/types";
+import { Divider } from "@heroui/divider";
 import { useEffect } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 

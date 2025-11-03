@@ -3,7 +3,7 @@ import { heroui } from "@heroui/theme";
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: [
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
@@ -15,7 +15,6 @@ const config = {
       },
       colors: {
         accent: "oklch(83.7% 0.128 66.29)",
-         
       },
     },
   },
