@@ -2,6 +2,7 @@ import {
   createOrder,
   getAllOrders,
   getASingleOrder,
+  getMyOrders,
 } from "@/services/Checkout";
 import { TOrder } from "@/types";
 import { addToast } from "@heroui/toast";
@@ -33,7 +34,7 @@ export const useCreateOrder = () => {
   });
 };
 
-//get all orders
+//get all orders (for admin only)
 export const useGetAllOrders = () => {
   return useQuery({
     queryKey: ["GET-ALL-ORDERS"],
@@ -54,6 +55,30 @@ export const useGetAllOrders = () => {
       addToast({
         title: "Error",
         description: error?.message || "Failed to retrieve orders",
+        color: "danger",
+      });
+    },
+  });
+};
+//get my orders (only for logged in user)
+export const useGetMyOrders = () => {
+  return useQuery({
+    queryKey: ["GET-MY-ORDERS"],
+    queryFn: async () => {
+      return await getMyOrders();
+    },
+    onSuccess: (res) => {
+      if (!res || !res.data) return; // safety check
+      addToast({
+        title: "Success",
+        description: "My Orders retrieved successfully",
+        color: "success",
+      });
+    },
+    onError: (error: any) => {
+      addToast({
+        title: "Error",
+        description: error?.message || "Failed to retrieve my orders",
         color: "danger",
       });
     },

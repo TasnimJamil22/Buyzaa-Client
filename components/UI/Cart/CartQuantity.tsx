@@ -19,6 +19,7 @@ export default function CartQuantity({ product }: IProps) {
     addToCart,
     increaseQuantity,
     decreaseQuantity,
+    removeFromCart,
     clearCart,
   } = useCart();
 
@@ -44,7 +45,7 @@ export default function CartQuantity({ product }: IProps) {
               );
               existingItem?.quantity! > 1
                 ? decreaseQuantity(product._id || "")
-                : clearCart();
+                : removeFromCart(product._id || "");
               // if (existingItem) {
               //   // decrease from context (cart)
               //   decreaseQuantity(product._id || "");

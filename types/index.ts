@@ -87,4 +87,18 @@ export interface TOrder {
   deliveryDate: String;
   cartItems: TItem[];
   totalAmount: number;
+  payment?: TPayment | string; // ObjectId string if not populated, TPayment if populated
+}
+//payment
+export interface TPayment {
+  orderId: string;
+  transactionId: string;
+  email: string;
+  paymentMethod: string[];
+  amount: number; // in cents
+  currency: string; // e.g., "usd"
+  status: "pending" | "succeeded" | "failed";
+  isPaid: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

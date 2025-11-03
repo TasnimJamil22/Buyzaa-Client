@@ -6,8 +6,10 @@ import CartQuantity from "./CartQuantity";
 import Link from "next/link";
 import { Button } from "@heroui/button";
 import { TItem } from "@/types";
+import { useUser } from "@/context/user.provider";
 
 export default function MyCart() {
+  const { user } = useUser();
   const {
     cartItems,
     increaseQuantity,
@@ -96,17 +98,16 @@ export default function MyCart() {
         </ul>
       )}
       <div className="flex  py-5 w-full  rounded-sm justify-between">
+        <span className="w-1/2 text-center py-5 bg-orange-400 rounded-l-md">
+          {/* calculate total */}Total ${total.toFixed(2)}
+        </span>
         <Link
           href="/profile/checkout"
           // href={`/profile/payment/{paymentId}`}
-          className="  text-center w-1/2 mx-auto  py-5 bg-accent rounded-l-md hover:bg-red-300"
+          className="  text-center w-1/2 mx-auto  py-5 bg-accent rounded-r-md hover:bg-red-300"
         >
           Checkout
         </Link>
-
-        <span className="w-1/2 text-center py-5 bg-orange-400 rounded-r-md">
-          {/* calculate total */}${total.toFixed(2)}
-        </span>
       </div>
     </div>
   );

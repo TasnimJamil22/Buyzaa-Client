@@ -8,6 +8,7 @@ import { Link } from "@heroui/link";
 import Cart from "../Cart";
 import { SetStateAction, useState } from "react";
 import CartQuantity from "../Cart/CartQuantity";
+import { useUser } from "@/context/user.provider";
 
 interface IProps {
   product: TProduct;
@@ -18,6 +19,7 @@ interface CartItem {
   quantity: number;
 }
 export default function ProductCard({ product }: IProps) {
+  const { user } = useUser();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const { _id, name, description, price, quantity, category, images } =
     product || {};
@@ -58,7 +60,9 @@ export default function ProductCard({ product }: IProps) {
         </div>
       </CardBody>
       <CardFooter>
-        <CartQuantity product={product} />
+        {/* <CartQuantity product={product} /> */}
+        {/* Only for user Add to Cart button */}
+        {user?.role === "USER" && <CartQuantity product={product} />}
       </CardFooter>
     </Card>
   );

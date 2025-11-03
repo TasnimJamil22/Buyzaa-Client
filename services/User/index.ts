@@ -47,7 +47,8 @@ export const createUser = async (userData: TUser) => {
 //data fetching : using axiosInstance
 export const deleteUser = async (userId: string) => {
   try {
-    const data = await axiosInstance.delete(`/users/${userId}`);
+    const { data } = await axiosInstance.delete(`/users/${userId}`);
+
     return data;
   } catch (error: any) {
     throw new Error(error.message);

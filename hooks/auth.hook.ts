@@ -5,15 +5,15 @@ import { useMutation } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
 
 export const useRegisterUser = () => {
-  return useMutation<any, Error, FieldValues>({
+  return useMutation({
     mutationKey: ["USER_REGISTRATION"],
-    mutationFn: async (userData) => await registerUser(userData),
+    mutationFn: async (userData: TUser) => await registerUser(userData),
     onSuccess: () => {
       // ✅ Refetch the list of users
       // queryClient.invalidateQueries({ queryKey: ["GET-ALL-USER"] });
       addToast({
         title: "Success",
-        description: "User Registered successfully",
+        description: "User Registered successfullyy",
         color: "success",
       });
 

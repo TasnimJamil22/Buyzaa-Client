@@ -1,23 +1,31 @@
 "use client";
 import BZForm from "@/components/form/BZForm";
 import BZInput from "@/components/form/BZInput";
+import BZModal from "@/components/modals/BZModal";
+import { useUser } from "@/context/user.provider";
+import { useCreatePaymentRecord } from "@/hooks/payment.hook";
 import { createPaymentIntent } from "@/services/Payment";
-import { TOrder } from "@/types";
+import { TOrder, TPayment } from "@/types";
 
 import { Button } from "@heroui/button";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
+import PaymentSuccess from "./SuccessfulPayment";
 
 interface IProps {
   order: TOrder;
   isLoading: boolean;
 }
 export default function PaymentForm({ order, isLoading }: IProps) {
+  const { user } = useUser();
+  const { mutate: handleCreatePaymentRecord, isSuccess } =
+    useCreatePaymentRecord();
   console.log("totalamout", order.totalAmount);
   console.log(order);
   const [error, setError] = useState<string | undefined>("");
   const stripe = useStripe();
   const elements = useElements();
+  const [transactionId, setTransactionId] = useState<string | null>(null);
   // const onSubmit: SubmitHandler<any> = async (data) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -44,8 +52,8 @@ export default function PaymentForm({ order, isLoading }: IProps) {
     //setp:2 create payment intent(calling it from payment services )
     const orderId = order?._id;
     //// convert dollars to cents
-    const amount = order.totalAmount;
-    const amountInCents = amount * 100;
+    const cost = order.totalAmount;
+    const amount = cost * 100;
     // console.log(amountInCents);
     // createPaymentIntent(amountInCents, orderId as string);
     //This calls your backend.
@@ -54,10 +62,7 @@ export default function PaymentForm({ order, isLoading }: IProps) {
 
     //Stripe responds with a clientSecret, which is used to confirm the payment.
     //Important: You must await this call and store the clientSecret:
-    const clientSecret = await createPaymentIntent(
-      amountInCents,
-      orderId as string
-    );
+    const clientSecret = await createPaymentIntent(amount, orderId as string);
     //Step 3: Confirm the payment
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -74,8 +79,25 @@ export default function PaymentForm({ order, isLoading }: IProps) {
       setError(confirmError.message);
     } else if (paymentIntent?.status === "succeeded") {
       setError("");
-      console.log("✅ Payment successful!", paymentIntent);
+
       //step-5 mark order paid also create payment history
+      if (paymentIntent.status === "succeeded") {
+        console.log("✅ Payment successful!", paymentIntent);
+        const transactionId = paymentIntent.id;
+        const paymentData: TPayment = {
+          orderId: orderId as string,
+          email: user?.email as string,
+          amount,
+          currency: paymentIntent.currency,
+          transactionId: transactionId,
+          paymentMethod: paymentIntent.payment_method_types,
+          status: paymentIntent.status,
+          isPaid: true,
+        };
+        console.log(paymentData);
+        handleCreatePaymentRecord(paymentData);
+        setTransactionId(paymentIntent.id); // store transaction id
+      }
     }
   };
   //
@@ -84,24 +106,40 @@ export default function PaymentForm({ order, isLoading }: IProps) {
   }
 
   return (
-    <div>
-      <div>
-        {/* <BZForm onSubmit={onsubmit}> */}
-        <form
-          onSubmit={handleSubmit}
-          className="max-w-md mx-auto   border border-gray-200 rounded-xl p-5 shadow-sm space-y-5"
-        >
-          <CardElement />
+    <>
+      {isSuccess ? (
+        <div>
+          {isSuccess && <PaymentSuccess transactionId={transactionId!} />}
+        </div>
+      ) : (
+        <div>
+          <div>
+            {/* <BZForm onSubmit={onsubmit}> */}
+            <form
+              onSubmit={handleSubmit}
+              className="max-w-md mx-auto   border border-gray-200 rounded-xl p-5 shadow-sm space-y-5"
+            >
+              <CardElement />
 
-          {/* <BZInput /> */}
-          <Button type="submit" disabled={!stripe}>
-            Confirm Order Payment ${order?.totalAmount}
-          </Button>
-          {error && <p className="text-red-500">{error}</p>}
-        </form>
+              {/* <BZInput /> */}
 
-        {/* </BZForm> */}
-      </div>
-    </div>
+              <Button type="submit" disabled={!stripe}>
+                Confirm Order Payment ${order?.totalAmount}
+                {/* {isSuccess && (
+              <BZModal
+                buttonText={`Confirm Order Payment $${order?.totalAmount}`}
+                body={isSuccess ? <PaymentSuccess /> : undefined}
+              />
+            )} */}
+              </Button>
+
+              {error && <p className="text-red-500">{error}</p>}
+            </form>
+
+            {/* </BZForm> */}
+          </div>
+        </div>
+      )}
+    </>
   );
 }

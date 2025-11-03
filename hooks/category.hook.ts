@@ -10,7 +10,7 @@ import {
 import { TCategory } from "@/types";
 import { addToast } from "@heroui/toast";
 
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 //get all categories
 export const useGetAllCategories = () => {
   return useQuery({
@@ -21,13 +21,14 @@ export const useGetAllCategories = () => {
 
 //create category
 export const useCreateCategory = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (category: TCategory) => {
       return await createCategory(category);
     },
     onSuccess: () => {
       // ✅ Refetch the list of users
-      // queryClient.invalidateQueries({ queryKey: ["GET-ALL-USER"] });
+      queryClient.invalidateQueries({ queryKey: ["GET-ALL-CATEGORIES"] });
       addToast({
         title: "Success",
         description: "Category created successfully",
@@ -63,6 +64,7 @@ export const useUpdateCategory = () => {
     }) => {
       const { categoryId, updatedCategory } = payload;
       const data = await updateCategory(categoryId, updatedCategory);
+      return data;
     },
   });
 };

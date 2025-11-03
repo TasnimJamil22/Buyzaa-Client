@@ -24,6 +24,7 @@ export default function BZInput({
   type = "text",
   label,
   name,
+  disabled = false,
 }: IProps) {
   const {
     register,
@@ -42,6 +43,7 @@ export default function BZInput({
       required={required}
       type={type}
       label={label}
+      disabled={disabled}
       className="focus:outline-none focus:ring-0 border-none"
     />
   );

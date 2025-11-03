@@ -4,7 +4,7 @@ import PaymentForm from "@/components/UI/Payment/PaymentForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
-const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
+// const stripePromise = loadStripe("pk_test_6pRNASCoBOKtIshFeQd4XMUh");
 export default function Payment() {
   return (
     <div>

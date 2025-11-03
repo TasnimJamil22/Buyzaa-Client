@@ -44,9 +44,9 @@ export default function NavbarDropdown() {
           <DropdownItem key="profile">
             <Link href="/profile">Profile</Link>
           </DropdownItem>
-          <DropdownItem key="createpost">
+          {/* <DropdownItem key="createpost">
             <Link href="/profile/create-post">Creat Post</Link>
-          </DropdownItem>
+          </DropdownItem> */}
           <DropdownItem
             onClick={() => handleLogout()}
             key="delete"

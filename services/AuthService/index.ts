@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
-export const registerUser = async (userData: FieldValues) => {
+export const registerUser = async (userData: TUser) => {
   const { data } = await axiosInstance.post("/auth/register", userData);
   console.log(data);
 

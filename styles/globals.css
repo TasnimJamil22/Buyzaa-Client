@@ -1,3 +1,12 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@config "../tailwind.config.js"
+/* @import "tailwindcss"; */
+
+/* @config "../tailwind.config.js" */
+
+.font-dancing {
+  font-family: "Dancing Script", cursive;
+  font-weight: 700; /* boldest available */
+}
