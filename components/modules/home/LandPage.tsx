@@ -79,7 +79,7 @@ export default function Landing() {
       {/* Content */}
       <div className="relative z-10 text-center px-4">
         {/* Headline */}
-        <h1 className="font-dancing text-white text-3xl sm:text-5xl font-bold mb-4 drop-shadow-lg">
+        <h1 className="font-dancing text-white text-6xl sm:text-5xl font-bold mb-4 drop-shadow-lg">
           Find Your Perfect Art Piece
         </h1>
 

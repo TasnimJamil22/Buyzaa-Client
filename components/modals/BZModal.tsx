@@ -14,6 +14,7 @@ interface BZModalProps {
   title?: string;
   body?: ReactNode;
   onAction?: () => void;
+  // children?: React.ReactNode;
 }
 
 export default function BZModal({
@@ -28,7 +29,9 @@ export default function BZModal({
   return (
     <>
       <Button
-        className="px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium shadow hover:from-indigo-600 hover:to-purple-700 transition"
+        className="px-6 py-3 rounded-lg bg-gradient-to-r from-[#d4af37] to-[#b8860b] 
+             text-white font-semibold shadow-md hover:shadow-lg 
+             hover:from-[#c6a134] hover:to-[#9b7605] transition-all duration-300"
         onPress={onOpen}
       >
         {buttonText}
@@ -40,10 +43,30 @@ export default function BZModal({
               <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
               <ModalBody>{body}</ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button
+                  color="danger"
+                  variant="light"
+                  onPress={onClose}
+                  className="
+    px-6 py-2 rounded-lg 
+    bg-gradient-to-r from-[#d4af37] to-[#b8860b] 
+    text-white font-semibold 
+    shadow-md hover:shadow-lg 
+    hover:from-[#c6a134] hover:to-[#9b7605] 
+    transition-all duration-300
+  "
+                >
                   Close
                 </Button>
                 <Button
+                  className="
+    px-6 py-2 rounded-lg 
+    bg-gradient-to-r from-[#d4af37] to-[#b8860b] 
+    text-white font-semibold 
+    shadow-md hover:shadow-lg 
+    hover:from-[#c6a134] hover:to-[#9b7605] 
+    transition-all duration-300
+  "
                   color="primary"
                   onPress={() => {
                     if (onAction) onAction(); // 👈 Call the delete function

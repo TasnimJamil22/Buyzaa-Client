@@ -44,7 +44,12 @@ export default function ProductCard({ product }: IProps) {
 
       {/* Product Info */}
       <CardBody className="px-4 py-3">
-        <Link href={`/products/${_id}`}>
+        <Link
+          href={`/products/${_id}`}
+          className="relative px-4 py-2 text-lg font-medium text-[#a17c37] hover:text-[#8b6d2f] transition-all duration-300 
+                   after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r from-[#e0c066] to-[#a17c37]
+                   hover:after:w-full after:transition-all after:duration-300"
+        >
           <h3 className=" font-semibold text-2xl">{name}</h3>
         </Link>
         <p className="text-pink-900 ">

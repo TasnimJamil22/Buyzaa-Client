@@ -79,6 +79,8 @@ export interface TItem {
 
 export interface TOrder {
   _id?: string;
+  orderNumber?: string;
+  user?: TUser | string;
   name: string;
   email: string;
   mobileNo: string;
@@ -91,6 +93,8 @@ export interface TOrder {
 }
 //payment
 export interface TPayment {
+  _id?: string;
+  userId: string;
   orderId: string;
   transactionId: string;
   email: string;

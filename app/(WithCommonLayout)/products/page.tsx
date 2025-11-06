@@ -11,7 +11,6 @@ export default async function Products() {
   console.log("the:", categories);
   return (
     <div>
-      <h1>This is Products Page</h1>
       <div>
         <ProductFilter categories={categories} />
       </div>

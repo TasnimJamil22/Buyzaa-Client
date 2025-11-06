@@ -10,7 +10,7 @@ export default async function UserList() {
 
   return (
     <div>
-      <h1>this is user list page</h1>
+      {/* <h1>this is user list page</h1> */}
       {/* create user */}
 
       {/* users list and delete,uodate. */}

@@ -38,3 +38,13 @@ export const createPaymentRecord = async (paymentData: TPayment) => {
     console.log(err.message);
   }
 };
+
+//my payments history
+export const getMyPayments = async () => {
+  try {
+    const { data } = await axiosInstance.get("/payment/my-payments");
+    return data;
+  } catch (err: any) {
+    console.log(err.message);
+  }
+};

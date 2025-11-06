@@ -1,46 +1,22 @@
 "use client";
+import BZModal from "@/components/modals/BZModal";
+import { useGetMyPayments } from "@/hooks/payment.hook";
+import { TPayment } from "@/types";
 import { useState } from "react";
 
 type PaymentStatus = "Paid" | "Failed" | "Pending";
 
-interface Payment {
-  id: string;
-  date: string;
-  method: string;
-  amount: number;
-  status: PaymentStatus;
-}
-
 export default function PaymentHistory() {
-  const [payments] = useState<Payment[]>([
-    {
-      id: "TXN-1001",
-      date: "2025-11-05",
-      method: "Credit Card",
-      amount: 2450,
-      status: "Paid",
-    },
-    {
-      id: "TXN-1002",
-      date: "2025-11-03",
-      method: "bKash",
-      amount: 890,
-      status: "Failed",
-    },
-    {
-      id: "TXN-1003",
-      date: "2025-10-28",
-      method: "Cash on Delivery",
-      amount: 1350,
-      status: "Pending",
-    },
-  ]);
-
-  const statusColor: Record<PaymentStatus, string> = {
-    Paid: "bg-green-100 text-green-700",
-    Failed: "bg-red-100 text-red-700",
-    Pending: "bg-yellow-100 text-yellow-700",
+  const [selectedPayment, setSelectedPayment] = useState<TPayment | null>(null);
+  const { data } = useGetMyPayments();
+  const myPayments: TPayment[] = data?.data || [];
+  const statusColor: Record<string, string> = {
+    succeeded: "bg-green-100 text-green-700",
+    failed: "bg-red-100 text-red-700",
+    pending: "bg-yellow-100 text-yellow-700",
   };
+
+  console.log(myPayments);
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-6">
@@ -56,18 +32,26 @@ export default function PaymentHistory() {
                 <th className="py-3 px-4">Transaction ID</th>
                 <th className="py-3 px-4">Date</th>
                 <th className="py-3 px-4">Method</th>
-                <th className="py-3 px-4">Amount (৳)</th>
+                <th className="py-3 px-4">Amount</th>
                 <th className="py-3 px-4">Status</th>
                 <th className="py-3 px-4">Action</th>
               </tr>
             </thead>
             <tbody>
-              {payments.map((p) => (
-                <tr key={p.id} className="border-t hover:bg-gray-50">
-                  <td className="py-3 px-4 font-medium">{p.id}</td>
-                  <td className="py-3 px-4">{p.date}</td>
-                  <td className="py-3 px-4">{p.method}</td>
-                  <td className="py-3 px-4 font-semibold">৳{p.amount}</td>
+              {myPayments.map((p) => (
+                <tr key={p._id} className="border-t hover:bg-gray-50">
+                  <td className="py-3 px-4 font-medium max-w-[150px] truncate">
+                    {p.transactionId}
+                  </td>
+                  <td className="py-3 px-4">
+                    {p.createdAt
+                      ? new Date(p.createdAt).toLocaleDateString()
+                      : "N/A"}
+                  </td>
+                  <td className="py-3 px-4">{p.paymentMethod}</td>
+                  <td className="py-3 px-4 font-semibold">
+                    ${(p.amount / 100).toFixed(2)}
+                  </td>
                   <td className="py-3 px-4">
                     <span
                       className={`px-3 py-1 text-sm rounded-full font-medium ${
@@ -78,9 +62,43 @@ export default function PaymentHistory() {
                     </span>
                   </td>
                   <td className="py-3 px-4">
-                    <button className="text-indigo-600 hover:underline text-sm">
-                      View
-                    </button>
+                    {/* view details of a payment with modal */}
+                    <BZModal
+                      buttonText="View"
+                      title="Payment Details"
+                      body={
+                        <div className="space-y-2 text-sm">
+                          <p>
+                            <span className="font-semibold">
+                              Transaction ID:
+                            </span>
+                            {p.transactionId}
+                          </p>
+                          <p>
+                            <span className="font-semibold">
+                              Payment Method:
+                            </span>
+                            {p.paymentMethod.join(", ")}
+                          </p>
+                          <p>
+                            <span className="font-semibold">Amount:</span> $
+                            {(p.amount / 100).toFixed(2)}
+                            {p.currency.toUpperCase()}
+                          </p>
+                          <p>
+                            <span className="font-semibold">Status:</span>
+                            {p.status}
+                          </p>
+
+                          <p>
+                            <span className="font-semibold">Date:</span>
+                            {p.createdAt
+                              ? new Date(p.createdAt).toLocaleString()
+                              : "N/A"}
+                          </p>
+                        </div>
+                      }
+                    />
                   </td>
                 </tr>
               ))}

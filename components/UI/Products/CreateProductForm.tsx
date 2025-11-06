@@ -33,7 +33,7 @@ export default function CreateProductForm({ products }: IProps) {
   };
 
   return (
-    <div className="max-w-xl mx-auto bg-white p-6 rounded-2xl shadow-md">
+    <div className="max-w-xl mx-auto  p-6 rounded-2xl shadow-md">
       <h2 className="text-2xl font-semibold mb-4 text-gray-700">
         Create New Product
       </h2>
@@ -76,9 +76,8 @@ export default function CreateProductForm({ products }: IProps) {
 
         <Button
           type="submit"
-          color="primary"
           isLoading={isPending}
-          className="w-full mt-4"
+          className="w-full mt-4 bg-yellow-400"
         >
           Create Product
         </Button>

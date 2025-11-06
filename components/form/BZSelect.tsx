@@ -1,6 +1,6 @@
 import { IInput } from "@/types";
 import { Select, SelectItem } from "@heroui/react";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 interface IProps extends IInput {
   options: {
@@ -20,21 +20,29 @@ const BZSelect = ({
   defaultValue,
 }: IProps) => {
   const {
+    control,
     register,
     formState: { errors },
   } = useFormContext();
 
   return (
-    <Select
-      {...register(name, { value: defaultValue })} // ✅ set default value here
-      label={label}
-      variant={variant}
-      isDisabled={disabled}
-    >
-      {options.map((option) => (
-        <SelectItem key={option.key}>{option.label}</SelectItem>
-      ))}
-    </Select>
+    <Controller
+      name={name}
+      control={control}
+      defaultValue={defaultValue || ""}
+      render={({ field }) => (
+        <Select
+          {...field} // ✅ value & onChange handled by Controller
+          label={label}
+          variant={variant}
+          isDisabled={disabled}
+        >
+          {options.map((option) => (
+            <SelectItem key={option.key}>{option.label}</SelectItem>
+          ))}
+        </Select>
+      )}
+    />
   );
 };
 

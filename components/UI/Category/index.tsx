@@ -27,13 +27,15 @@ export default function CategoryList() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">Category List</h1>
+      <h1 className="font-dancing text-6xl font-bold mb-6 text-[#a17c37]">
+        Category List
+      </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6  p-5">
         {categories?.map((category: any) => (
           <div
             key={category._id}
-            className="  rounded-2xl shadow-sm hover:shadow-md transition p-5 bg-blue-100"
+            className="rounded-2xl shadow-sm hover:shadow-md transition p-5  text-[#a17c37]"
           >
             {/* Category Image (optional) */}
             {category.image && (
@@ -45,7 +47,12 @@ export default function CategoryList() {
             )}
 
             <h2 className="text-lg font-semibold text-gray-800">
-              <Link href={`/admin/categories/${category?._id}`}>
+              <Link
+                href={`/admin/categories/${category?._id}`}
+                className="relative px-4 py-2 text-lg font-medium text-[#a17c37] hover:text-[#8b6d2f] transition-all duration-300 
+                   after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r from-[#e0c066] to-[#a17c37]
+                   hover:after:w-full after:transition-all after:duration-300"
+              >
                 {category.name}
               </Link>
             </h2>

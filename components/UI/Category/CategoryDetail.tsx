@@ -32,7 +32,7 @@ export default function CategoryDetail({ category }: IProps) {
   //     );
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-3xl shadow-lg">
+    <div className="max-w-4xl mx-auto mt-10 p-6  rounded-3xl shadow-lg">
       {/* Category Image */}
       {/* {category.images && (
         <img
@@ -43,7 +43,9 @@ export default function CategoryDetail({ category }: IProps) {
       )} */}
 
       {/* Category Info */}
-      <h1 className="text-3xl font-bold text-gray-800 mb-3">{category.name}</h1>
+      <h1 className="text-3xl font-bold text-[#a17c37] mb-3">
+        {category.name}
+      </h1>
       <p className="text-gray-600 mb-6">
         {category.description || "No description provided."}
       </p>

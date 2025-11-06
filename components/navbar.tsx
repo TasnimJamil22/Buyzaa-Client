@@ -107,7 +107,7 @@ export default function Navbar() {
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarMenu>
+      {/* <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
@@ -121,6 +121,36 @@ export default function Navbar() {
                 }
                 href="#"
                 size="lg"
+              >
+                {item.label}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+        </div>
+      </NavbarMenu> */}
+      <NavbarMenu>
+        <div className="mx-4 mt-2 flex flex-col gap-2">
+          {siteConfig.navMenuItems.map((item, index) => (
+            <NavbarMenuItem key={`${item.label}-${index}`}>
+              <Link
+                href={item.href} // make it functional
+                className={`
+                  block
+                  text-lg
+                  font-medium
+                  px-4 py-2
+                  rounded-lg
+                  transition
+                  ${
+                    pathname === item.href
+                      ? "bg-indigo-100 text-indigo-700"
+                      : index === 2
+                        ? "text-indigo-600 hover:bg-indigo-50"
+                        : index === siteConfig.navMenuItems.length - 1
+                          ? "text-red-600 hover:bg-red-50"
+                          : "text-gray-900 hover:bg-gray-100"
+                  }
+                `}
               >
                 {item.label}
               </Link>

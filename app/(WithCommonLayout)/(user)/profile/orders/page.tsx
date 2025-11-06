@@ -1,6 +1,7 @@
 "use client";
+import BZModal from "@/components/modals/BZModal";
 import { useGetAllOrders, useGetMyOrders } from "@/hooks/checkout.hook";
-import { TOrder } from "@/types";
+import { TItem, TOrder } from "@/types";
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
 import {
@@ -53,9 +54,56 @@ export default function Orders() {
               </TableCell>
               <TableCell>${order.totalAmount}</TableCell>
               <TableCell>
-                <Link href={`/admin/manageUser/userList/${order._id}`}>
-                  detalis
-                </Link>
+                <BZModal
+                  buttonText="View"
+                  title="Order Details"
+                  body={
+                    <div className="space-y-3 p-4 bg-gray-50 rounded-md text-sm">
+                      <p>
+                        <span className="font-semibold">Order ID:</span>
+                        {order.orderNumber}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Customer Name:</span>
+                        {order.name}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Email:</span>
+                        {order.email}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Mobile No:</span>
+                        {order.mobileNo}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Address:</span>
+                        {order.address}, {order.city}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Delivery Date:</span>
+                        {order.deliveryDate
+                          ? new Date(order.deliveryDate).toLocaleString()
+                          : "N/A"}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Products:</span>
+                        {order.cartItems
+                          .map((p: TItem) => `${p.name} x${p.quantity}`)
+                          .join(", ")}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Total:</span> $
+                        {order.totalAmount.toFixed(2)}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Payment Status:</span>
+                        {order.payment && "status" in order.payment
+                          ? order.payment.status
+                          : "Pending"}
+                      </p>
+                    </div>
+                  }
+                />
               </TableCell>
               <TableCell>
                 {/* <Link href={`/profile/payment/${order._id}`}>Pay</Link> */}

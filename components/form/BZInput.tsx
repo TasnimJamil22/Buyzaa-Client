@@ -44,7 +44,20 @@ export default function BZInput({
       type={type}
       label={label}
       disabled={disabled}
-      className="focus:outline-none focus:ring-0 border-none"
+      className={`
+        w-full 
+        mb-4 
+        rounded-xl 
+        border border-[#e3d5a1] 
+         
+        shadow-sm 
+        focus:ring-2 focus:ring-[#d4af37] 
+        focus:border-[#c6a134] 
+        transition-all duration-300 
+        placeholder-gray-400
+         font-bold
+        ${disabled ? "opacity-60 cursor-not-allowed" : ""}
+      `}
     />
   );
 }

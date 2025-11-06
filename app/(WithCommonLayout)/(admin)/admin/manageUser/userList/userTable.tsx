@@ -85,8 +85,8 @@ export default function UserTable() {
   return (
     <div>
       <div className="flex justify-center mt-10 mb-10">
-        <div className="w-full max-w-3xl bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+        <div className="w-full max-w-3xl   p-8 rounded-2xl shadow-lg border border-gray-200">
+          <h2 className="text-[#a17c37] text-3xl font-bold text-center   mb-6">
             Create New User
           </h2>
           {/* create user form */}
@@ -112,11 +112,11 @@ export default function UserTable() {
                 <button
                   type="submit"
                   disabled={createUserLoading}
-                  className={`w-full md:w-1/2 text-white font-semibold py-3 px-6 rounded-xl border shadow-md 
+                  className={`w-full md:w-1/2  bg-gradient-to-r from-[#c9a14a] to-[#a17c37] hover:from-[#a17c37] hover:to-[#8b6d2f] text-white font-semibold py-3 px-6 rounded-xl border shadow-md 
       ${
         createUserLoading
           ? "bg-gray-400 cursor-not-allowed"
-          : "bg-gradient-to-r from-blue-600 to-blue-500 border-blue-700 hover:from-blue-700 hover:to-blue-600 transition-all"
+          : " bg-gradient-to-r from-[#c9a14a] to-[#a17c37] hover:from-[#a17c37] hover:to-[#8b6d2f] text-white  transition-all"
       }`}
                 >
                   {createUserLoading ? "Creating..." : "Create User"}
@@ -128,7 +128,7 @@ export default function UserTable() {
       </div>
 
       {/* user table */}
-      <h1 className="text-2xl font-semibold text-gray-800 mb-6 border-b pb-2">
+      <h1 className="text-[#a17c37] text-2xl font-semibold   mb-6 border-b pb-2">
         Users List
       </h1>
 

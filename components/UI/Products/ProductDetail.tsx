@@ -4,42 +4,48 @@ import BZModal from "@/components/modals/BZModal";
 import { TProduct } from "@/types"; // adjust path to your interface
 import CreateProductForm from "./CreateProductForm";
 import UpdateProductForm from "./UpdateProductForm";
+import { useUser } from "@/context/user.provider";
 
 interface IProps {
   product: TProduct;
 }
 
 export default function ProductDetail({ product }: IProps) {
+  const { user } = useUser();
   console.log(product);
   console.log(product?.category?.name);
   return (
-    <div className="max-w-10xl mx-auto p-6 sm:p-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-lg shadow-lg overflow-hidden mx-auto">
+    <div className="max-w-6xl mx-auto my-12 p-3 sm:p-10 rounded-2xl shadow-xl border border-[#f3e5ab]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Left: Product Image */}
-        <div className="flex items-center justify-center bg-gray-100 rounded-lg">
+        <div className="flex items-center justify-center   rounded-2xl overflow-hidden shadow-inner">
           <img
             src={product.images?.[0] || "/placeholder.jpg"}
             alt={product.name}
-            className="w-full h-auto max-h-[500px] object-contain rounded-lg"
+            className="w-full h-auto max-h-[500px] object-contain rounded-xl hover:scale-105 transition-transform duration-300"
           />
         </div>
 
         {/* Right: Product Info */}
-        <div className="flex flex-col justify-between p-6 space-y-4">
+        <div className="flex flex-col justify-between p-4 sm:p-6 space-y-5">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800">{product.name}</h1>
-            <p className="text-sm text-gray-500 mt-1">
+            <h1 className="text-3xl font-extrabold text-[#a17c37] tracking-tight">
+              {product.name}
+            </h1>
+            <p className="text-sm text-gray-100 mt-1 italic">
               Category: {product?.category?.name}
             </p>
-            <p className="text-lg text-gray-700 mt-4">{product.description}</p>
+            <p className="text-lg text-gray-100 mt-4 leading-relaxed">
+              {product.description}
+            </p>
           </div>
 
           <div>
-            <p className="text-2xl font-semibold text-indigo-600">
+            <p className="text-3xl font-bold text-[#c19a6b]">
               ${product.price}
             </p>
             <p
-              className={`mt-1 text-sm ${
+              className={`mt-2 text-sm font-medium ${
                 product.quantity > 0 ? "text-green-600" : "text-red-500"
               }`}
             >
@@ -49,27 +55,37 @@ export default function ProductDetail({ product }: IProps) {
             </p>
           </div>
 
-          <button
-            disabled={product.quantity <= 0}
-            className="
-              w-full md:w-auto
-              px-6 py-3
-              bg-indigo-600 text-white
-              font-semibold
-              rounded-lg
-              shadow-md
-              hover:bg-indigo-700
-              disabled:bg-gray-400 disabled:cursor-not-allowed
-              transition
-            "
-          >
-            Add to Cart
-          </button>
+          {user?.role === "USER" && (
+            <button
+              disabled={product.quantity <= 0}
+              className={`w-full md:w-auto px-6 py-3 rounded-xl font-semibold shadow-md transition-all duration-300 
+            ${
+              product.quantity <= 0
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-gradient-to-r from-[#f0c14b] to-[#d1a652] text-white hover:from-[#d1a652] hover:to-[#a8732a] hover:shadow-lg"
+            }`}
+            >
+              {product.quantity <= 0 ? "Out of Stock" : "🛒 Add to Cart"}
+            </button>
+          )}
         </div>
-        <div className="mx-auto my-10">
+      </div>
+
+      {/* Divider */}
+      <div className="my-12 border-t border-[#f0e6c8]" />
+
+      {/* Update / Edit Buttons */}
+      <div className="flex flex-col md:flex-row justify-center items-center gap-6">
+        <div className="w-full md:w-auto text-center">
           <BZModal
-            buttonText="Update Product"
-            //we are sending product={product} to <UpdateProductForm/>
+            buttonText="🎨 Update Product"
+            body={<UpdateProductForm product={product} />}
+          />
+        </div>
+
+        <div className="w-full md:w-auto text-center">
+          <BZModal
+            buttonText="🖌️ Edit Product Details"
             body={<UpdateProductForm product={product} />}
           />
         </div>

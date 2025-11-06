@@ -62,7 +62,9 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">Products</h1>
+      <h1 className="font-dancing text-6xl font-bold mb-6 text-[#a17c37]">
+        Products
+      </h1>
 
       {/* Search & Filter */}
       <div className="flex flex-col md:flex-row gap-4 mb-6">

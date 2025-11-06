@@ -1,8 +1,8 @@
-import { createPaymentRecord } from "@/services/Payment";
+import { createPaymentRecord, getMyPayments } from "@/services/Payment";
 import { TPayment } from "@/types";
 import { addToast } from "@heroui/toast";
-import { useMutation } from "@tanstack/react-query";
-
+import { useMutation, useQuery } from "@tanstack/react-query";
+//create payment record
 export const useCreatePaymentRecord = () => {
   return useMutation({
     mutationKey: ["CREATE-PAYMENT"],
@@ -23,6 +23,32 @@ export const useCreatePaymentRecord = () => {
       addToast({
         title: "Error",
         description: error?.message || "Failed to create payment",
+        color: "danger",
+      });
+    },
+  });
+};
+//get My payments
+export const useGetMyPayments = () => {
+  return useQuery({
+    queryKey: ["GET-MY-PAYMENTS"],
+    queryFn: async () => {
+      return await getMyPayments();
+    },
+    onSuccess: () => {
+      addToast({
+        title: "Success",
+        description: "My Payments retrieved successfully",
+        color: "success",
+      });
+
+      // ✅ Refetch the list of users
+      // queryClient.invalidateQueries({ queryKey: ["GET-ALL-USER"] });
+    },
+    onError: (error: any) => {
+      addToast({
+        title: "Error",
+        description: error?.message || "Failed to retrieve my payments",
         color: "danger",
       });
     },

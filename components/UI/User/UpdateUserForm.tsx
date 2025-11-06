@@ -19,7 +19,7 @@ export default function UpdateUserForm({ user }: UpdateUserFormProps) {
     });
   };
   return (
-    <div className="max-w-lg mx-auto bg-white shadow-md p-6 rounded-xl border border-gray-200">
+    <div className="max-w-lg mx-auto  shadow-md p-6 rounded-xl border border-gray-200">
       <h2 className="text-xl font-semibold mb-4">Update User Form</h2>
 
       <BZFrom onSubmit={onSubmit} defaultValues={user}>
@@ -34,7 +34,7 @@ export default function UpdateUserForm({ user }: UpdateUserFormProps) {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
+          className="w-full bg-gradient-to-r from-[#c9a14a] to-[#a17c37] hover:from-[#a17c37]   text-white py-2 rounded-lg   transition disabled:opacity-50"
         >
           {isPending ? "Updating..." : "Update User"}
         </button>

@@ -16,7 +16,7 @@ const ProductDetailPage = async ({ params: { productId } }: IProps) => {
   return (
     <Container>
       <div className="mx-auto bg-default-100 rounded-lg">
-        <h1>{product.name}</h1>
+        {/* <h1>{product.name}</h1> */}
         <ProductDetail key={product?._id} product={product} />
       </div>
       <div className="my-12">

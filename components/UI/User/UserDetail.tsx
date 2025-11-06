@@ -56,7 +56,7 @@ export default function UserDetail({ user }: IProps) {
     <div className="max-w-5xl mx-auto p-10">
       <Card className="overflow-hidden rounded-2xl shadow-xl border border-gray-200">
         {/* Profile Header */}
-        <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-10 flex flex-col items-center">
+        <div className="bg-gradient-to-r  bg-gradient-to-r from-[#c9a14a] to-[#a17c37] hover:from-[#a17c37] hover:to-[#8b6d2f] text-white p-10 flex flex-col items-center">
           <Avatar
             src={
               user.profilePhoto ||
@@ -71,21 +71,21 @@ export default function UserDetail({ user }: IProps) {
 
         {/* User Info Section */}
         <CardBody className="p-10">
-          <h3 className="text-lg font-semibold text-gray-800 mb-6">
+          <h3 className="text-lg font-semibold text-[#a17c37] mb-6">
             User Information
           </h3>
           <div className="grid md:grid-cols-2 gap-8 text-sm">
             {/* Email */}
             <div className="flex items-center gap-3 border-b pb-4">
               <Mail className="w-5 h-5 text-indigo-500" />
-              <span className="text-gray-700">{user.email}</span>
+              <span className="text-default-500">{user.email}</span>
             </div>
 
             {/* Phone */}
             {user.mobileNumber && (
               <div className="flex items-center gap-3 border-b pb-4">
                 <Phone className="w-5 h-5 text-green-500" />
-                <span className="text-gray-700">{user.mobileNumber}</span>
+                <span className="text-default-500">{user.mobileNumber}</span>
               </div>
             )}
 
@@ -93,7 +93,7 @@ export default function UserDetail({ user }: IProps) {
             {user.role && (
               <div className="flex items-center gap-3 border-b pb-4">
                 <Shield className="w-5 h-5 text-orange-500" />
-                <span className="text-gray-700 capitalize">{user.role}</span>
+                <span className="text-default-500 capitalize">{user.role}</span>
               </div>
             )}
 
@@ -101,7 +101,7 @@ export default function UserDetail({ user }: IProps) {
             {user.status && (
               <div className="flex items-center gap-3 border-b pb-4">
                 <UserX className="w-5 h-5 text-red-500" />
-                <span className="text-gray-700">{user.status}</span>
+                <span className="text-default-500">{user.status}</span>
               </div>
             )}
 
@@ -109,7 +109,7 @@ export default function UserDetail({ user }: IProps) {
             {user.passwordChangedAt && (
               <div className="flex items-center gap-3 border-b pb-4">
                 <KeyRound className="w-5 h-5 text-yellow-500" />
-                <span className="text-gray-700">
+                <span className="text-default-500">
                   Password changed:
                   {new Date(user.passwordChangedAt).toLocaleDateString()}
                 </span>
@@ -120,7 +120,7 @@ export default function UserDetail({ user }: IProps) {
             {user.createdAt && (
               <div className="flex items-center gap-3 border-b pb-4">
                 <CalendarDays className="w-5 h-5 text-blue-500" />
-                <span className="text-gray-700">
+                <span className="text-default-500">
                   Created: {new Date(user.createdAt).toLocaleDateString()}
                 </span>
               </div>
@@ -130,7 +130,7 @@ export default function UserDetail({ user }: IProps) {
             {user.updatedAt && (
               <div className="flex items-center gap-3">
                 <Clock className="w-5 h-5 text-purple-500" />
-                <span className="text-gray-700">
+                <span className="text-default-500">
                   Updated: {new Date(user.updatedAt).toLocaleDateString()}
                 </span>
               </div>
@@ -158,10 +158,10 @@ export default function UserDetail({ user }: IProps) {
         </CardBody>
 
         {/* Footer */}
-        <div className="p-5 border-t bg-gray-50 text-right">
+        <div className="p-5 border-t text-right">
           <Link
             href="/admin/manageUser/userList"
-            className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition"
+            className="text-sm font-medium text-default-500 hover:text-indigo-600 transition"
           >
             ← Back to Users
           </Link>

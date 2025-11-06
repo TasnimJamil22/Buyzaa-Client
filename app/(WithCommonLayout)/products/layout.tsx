@@ -8,7 +8,7 @@ import Cart from "../(user)/profile/cart/page";
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
-      <h1>User Profile Layout</h1>
+      {/* <h1>User Profile Layout</h1> */}
 
       {/* <main> {children}</main> */}
 
@@ -18,7 +18,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           <Cart />
         </div>
       </div> */}
-      <div className="relative   max-w-7xl mx-auto px-4 py-6">
+      <div className="relative max-w-5xl mx-auto px-4 py-6">
         {/* Main content */}
         <div className="w-full">{children}</div>
 
