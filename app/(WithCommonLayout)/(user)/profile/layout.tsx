@@ -6,25 +6,23 @@ import { ReactNode } from "react";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    // <Container>
-    //   {/* <h1>User Profile Layout</h1> */}
-
-    //   {/* <main> {children}</main> */}
-    //   <div className="flex">
-    //     <div className="w-2/5">
-    //       <Sidebar />
-    //     </div>
-    //     <div className="w-4/5">{children}</div>
+    // <div className="flex flex-col md:flex-row">
+    //   {/* Sidebar */}
+    //   <div className="w-full md:w-2/5">
+    //     <Sidebar />
     //   </div>
-    // </Container>
-    <div className="flex flex-col md:flex-row">
+
+    //   {/* Main content */}
+    //   <div className="w-full md:w-4/5">{children}</div>
+    // </div>
+    <div className="flex flex-col md:flex-row min-h-screen">
       {/* Sidebar */}
-      <div className="w-full md:w-2/5">
+      <aside className="w-full md:w-2/5 lg:w-1/4   p-4 md:p-6">
         <Sidebar />
-      </div>
+      </aside>
 
       {/* Main content */}
-      <div className="w-full md:w-4/5">{children}</div>
+      <main className="w-full md:w-3/5 lg:w-3/4 p-4 md:p-8  ">{children}</main>
     </div>
   );
 }

@@ -53,3 +53,12 @@ export const updateProduct = async (
     throw new Error(err.message);
   }
 };
+//delete a product by id
+export const deleteProduct = async (productId: string) => {
+  try{
+    const { data } = await axiosInstance.delete(`/products/${productId}`);
+  return data;
+  }catch(err:any){
+    throw new Error(err.message)
+  }
+};

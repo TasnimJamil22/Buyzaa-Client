@@ -1,4 +1,8 @@
-import { createProduct, updateProduct } from "@/services/Product";
+import {
+  createProduct,
+  deleteProduct,
+  updateProduct,
+} from "@/services/Product";
 import { TProduct } from "@/types";
 import { addToast } from "@heroui/toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -63,6 +67,35 @@ export const useUpdateProduct = () => {
       addToast({
         title: "Error",
         description: error?.message || "Failed to update product",
+        color: "danger",
+      });
+    },
+  });
+};
+
+//delete a product by id
+export const useDeleteProduct = () => {
+  return useMutation({
+    mutationKey: ["DELETE-PRODUCT"],
+    mutationFn: async (productId: string) => {
+      return await deleteProduct(productId);
+    },
+    onSuccess: () => {
+      // ✅ Refetch the list of users
+      // queryClient.invalidateQueries({ queryKey: ["GET-ALL-USER"] });
+      addToast({
+        title: "Success",
+        description: "Product deleted successfully",
+        color: "success",
+      });
+
+      // ✅ Refetch the list of users
+      // queryClient.invalidateQueries({ queryKey: ["GET-ALL-USER"] });
+    },
+    onError: (error: any) => {
+      addToast({
+        title: "Error",
+        description: error?.message || "Failed to delete product",
         color: "danger",
       });
     },

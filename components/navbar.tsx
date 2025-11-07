@@ -41,24 +41,25 @@ export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const { cartItems } = useCart();
-  // const handleLogout = () => {
-  //   logoutUser();
-  //   setUser(null);
-  //   setIsLoading(true);
-  //   if (protectedRoutes.some((route) => pathname.match(route))) {
-  //     router.push("/");
-  //   }
-  // };
+  const handleLogout = () => {
+    logoutUser();
+    setUser(null);
+    setIsLoading(true);
+    if (protectedRoutes.some((route) => pathname.match(route))) {
+      router.push("/");
+    }
+  };
   return (
     <HeroUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">Buyzaa</p>
+            <p className="font-dancing text-4xl text-[#a17c37] font-bold-800  ">
+              Buyzaa
+            </p>
           </NextLink>
         </NavbarBrand>
-        <ul className="hidden lg:flex gap-4 justify-start ml-2">
+        <ul className="hidden lg:flex gap-4 justify-start ml-2 text-[#a17c37] ">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
@@ -93,13 +94,13 @@ export default function Navbar() {
           </NavbarItem>
         )}
         {/* cart icon */}
-        {/* <NavbarItem className="hidden sm:flex gap-2">
-          <NextLink href="/cart">
+        <NavbarItem className="hidden sm:flex gap-2">
+          <NextLink href="/profile/cart">
             <Badge content={cartItems.length} color="danger">
               <CartIcon />
             </Badge>
           </NextLink>
-        </NavbarItem> */}
+        </NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
@@ -133,24 +134,17 @@ export default function Navbar() {
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item.label}-${index}`}>
               <Link
-                href={item.href} // make it functional
+                href={item.href} // functional link
                 className={`
-                  block
-                  text-lg
-                  font-medium
-                  px-4 py-2
-                  rounded-lg
-                  transition
-                  ${
-                    pathname === item.href
-                      ? "bg-indigo-100 text-indigo-700"
-                      : index === 2
-                        ? "text-indigo-600 hover:bg-indigo-50"
-                        : index === siteConfig.navMenuItems.length - 1
-                          ? "text-red-600 hover:bg-red-50"
-                          : "text-gray-900 hover:bg-gray-100"
-                  }
-                `}
+            block
+            text-lg
+            font-medium
+            px-4 py-2
+            rounded-lg
+            transition
+            text-default-500
+            hover:bg-gray-100
+          `}
               >
                 {item.label}
               </Link>

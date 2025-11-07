@@ -63,7 +63,7 @@ export default function CheckoutForm() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center ">
+    <div className="w-full flex flex-col items-center">
       <h1 className="w-full flex justify-center items-center text-4xl font-semibold mb-6 text-accent font-[Manrope]">
         Checkout
       </h1>
@@ -74,7 +74,7 @@ export default function CheckoutForm() {
             onSubmit={handleSubmit(onSubmit)}
             className="w-full max-w-3xl p-6"
           >
-            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 ">
               <BZInput name="name" label="Name" />
               <BZInput
                 name="email"

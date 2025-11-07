@@ -6,18 +6,22 @@ import { useRegisterUser } from "@/hooks/auth.hook";
 import { TUser } from "@/types";
 import { Button } from "@heroui/button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
 export default function RegisterPage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const redirect = searchParams.get("redirect"); //this redirect is a pathname actually,(ex:/profile),coming from our url, which we have set in middleware.
+
   const {
     mutate: handleRegisterUser,
     isPending,
     isSuccess,
   } = useRegisterUser();
   const { setIsLoading } = useUser();
-  const router = useRouter();
+
   const onSubmit: SubmitHandler<TUser> = (data) => {
     const userData = {
       ...data,
@@ -26,9 +30,14 @@ export default function RegisterPage() {
     console.log(userData);
     setIsLoading(true);
   };
+  //This is for: if we go direct login, that means no redirect from url like /profile, /create-post, /settings etc so it will take us to home page after login . But when we wanted to go in /profile etc but we needed to login then it after login it will take us to that .... /profile page
   useEffect(() => {
     if (!isPending && isSuccess) {
-      router.push("/");
+      if (redirect) {
+        router.push(redirect);
+      } else {
+        router.push("/");
+      }
     }
   }, [isPending, isSuccess]);
   return (

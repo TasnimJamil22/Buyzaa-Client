@@ -17,12 +17,14 @@ import { usePathname, useRouter } from "next/navigation";
 // import { Link } from "@heroui/link";
 
 export default function NavbarDropdown() {
-  const { user, setIsLoading: userLoading } = useUser();
+  const { user, setIsLoading: userLoading, setUser } = useUser();
   const router = useRouter();
   const pathname = usePathname();
 
   const handleLogout = () => {
     logoutUser();
+    setUser(null);
+    userLoading(true);
 
     // router.push("/");
     if (protectedRoutes.some((route) => pathname.match(route))) {

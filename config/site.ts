@@ -36,10 +36,10 @@ export const siteConfig = {
       label: "Products",
       href: "/products",
     },
-    // {
-    //   label: "Cart",
-    //   href: "/cart",
-    // },
+    {
+      label: "Cart",
+      href: "/profile/cart",
+    },
 
     {
       label: "About",
