@@ -85,7 +85,8 @@ export default function CartQuantity({ product }: IProps) {
           color="primary"
           className="w-full bg-accent hover:bg-orange-300  text-default-700 rounded-lg font-medium px-6 py-2 transition-all shadow-sm text-center mx-auto"
         >
-          Add to Cart
+          {/* Add to Cart */}
+          {product.quantity <= 0 ? "Out of Stock" : "🛒 Add to Cart"}
         </Button>
       )}
     </div>

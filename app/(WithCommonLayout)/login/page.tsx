@@ -3,30 +3,73 @@ import BZForm from "@/components/form/BZForm";
 import BZInput from "@/components/form/BZInput";
 import { useUser } from "@/context/user.provider";
 import { useLoginUser, useRegisterUser } from "@/hooks/auth.hook";
+import { loginUser } from "@/services/AuthService";
 import { TUser } from "@/types";
 import { Button } from "@heroui/button";
-import { Jim_Nightshade } from "next/font/google";
+
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import loginValidationSchema from "@/schemas/login.schema";
 
 export default function LoginPage() {
+  // const [errorMessage, setErrorMessage] = useState("");
   const searchParams = useSearchParams();
   const router = useRouter();
   const redirect = searchParams.get("redirect"); //this redirect is a pathname actually,(ex:/profile),coming from our url, which we have set in middleware.
 
-  const { mutate: handleLoginUser, isPending, isSuccess } = useLoginUser();
+  const {
+    mutate: handleLoginUser,
+    isPending,
+    isSuccess,
+    error,
+    isError,
+  } = useLoginUser();
   const { setIsLoading } = useUser();
-
+  // const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  //   try {
+  //     setIsLoading(true);
+  //     const res = await handleLoginUser(data);
+  //     console.log("✅ Login successful:", res);
+  //     setIsLoading(true);
+  //     setError("");
+  //   } catch (err: any) {
+  //     setError(err.message);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+  //
+  //
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    setIsLoading(true);
     const userData = {
       ...data,
     };
+
     handleLoginUser(userData);
+
     setIsLoading(true);
     console.log(userData);
   };
+
+  // const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  //   try {
+  //     setIsLoading(true);
+  //     const userData = {
+  //       ...data,
+  //     };
+  //     loginUser(userData); // ✅ async call
+  //     // console.log("✅ Login successful:", res);
+  //     setIsLoading(true);
+  //     setError(""); // clear old error
+  //   } catch (err: any) {
+  //     setError(err.message); // ✅ show backend message
+  //   }
+  // };
+
   //This is for: if we go direct login, that means no redirect from url like /profile, /create-post, /settings etc so it will take us to home page after login . But when we wanted to go in /profile etc but we needed to login then it after login it will take us to that .... /profile page
 
   useEffect(() => {
@@ -38,6 +81,7 @@ export default function LoginPage() {
       }
     }
   }, [isPending, isSuccess]);
+
   return (
     <div className="flex flex-col justify-center items-center min-h-screen  ">
       <h1 className="text-4xl font-semibold mb-6 text-accent font-[Manrope] ">
@@ -45,12 +89,27 @@ export default function LoginPage() {
       </h1>
 
       <div className="w-full max-w-md  p-8 rounded-2xl shadow-md">
-        <BZForm onSubmit={onSubmit}>
+        <BZForm
+          onSubmit={onSubmit}
+          resolver={zodResolver(loginValidationSchema)}
+        >
           <div className="flex flex-col gap-4">
-            <BZInput name="email" label="Email" type="email" />
-            <BZInput name="password" label="Password" type="password" />
+            <BZInput name="email" label="Email" type="email" required />
+
+            <BZInput
+              name="password"
+              label="Password"
+              type="password"
+              required
+            />
+            {/* {error && <p className="text-red-500 text-sm">{errorMessage}</p>} */}
+            {isError && (
+              <p className="text-red-500 text-sm">
+                {(error as Error)?.message}
+              </p>
+            )}
             <Button type="submit" className="w-full bg-accent">
-              Login
+              {isPending ? "Logging in..." : "Login"}
             </Button>
             <p className="text-default-500 py-3">
               New to Buyzaa?

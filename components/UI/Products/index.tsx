@@ -104,7 +104,7 @@ export default function ProductCard({ product }: IProps) {
   return (
     <Card
       className="max-w-xs shadow-lg rounded-lg overflow-hidden border border-[#f1e4c3] 
-                 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl 
+                 transition-all duration-900 hover:scale-[1.03] hover:shadow-2xl 
                  hover:border-[#d6b770]"
     >
       {/* Product Image */}

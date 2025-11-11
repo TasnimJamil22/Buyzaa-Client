@@ -87,7 +87,7 @@ export default function Sidebar() {
             <div className="w-20 h-20 mx-auto bg-gradient-to-tr from-[#f0c14b]/30 via-[#d1a652]/20 to-[#fff]/10 rounded-full flex items-center justify-center text-sm font-medium shadow-inner">
               IMG
             </div>
-            <h1 className="mt-4 text-2xl font-semibold text-[#a17c37] tracking-wide">
+            <h1 className="font-dancing mt-4 text-4xl font-semibold text-[#a17c37] tracking-wide">
               {user?.name}
             </h1>
             <p className="mt-1 text-sm text-[#8b6d2f]">{user?.email}</p>

@@ -1,11 +1,12 @@
 import {
   createProduct,
   deleteProduct,
+  getAllProducts,
   updateProduct,
 } from "@/services/Product";
 import { TProduct } from "@/types";
 import { addToast } from "@heroui/toast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //create a product
 export const useCreateProduct = () => {
@@ -96,6 +97,34 @@ export const useDeleteProduct = () => {
       addToast({
         title: "Error",
         description: error?.message || "Failed to delete product",
+        color: "danger",
+      });
+    },
+  });
+};
+//get all products hook
+export const useGetAllProducts = () => {
+  return useQuery({
+    queryKey: ["GET-ALL-PRODUCTS"],
+    queryFn: async () => {
+      await getAllProducts();
+    },
+    onSuccess: () => {
+      // ✅ Refetch the list of users
+      // queryClient.invalidateQueries({ queryKey: ["GET-ALL-USER"] });
+      addToast({
+        title: "Success",
+        description: "Products retrieved successfully",
+        color: "success",
+      });
+
+      // ✅ Refetch the list of users
+      // queryClient.invalidateQueries({ queryKey: ["GET-ALL-USER"] });
+    },
+    onError: (error: any) => {
+      addToast({
+        title: "Error",
+        description: error?.message || "Failed to retrieved products",
         color: "danger",
       });
     },

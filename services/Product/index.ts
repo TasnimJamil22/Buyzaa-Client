@@ -2,6 +2,7 @@ import envConfig from "@/config/envConfig";
 import axiosInstance from "@/lib/AxiosInstance";
 import { TProduct } from "@/types";
 
+//service function will be used in server component-> app routes or pages ,but for client component , this will not work ,at this moment,we need hook
 //get all products
 export const getAllProducts = async () => {
   // handling nextjs cache validation
@@ -55,10 +56,10 @@ export const updateProduct = async (
 };
 //delete a product by id
 export const deleteProduct = async (productId: string) => {
-  try{
+  try {
     const { data } = await axiosInstance.delete(`/products/${productId}`);
-  return data;
-  }catch(err:any){
-    throw new Error(err.message)
+    return data;
+  } catch (err: any) {
+    throw new Error(err.message);
   }
 };

@@ -53,6 +53,7 @@
     "@heroui/toast": "^2.0.16",
     "@heroui/tooltip": "2.2.23",
     "@heroui/user": "2.2.21",
+    "@hookform/resolvers": "^5.2.2",
     "@react-aria/ssr": "3.9.10",
     "@react-aria/visually-hidden": "3.8.27",
     "@stripe/react-stripe-js": "^5.2.0",
@@ -71,7 +72,8 @@
     "react-dom": "18.3.1",
     "react-hook-form": "^7.63.0",
     "react-icons": "^5.5.0",
-    "stripe": "^19.1.0"
+    "stripe": "^19.1.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "15.3.4",

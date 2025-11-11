@@ -19,15 +19,35 @@ export const registerUser = async (userData: TUser) => {
   return data;
 };
 
-export const loginUser = async (userData: FieldValues) => {
-  const { data } = await axiosInstance.post("/auth/login", userData);
-  if (data.success) {
-    const cookieStore = await cookies();
+// export const loginUser = async (userData: FieldValues) => {
+//   const { data } = await axiosInstance.post("/auth/login", userData);
+//   if (data.success) {
+//     const cookieStore = await cookies();
 
-    cookieStore.set("accessToken", data?.data?.accessToken);
-    cookieStore.set("refreshToken", data?.data?.refreshToken);
+//     cookieStore.set("accessToken", data?.data?.accessToken);
+//     cookieStore.set("refreshToken", data?.data?.refreshToken);
+//   }
+//   return data;
+// };
+
+export const loginUser = async (userData: FieldValues) => {
+  try {
+    const { data } = await axiosInstance.post("/auth/login", userData);
+
+    if (data.success) {
+      const cookieStore = await cookies();
+      cookieStore.set("accessToken", data?.data?.accessToken);
+      cookieStore.set("refreshToken", data?.data?.refreshToken);
+    }
+
+    return data; // success case
+  } catch (error: any) {
+    // ✅ handle backend errors safely
+    const message =
+      error.response?.data?.message ||
+      "Something went wrong. Please try again.";
+    throw new Error(message); // send this to your form or hook
   }
-  return data;
 };
 
 export const getCurrentUser = async () => {

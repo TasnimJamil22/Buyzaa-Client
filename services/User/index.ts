@@ -61,7 +61,7 @@ export const updateUser = async (
   updatedData: Partial<TUser>
 ) => {
   try {
-    const data = await axiosInstance.patch(`/users/${userId}`, updatedData);
+    const { data } = await axiosInstance.patch(`/users/${userId}`, updatedData); //if it was only data: the error "maximum call  stack exceeded."so make sure it is {data}
     return data;
   } catch (error: any) {
     throw new Error(error.message);

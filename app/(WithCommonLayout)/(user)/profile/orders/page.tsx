@@ -20,7 +20,8 @@ export default function Orders() {
   console.log(orders);
   return (
     <div>
-      <h1>This is orders page</h1>
+      {/* <h1>This is orders page</h1> */}
+      <h1 className="text-4xl text-yellow-600  font-dancing">Orders history</h1>
 
       {/* user table */}
       <Table aria-label="Example static collection table mb-5">
@@ -124,6 +125,9 @@ export default function Orders() {
           ))}
         </TableBody>
       </Table>
+      {orders?.length === 0 && (
+        <p className="text-center text-default-500 p-5">No orders found</p>
+      )}
     </div>
   );
 }

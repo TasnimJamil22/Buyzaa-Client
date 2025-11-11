@@ -6,6 +6,9 @@ import CreateProductForm from "./CreateProductForm";
 import UpdateProductForm from "./UpdateProductForm";
 import { useUser } from "@/context/user.provider";
 import { useDeleteProduct } from "@/hooks/product.hook";
+import { useCart } from "@/context/cart.provider";
+import { useState } from "react";
+import CartQuantity from "../Cart/CartQuantity";
 
 interface IProps {
   product: TProduct;
@@ -15,8 +18,10 @@ export default function ProductDetail({ product }: IProps) {
   const { user } = useUser();
   console.log(product);
   console.log(product?.category?.name);
+  const { addToCart } = useCart();
   const { mutate: handleDeleteProduct, isSuccess: productDeleted } =
     useDeleteProduct();
+
   return (
     <div>
       {productDeleted ? (
@@ -48,10 +53,10 @@ export default function ProductDetail({ product }: IProps) {
                 <h1 className="text-3xl font-extrabold text-[#a17c37] tracking-tight">
                   {product.name}
                 </h1>
-                <p className="text-sm text-gray-100 mt-1 italic">
+                <p className="text-sm  mt-1 italic">
                   Category: {product?.category?.name}
                 </p>
-                <p className="text-lg text-gray-100 mt-4 leading-relaxed">
+                <p className="  text-default-500  mt-4 leading-relaxed">
                   {product.description}
                 </p>
               </div>
@@ -71,8 +76,9 @@ export default function ProductDetail({ product }: IProps) {
                 </p>
               </div>
               {/* if user role is admin , no add to cart needed but all others will see */}
-              {user?.role !== "ADMIN" && (
+              {/* {user?.role !== "ADMIN" && (
                 <button
+                  onClick={handleAddToCart}
                   disabled={product.quantity <= 0}
                   className={`w-full md:w-auto px-6 py-3 rounded-xl font-semibold shadow-md transition-all duration-300 
                    ${
@@ -83,7 +89,8 @@ export default function ProductDetail({ product }: IProps) {
                 >
                   {product.quantity <= 0 ? "Out of Stock" : "🛒 Add to Cart"}
                 </button>
-              )}
+              )} */}
+              {user?.role !== "ADMIN" && <CartQuantity product={product} />}
             </div>
           </div>
 

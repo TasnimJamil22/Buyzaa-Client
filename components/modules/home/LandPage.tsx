@@ -1,6 +1,79 @@
 "use client";
 
 import { Input } from "@heroui/input";
+import { SearchIcon } from "lucide-react";
+import BannerSearch from "./BannerSearch";
+import { useGetAllProducts } from "@/hooks/product.hook";
+import { TProduct } from "@/types";
+import { useState } from "react";
+interface IProps {
+  products: TProduct[];
+}
+export default function Landing({ products }: IProps) {
+  return (
+    <div className="relative h-[calc(100vh-100px)] w-full bg-[url('/bannerImg2.png')] bg-cover bg-no-repeat bg-center flex items-center justify-center rounded-lg">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/50 rounded-lg"></div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center px-4">
+        {/* Headline */}
+        <h1 className="font-dancing text-white text-3xl md:text-5xl font-bold mb-4 drop-shadow-lg">
+          Find Your Perfect Art Piece
+        </h1>
+        {/* Tagline */}
+        <p className="text-white/80 mb-8 max-w-xl mx-auto">
+          Explore unique collections of paintings, sculptures, and creative
+          crafts tailored just for you.
+        </p>
+        {/* Search Section */}
+        <div className="max-w-xl mx-auto w-full px-4">
+          <form className="flex-1">
+            <Input
+              placeholder="Search"
+              classNames={{
+                inputWrapper: "bg-default-100",
+                input: "text-sm",
+              }}
+              startContent={<SearchIcon />}
+              type="text"
+            />
+          </form>
+        </div>
+        {/* <BannerSearch onSearch={handleSearch} /> */}
+        {/* 🖼️ Product display
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((p) => (
+              <div
+                key={p._id}
+                className="bg-white text-black p-4 rounded-lg shadow-md hover:shadow-lg transition"
+              >
+                <h2 className="font-semibold">{p.name}</h2>
+                <p>${p.price}</p>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-300 col-span-full">No results found</p>
+          )}
+        </div> */}
+      </div>
+    </div>
+  );
+}
+
+// module.exports = {
+//   plugins: {
+//     "@tailwindcss/postcss": {},
+//   },
+// };
+// module.exports = {
+//   plugins: {
+//     "@tailwindcss/postcss": {},
+//     autoprefixer: {},
+//   },
+// };
+
 // import React from "react";
 // import { Button } from "@heroui/button";
 
@@ -67,55 +140,3 @@ import { Input } from "@heroui/input";
 // }
 
 //3
-
-import { SearchIcon } from "lucide-react";
-
-export default function Landing() {
-  return (
-    <div className="relative h-[calc(100vh-100px)] w-full bg-[url('/bannerImg2.png')] bg-cover bg-no-repeat bg-center flex items-center justify-center rounded-lg">
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40 rounded-lg"></div>
-
-      {/* Content */}
-      <div className="relative z-10 text-center px-4">
-        {/* Headline */}
-        <h1 className="font-dancing text-white text-6xl sm:text-5xl font-bold mb-4 drop-shadow-lg">
-          Find Your Perfect Art Piece
-        </h1>
-
-        {/* Tagline */}
-        <p className="text-white/80 mb-8 max-w-xl mx-auto">
-          Explore unique collections of paintings, sculptures, and creative
-          crafts tailored just for you.
-        </p>
-
-        {/* Search Section */}
-        <div className="max-w-xl mx-auto w-full px-4">
-          <form className="flex-1">
-            <Input
-              placeholder="Search"
-              classNames={{
-                inputWrapper: "bg-default-100",
-                input: "text-sm",
-              }}
-              startContent={<SearchIcon />}
-              type="text"
-            />
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// module.exports = {
-//   plugins: {
-//     "@tailwindcss/postcss": {},
-//   },
-// };
-// module.exports = {
-//   plugins: {
-//     "@tailwindcss/postcss": {},
-//     autoprefixer: {},
-//   },
-// };

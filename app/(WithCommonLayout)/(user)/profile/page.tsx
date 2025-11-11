@@ -1,92 +1,192 @@
 "use client";
 
-import { useState } from "react";
-import { Image } from "@heroui/image";
-import { Button } from "@heroui/button";
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
-import { Input } from "@heroui/input";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useUser } from "@/context/user.provider";
+import BZForm from "@/components/form/BZForm";
+import BZInput from "@/components/form/BZInput";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+import { useUpdateUser } from "@/hooks/user.hook";
+import { TUser } from "@/types";
 
 export default function ProfilePage() {
   const { user } = useUser();
-  const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState(user?.name || "");
-  const [email, setEmail] = useState(user?.email || "");
-  const [mobile, setMobile] = useState(user?.mobileNumber || "");
+  const {
+    mutate: handleUpdateUser,
+    isPending,
+    isSuccess,
+    error,
+  } = useUpdateUser();
+  const [showPassword, setShowPassword] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [imageFiles, setImageFiles] = useState<File[] | []>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
+  console.log(imageFiles);
+  console.log("p", imagePreviews);
+  const onSubmit: SubmitHandler<FieldValues> = (data: Partial<TUser>) => {
+    if (!user?._id) return;
+    handleUpdateUser({
+      userId: user._id,
+      updatedData: data,
+    });
+    console.log(user);
+  };
 
-  const handleSave = () => {
-    // TODO: connect API update logic here
-    console.log("Profile updated:", { name, email, mobile });
-    setIsEditing(false);
+  useEffect(() => {
+    if (isSuccess) {
+      setSuccessMsg("Profile updated successfully!");
+      const timer = setTimeout(() => setSuccessMsg(""), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess]);
+
+  if (!user)
+    return (
+      <div className="text-center mt-10 text-gray-500">Loading profile...</div>
+    );
+  //handle image
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // console.log(e.target.files![0]);
+    const file = e.target.files![0];
+    setImageFiles((prev) => [...prev, file]);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreviews((prev) => [...prev, reader.result as string]);
+      };
+      //to read as data url
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
-    <div className="min-h-screen   flex flex-col items-center py-10 px-4">
-      <Card className="w-full max-w-md shadow-lg rounded-3xl border border-amber-100 bg-white/70 backdrop-blur-sm">
-        <CardHeader className="flex flex-col items-center gap-3 py-6">
-          <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-amber-300 to-pink-200 flex items-center justify-center text-xl font-semibold text-white shadow-md">
-            {user?.name?.[0] || "U"}
-          </div>
-          <h2 className="text-2xl font-semibold text-gray-800">{user?.name}</h2>
-          <p className="text-gray-500">{user?.email}</p>
-        </CardHeader>
+    <div className="max-w-xl mx-auto mt-12 p-6   rounded-2xl shadow-lg">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+        My Profile
+      </h1>
 
-        <CardBody className="space-y-4">
-          <Input
-            label="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            disabled={!isEditing}
-          />
-          <Input label="Email" value={email} disabled />
-          <Input
-            label="Mobile Number"
-            value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
-            disabled={!isEditing}
-          />
-        </CardBody>
-
-        <CardFooter className="flex justify-between mt-4">
-          {isEditing ? (
-            <>
-              <Button
-                onPress={handleSave}
-                className="bg-gradient-to-r from-amber-400 to-pink-400 text-white px-6 py-2 rounded-xl shadow-md hover:opacity-90"
-              >
-                Save
-              </Button>
-              <Button
-                onPress={() => setIsEditing(false)}
-                variant="bordered"
-                className="border-amber-200 text-amber-700"
-              >
-                Cancel
-              </Button>
-            </>
-          ) : (
-            <Button
-              onPress={() => setIsEditing(true)}
-              className="bg-gradient-to-r from-amber-300 to-pink-300 text-white px-6 py-2 rounded-xl shadow-md hover:opacity-90"
-            >
-              Edit Profile
-            </Button>
-          )}
-        </CardFooter>
-      </Card>
-
-      <div className="mt-8 text-center space-y-3">
-        <Button className="w-48 bg-gradient-to-r from-rose-300 to-rose-400 text-white rounded-xl shadow hover:opacity-90">
-          Logout
-        </Button>
-        <p className="text-sm text-gray-500">Want to delete your account?</p>
-        <Button
-          variant="bordered"
-          className="border-red-300 text-red-500 hover:bg-red-50"
-        >
-          Delete Account
-        </Button>
+      {/* Profile Avatar */}
+      <div className="flex justify-center mb-6">
+        <img
+          src={user.profilePhoto || "/default-avatar.png"}
+          alt="Profile"
+          className="w-24 h-24 rounded-full object-cover border-2 border-gray-300"
+        />
       </div>
+
+      {/* Success / Error Messages */}
+      {successMsg && (
+        <div className="mb-4 px-4 py-2 bg-green-100 text-green-800 rounded-lg text-center">
+          {successMsg}
+        </div>
+      )}
+      {error && (
+        <div className="mb-4 px-4 py-2 bg-red-100 text-red-800 rounded-lg text-center">
+          Failed to update profile
+        </div>
+      )}
+
+      <BZForm onSubmit={onSubmit} defaultValues={user || {}}>
+        <div className="grid grid-cols-1 gap-4">
+          <BZInput name="name" label="Full Name" />
+          <BZInput name="email" label="Email" />
+
+          <div>
+            <BZInput
+              name="password"
+              label="Password"
+              type={showPassword ? "text" : "password"}
+            />
+            <label className="flex items-center gap-2 text-sm mt-1 text-gray-600">
+              <input
+                type="checkbox"
+                checked={showPassword}
+                onChange={() => setShowPassword(!showPassword)}
+                className="accent-[#c9a14a]"
+              />
+              Show password
+            </label>
+          </div>
+
+          <BZInput name="mobileNumber" label="Mobile Number" />
+          <BZInput name="profilePhoto" label="Profile Photo (URL)" />
+          <div className="min-w-fit flex-1 border">
+            <label htmlFor="image">Upload Image</label>
+            <input
+              multiple
+              type="file"
+              id="image"
+              className="hidden"
+              onChange={(e) => handleImageChange(e)}
+            />
+          </div>
+          <div>
+            {imagePreviews.length > 0 &&
+              imagePreviews.map((imageDataUrl) => (
+                <div key={imageDataUrl} className="p-5  border rounded-lg">
+                  <img
+                    className="h-full w-full object-cover object-center  rounded-lg"
+                    src={imageDataUrl}
+                    alt=""
+                  />
+                </div>
+              ))}
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          disabled={isPending}
+          className="mt-6 w-full bg-gradient-to-r from-[#c9a14a] to-[#a17c37] hover:from-[#a17c37] text-white py-3 rounded-xl font-semibold transition disabled:opacity-50"
+        >
+          {isPending ? "Updating..." : "Update Profile"}
+        </button>
+      </BZForm>
     </div>
   );
 }
+
+// "use client";
+
+// import { useState } from "react";
+// // adjust path as needed
+// import { useUser } from "@/context/user.provider"; // assuming you have a user context
+// import BZForm from "@/components/form/BZForm";
+// import BZInput from "@/components/form/BZInput";
+// import { FieldValues, SubmitHandler } from "react-hook-form";
+// import { useUpdateUser } from "@/hooks/user.hook";
+// import { TUser } from "@/types";
+
+// export default function ProfilePage() {
+//   const { user } = useUser(); // your current logged-in user
+
+//   const { mutate: handleUpdateUser, isPending, isSuccess } = useUpdateUser();
+
+//   const onSubmit: SubmitHandler<FieldValues> = (data: Partial<TUser>) => {
+//     handleUpdateUser({
+//       userId: user?._id as string,
+//       updatedData: data,
+//     });
+//   };
+
+//   return (
+//     <div className="max-w-lg mx-auto mt-10 p-4   rounded-xl shadow-md">
+//       <h1 className="text-2xl font-bold mb-6">My Profile</h1>
+//       <BZForm onSubmit={onSubmit} defaultValues={user || {}}>
+//         <BZInput name="name" label="Full Name" />
+//         <BZInput name="email" label="Email" />
+//         <BZInput name="password" label="Password" type="password" />
+
+//         <BZInput name="mobileNumber" label="Mobile Number" />
+//         <BZInput name="profilePhoto" label="Profile Photo (URL)" />
+
+//         <button
+//           type="submit"
+//           disabled={isPending}
+//           className="w-full bg-gradient-to-r from-[#c9a14a] to-[#a17c37] hover:from-[#a17c37] text-white py-2 rounded-lg transition disabled:opacity-50"
+//         >
+//           {isPending ? "Updating..." : "Update User"}
+//         </button>
+//       </BZForm>
+//     </div>
+//   );
+// }

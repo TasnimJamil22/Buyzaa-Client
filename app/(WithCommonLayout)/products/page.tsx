@@ -1,3 +1,4 @@
+import Landing from "@/components/modules/home/LandPage";
 import ProductCard from "@/components/UI/Products";
 import CreateProductForm from "@/components/UI/Products/CreateProductForm";
 import ProductFilter from "@/components/UI/Products/ProductFilter";
