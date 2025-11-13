@@ -39,7 +39,7 @@ export type TUser = {
   name: string;
   role: keyof typeof USER_ROLE;
   email: string;
-  password: string;
+  password?: string;
   status: keyof typeof USER_STATUS;
   passwordChangedAt?: Date;
   mobileNumber?: string;
@@ -106,3 +106,9 @@ export interface TPayment {
   createdAt?: Date;
   updatedAt?: Date;
 }
+//profile type
+export type TUserProfileUpdate = {
+  name: string;
+  mobileNumber: string;
+  profilePhoto?: string | null;
+};

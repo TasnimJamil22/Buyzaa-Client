@@ -9,7 +9,7 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 interface UpdateUserFormProps {
   user: TUser;
 }
-export default function UpdateUserForm({ user }: UpdateUserFormProps) {
+export default function ProfileUpdate({ user }: UpdateUserFormProps) {
   const { mutate: handleUpdateUser, isPending, isSuccess } = useUpdateUser();
 
   const onSubmit: SubmitHandler<FieldValues> = (data: Partial<TUser>) => {
@@ -34,14 +34,10 @@ export default function UpdateUserForm({ user }: UpdateUserFormProps) {
 
       <BZFrom onSubmit={onSubmit} defaultValues={user}>
         <BZInput name="name" label="Full Name" />
-        <BZInput name="email" label="Email" />
+
         <BZInput name="password" label="Password" type="password" />
 
-        <BZInput name="role" label="Role" />
-        <BZInput name="status" label="Status" />
-
         <BZInput name="mobileNumber" label="Mobile Number" />
-        <BZInput name="profilePhoto" label="Profile Photo (URL)" />
 
         <button
           type="submit"

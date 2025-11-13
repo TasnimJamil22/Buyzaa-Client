@@ -15,6 +15,7 @@ interface IProps {
   type?: "text" | "email" | "url" | "password";
   label: string;
   name: string;
+  defaultValue?: string;
 }
 export default function BZInput({
   variant = "bordered",
@@ -24,13 +25,14 @@ export default function BZInput({
   label,
   name,
   disabled = false,
+  defaultValue = "",
 }: IProps) {
   const {
     register,
     formState: { errors }, //gives errors of form
   } = useFormContext(); //this is we are getting as we send ...methods in <FormProvider/>
 
-  console.log("errors", errors);
+  // console.log("errors", errors);
 
   return (
     <Input
@@ -39,6 +41,7 @@ export default function BZInput({
       isInvalid={!!errors[name]} // it’s a shorthand for: isInvalid={errors[name] ? true : false} ----> errors["email"],errors["password"] etc
       variant={variant}
       size={size}
+      // isRequired={required}
       required={required}
       type={type}
       label={label}
@@ -57,6 +60,7 @@ export default function BZInput({
          font-bold
         ${disabled ? "opacity-60 cursor-not-allowed" : ""}
       `}
+      defaultValue={defaultValue}
     />
   );
 }

@@ -95,13 +95,13 @@ export default function LoginPage() {
         >
           <div className="flex flex-col gap-4">
             <BZInput name="email" label="Email" type="email" required />
-
             <BZInput
               name="password"
               label="Password"
               type="password"
               required
             />
+            {/* error from backend like pass not matched,user not found etc */}
             {/* {error && <p className="text-red-500 text-sm">{errorMessage}</p>} */}
             {isError && (
               <p className="text-red-500 text-sm">

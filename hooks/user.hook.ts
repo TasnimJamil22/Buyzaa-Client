@@ -83,7 +83,7 @@ export const useUpdateUser = () => {
     mutationKey: ["UPDATE-USER"],
     mutationFn: async (payload: {
       userId: string;
-      updatedData: Partial<TUser>;
+      updatedData: Partial<TUser> | FormData;
     }) => {
       const { userId, updatedData } = payload;
       return await updateUser(userId, updatedData);

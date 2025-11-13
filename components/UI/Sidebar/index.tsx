@@ -84,9 +84,20 @@ export default function Sidebar() {
         <div className="flex flex-col space-y-6">
           {/* Profile Card */}
           <div className="mx-auto border border-gray-200 rounded-2xl px-12 py-4 shadow-md hover:shadow-xl transition-shadow duration-300 text-center">
-            <div className="w-20 h-20 mx-auto bg-gradient-to-tr from-[#f0c14b]/30 via-[#d1a652]/20 to-[#fff]/10 rounded-full flex items-center justify-center text-sm font-medium shadow-inner">
-              IMG
+            <div className="w-24 h-24 mx-auto rounded-full p-1 bg-gradient-to-tr from-yellow-400 via-yellow-300 to-white shadow-lg overflow-hidden relative">
+              {/* Inner circle for shadow effect */}
+              <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
+                <img
+                  src={
+                    user?.profilePhoto ||
+                    "https://cdn-icons-png.flaticon.com/512/847/847969.png" // fallback
+                  }
+                  alt="Profile Image"
+                  className="w-full h-full object-cover object-center rounded-full transition-transform duration-300 hover:scale-105"
+                />
+              </div>
             </div>
+
             <h1 className="font-dancing mt-4 text-4xl font-semibold text-[#a17c37] tracking-wide">
               {user?.name}
             </h1>

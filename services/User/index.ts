@@ -55,15 +55,51 @@ export const deleteUser = async (userId: string) => {
   }
 };
 
-//update user
+// //update user
+// export const updateUser = async (
+//   userId: string,
+//   updatedData: Partial<TUser>
+// ) => {
+//   try {
+//     const { data } = await axiosInstance.patch(
+//       `/users/${userId}`,
+//       updatedData,
+//       {
+//         headers:
+//           updatedData instanceof FormData
+//             ? { "Content-Type": "multipart/form-data" }
+//             : undefined,
+//       }
+//     ); //if it was only data: the error "maximum call  stack exceeded."so make sure it is {data}
+//     return data;
+//   } catch (error: any) {
+//     throw new Error(error.message);
+//   }
+// };
+//
+
+// Update user
 export const updateUser = async (
   userId: string,
-  updatedData: Partial<TUser>
+  updatedData: Partial<TUser> | FormData
 ) => {
   try {
-    const { data } = await axiosInstance.patch(`/users/${userId}`, updatedData); //if it was only data: the error "maximum call  stack exceeded."so make sure it is {data}
+    const { data } = await axiosInstance.patch(
+      `/users/${userId}`,
+      updatedData, // send FormData or object directly
+      {
+        headers:
+          updatedData instanceof FormData
+            ? { "Content-Type": "multipart/form-data" }
+            : undefined,
+      }
+    );
+
     return data;
   } catch (error: any) {
-    throw new Error(error.message);
+    // extract axios error message safely
+    const message =
+      error.response?.data?.message || error.message || "Something went wrong";
+    throw new Error(message);
   }
 };

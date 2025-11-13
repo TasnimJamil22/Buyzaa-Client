@@ -2,10 +2,11 @@ import envConfig from "@/config/envConfig";
 import axios from "axios";
 // import { cookies } from "next/headers";
 // Using js-cookie
- 
-import Cookies from 'js-cookie';
+
+import Cookies from "js-cookie";
 const axiosInstance = axios.create({
   baseURL: envConfig.baseApi,
+  // withCredentials: true, // ✅ send cookies automatically
 });
 
 // Attach JWT token automatically
@@ -17,6 +18,7 @@ axiosInstance.interceptors.request.use((config) => {
   }
   return config;
 });
+
 //interceptor part for sending access token etc with data
 // Add a request interceptor
 // axiosInstance.interceptors.request.use(
