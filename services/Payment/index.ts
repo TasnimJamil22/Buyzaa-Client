@@ -39,6 +39,16 @@ export const createPaymentRecord = async (paymentData: TPayment) => {
   }
 };
 
+//all payments history
+export const getAllPayments = async () => {
+  try {
+    const { data } = await axiosInstance.get("/payment");
+    return data;
+  } catch (err: any) {
+    console.log(err.message);
+  }
+};
+
 //my payments history
 export const getMyPayments = async () => {
   try {

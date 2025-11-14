@@ -1,12 +1,13 @@
 import {
   createOrder,
+  deleteOrder,
   getAllOrders,
   getASingleOrder,
   getMyOrders,
 } from "@/services/Checkout";
 import { TOrder } from "@/types";
 import { addToast } from "@heroui/toast";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useCreateOrder = () => {
   return useMutation({
@@ -106,6 +107,34 @@ export const useGetASingleOrder = (orderId: string) => {
       addToast({
         title: "Error",
         description: error?.message || "Failed to retrieve order",
+        color: "danger",
+      });
+    },
+  });
+};
+
+//delete an order hook
+export const useDeleteOrder = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["DELETE-AN-ORDER"],
+    mutationFn: async (orderId: string) => {
+      return await deleteOrder(orderId);
+    },
+    onSuccess: () => {
+      addToast({
+        title: "Success",
+        description: "Order deleted successfully",
+        color: "success",
+      });
+
+      // ✅ Refetch the list of orders
+      queryClient.invalidateQueries({ queryKey: ["GET-ALL-ORDERS"] });
+    },
+    onError: (error: any) => {
+      addToast({
+        title: "Error",
+        description: error?.message || "Failed to delete order",
         color: "danger",
       });
     },

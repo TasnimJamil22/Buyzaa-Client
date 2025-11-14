@@ -1,7 +1,7 @@
 "use client";
 import BZModal from "@/components/modals/BZModal";
 import PaymentHistory from "@/components/UI/Payment/PaymentHistory";
-import { useGetAllOrders, useGetMyOrders } from "@/hooks/checkout.hook";
+import { useDeleteOrder, useGetAllOrders } from "@/hooks/checkout.hook";
 import { TItem, TOrder } from "@/types";
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
@@ -13,12 +13,14 @@ import {
   TableHeader,
   TableRow,
 } from "@heroui/table";
+import { DeleteIcon } from "lucide-react";
 
 export default function Orders() {
   // const { data } = useGetAllOrders();
-  const { data } = useGetMyOrders();
+  const { data } = useGetAllOrders();
   const orders: TOrder[] = data?.data || [];
   console.log(orders);
+  const { mutate: deleteOrder } = useDeleteOrder();
   return (
     <>
       <div>
@@ -38,7 +40,8 @@ export default function Orders() {
             <TableColumn>Cost</TableColumn>
 
             <TableColumn>Details</TableColumn>
-            <TableColumn>Pay</TableColumn>
+            <TableColumn>Payment Status</TableColumn>
+            <TableColumn>Remove</TableColumn>
           </TableHeader>
           <TableBody>
             {orders?.map((order: any, index) => (
@@ -122,13 +125,27 @@ export default function Orders() {
                       disabled
                       className="bg-green-700 text-white cursor-not-allowed"
                     >
-                      Paid
+                      Successful
                     </Button>
                   ) : (
-                    <Link href={`/profile/payment/${order._id}`}>
-                      <Button>Pay</Button>
-                    </Link>
+                    // <Link href={`/profile/payment/${order._id}`}>
+                    <Button>Pending</Button>
+                    // </Link>
                   )}
+                </TableCell>
+                <TableCell>
+                  <DeleteIcon
+                    className="cursor-pointer text-red-500"
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          "Are you sure you want to delete this order?"
+                        )
+                      ) {
+                        deleteOrder(order._id);
+                      }
+                    }}
+                  />
                 </TableCell>
               </TableRow>
             ))}
@@ -140,7 +157,7 @@ export default function Orders() {
       </div>
       <div>
         {/* payment history */}
-        <PaymentHistory type="my" />
+        <PaymentHistory type="all" />
       </div>
     </>
   );

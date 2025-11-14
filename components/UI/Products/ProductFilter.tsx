@@ -15,6 +15,7 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
+  const [priceFilter, setPriceFilter] = useState("");
 
   // Fetch products
   useEffect(() => {
@@ -55,10 +56,13 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
     if (categoryFilter) {
       temp = temp.filter((p) => p.category?._id === categoryFilter);
     }
+    if (priceFilter) {
+      temp = temp.filter((p) => p.price === Number(priceFilter));
+    }
     //👉 Finally, update the state with the filtered list.
     //Now your UI re-renders and displays only the matching products.
     setFilteredProducts(temp);
-  }, [search, categoryFilter, products]); //👉 This tells React to re-run this filtering whenever any of these values change.
+  }, [search, categoryFilter, priceFilter, products]); //👉 This tells React to re-run this filtering whenever any of these values change.
 
   return (
     <div className="max-w-7xl mx-auto p-6">
@@ -86,6 +90,24 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
               {category.name}
             </option>
           ))}
+        </select>
+        <select
+          className="border rounded p-2"
+          value={priceFilter}
+          onChange={(e) => setPriceFilter(e.target.value)}
+        >
+          <option value="">Price</option>
+          {products
+            .filter(
+              (p, i, arr) => arr.findIndex((x) => x.price === p.price) === i
+            ) // remove duplicate prices
+            .sort((a, b) => a.price - b.price) // sort low → high
+
+            .map((p) => (
+              <option key={p._id} value={p.price}>
+                {p.price}
+              </option>
+            ))}
         </select>
       </div>
 

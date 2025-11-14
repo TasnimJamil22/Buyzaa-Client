@@ -94,8 +94,8 @@ export interface TOrder {
 //payment
 export interface TPayment {
   _id?: string;
-  userId: string;
-  orderId: string;
+  userId: TUser | string;
+  orderId: TOrder | string;
   transactionId: string;
   email: string;
   paymentMethod: string[];

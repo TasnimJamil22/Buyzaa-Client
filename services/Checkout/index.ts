@@ -64,3 +64,13 @@ export const getASingleOrder = async (orderId: string) => {
     console.log(error.message);
   }
 };
+
+//delete an order
+export const deleteOrder = async (orderId: string) => {
+  try {
+    const { data } = await axiosInstance.delete(`/checkout/${orderId}`);
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+  }
+};

@@ -94,13 +94,15 @@ export default function Navbar() {
           </NavbarItem>
         )}
         {/* cart icon */}
-        <NavbarItem className="hidden sm:flex gap-2">
-          <NextLink href="/profile/cart">
-            <Badge content={cartItems.length} color="danger">
-              <CartIcon />
-            </Badge>
-          </NextLink>
-        </NavbarItem>
+        {user?.role !== "ADMIN" && (
+          <NavbarItem className="hidden sm:flex gap-2">
+            <NextLink href="/profile/cart">
+              <Badge content={cartItems.length} color="danger">
+                <CartIcon />
+              </Badge>
+            </NextLink>
+          </NavbarItem>
+        )}
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">

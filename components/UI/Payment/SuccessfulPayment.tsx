@@ -1,14 +1,21 @@
 "use client";
 
+import { useCart } from "@/context/cart.provider";
 import { TOrder } from "@/types";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface IProps {
   transactionId: string;
 }
 
 export default function PaymentSuccess({ transactionId }: IProps) {
+  const { clearCart } = useCart();
+  useEffect(() => {
+    // Payment success → clear the cart
+    clearCart();
+  }, []);
+
   return (
     <div className="text-center p-6">
       {/* Success Icon */}
