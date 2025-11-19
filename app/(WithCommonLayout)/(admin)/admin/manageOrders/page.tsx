@@ -16,7 +16,6 @@ import {
 import { DeleteIcon } from "lucide-react";
 
 export default function Orders() {
-  // const { data } = useGetAllOrders();
   const { data } = useGetAllOrders();
   const orders: TOrder[] = data?.data || [];
   console.log(orders);

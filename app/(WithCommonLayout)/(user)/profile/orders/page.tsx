@@ -63,7 +63,7 @@ export default function Orders() {
                     buttonText="View"
                     title="Order Details"
                     body={
-                      <div className="space-y-3 p-4 bg-gray-50 rounded-md text-sm">
+                      <div className="space-y-3 p-4  rounded-md text-sm">
                         <p>
                           <span className="font-semibold">Order ID:</span>
                           {order.orderNumber}
@@ -91,6 +91,7 @@ export default function Orders() {
                             ? new Date(order.deliveryDate).toLocaleString()
                             : "N/A"}
                         </p>
+
                         <p>
                           <span className="font-semibold">Products:</span>
                           {order.cartItems
@@ -106,7 +107,9 @@ export default function Orders() {
                           {order.payment.transactionId}
                         </p> */}
                         <p>
-                          <span className="font-semibold">Payment Status:</span>
+                          <span className="font-semibold  ">
+                            Payment Status:
+                          </span>
                           {order.payment && "status" in order.payment
                             ? order.payment.status
                             : "Pending"}
