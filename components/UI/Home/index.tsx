@@ -28,14 +28,14 @@ export default function HomePage() {
               className="group relative rounded-xl overflow-hidden shadow-lg"
             >
               <Image
-                src={col.img}
                 alt={col.name}
                 className="object-cover w-full h-72 transform group-hover:scale-110 transition"
+                src={col.img}
               />
               <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
                 <Link
-                  href={`/collection/${col.name.toLowerCase()}`}
                   className="bg-[#d4af37] text-white px-5 py-2 rounded-lg font-medium"
+                  href={`/collection/${col.name.toLowerCase()}`}
                 >
                   Explore {col.name}
                 </Link>
@@ -48,10 +48,10 @@ export default function HomePage() {
       {/* 🌟 Hero Section */}
       <section className="relative flex flex-col items-center justify-center text-center py-32 px-6 overflow-hidden my-12 rounded-lg">
         <Image
-          src={heroImg}
-          alt="Art Hero"
           fill
+          alt="Art Hero"
           className="object-cover opacity-40"
+          src={heroImg}
         />
         <div className="relative z-10 max-w-3xl mx-auto">
           <h1 className="font-dancing text-5xl md:text-6xl font-extrabold mb-6 text-[#a17c37] drop-shadow-lg">
@@ -62,8 +62,8 @@ export default function HomePage() {
             timeless beauty.
           </p>
           <Link
-            href="/products"
             className="px-8 py-3 bg-[#d4af37] hover:bg-[#c9a235] text-white rounded-lg font-semibold shadow-md transition"
+            href="/products"
           >
             Shop Now
           </Link>
@@ -72,14 +72,14 @@ export default function HomePage() {
       {/* 🌟 meet our artists Section */}
       <section className="py-32 my-12 relative overflow-hidden">
         {/* Gentle background gradient */}
-        <div className="absolute inset-0   opacity-70 -z-10"></div>
+        <div className="absolute inset-0   opacity-70 -z-10" />
 
         {/* Elegant Heading */}
         <div className="text-center mb-16">
           <h1 className="font-dancing text-6xl md:text-7xl font-extrabold bg-gradient-to-r from-[#c9a14a] via-[#d9b24e] to-[#a17c37] bg-clip-text text-transparent animate-fadeIn">
             Meet Our Artists
           </h1>
-          <div className="w-32 h-[3px] bg-gradient-to-r from-[#d9b24e] to-[#a17c37] mx-auto mt-4 rounded-full"></div>
+          <div className="w-32 h-[3px] bg-gradient-to-r from-[#d9b24e] to-[#a17c37] mx-auto mt-4 rounded-full" />
           <p className="mt-4 text-gray-600 text-lg italic">
             “Where imagination meets emotion — and turns into timeless art.”
           </p>
@@ -89,9 +89,9 @@ export default function HomePage() {
         <div className=" bg-default-100 backdrop-blur-md rounded-2xl shadow-xl max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10 px-6 py-24">
           <div className="md:w-1/2">
             <Image
-              src={artistImg}
               alt="Artist"
               className="rounded-2xl shadow-2xl object-cover   transition-transform duration-500"
+              src={artistImg}
             />
           </div>
           <div className="md:w-1/2 text-center md:text-left">
@@ -106,8 +106,8 @@ export default function HomePage() {
               heartfelt memories, and the gentle rhythm of life.
             </p>
             <Link
-              href="/about"
               className="px-6 py-3 bg-gradient-to-r from-[#c9a14a] to-[#a17c37] hover:from-[#a17c37] hover:to-[#8b6d2f] text-white rounded-lg shadow-lg font-medium transition-all"
+              href="/about"
             >
               Learn More
             </Link>
@@ -159,9 +159,9 @@ export default function HomePage() {
         </p>
         <div className="flex justify-center gap-4 max-w-md mx-auto">
           <input
-            type="email"
-            placeholder="Enter your email"
             className="flex-1 px-4 py-3 rounded-lg border border-[#e6d5aa] focus:outline-none"
+            placeholder="Enter your email"
+            type="email"
           />
           <button className="px-6 py-3 bg-[#d4af37] hover:bg-[#c9a235] text-white font-medium rounded-lg transition">
             Subscribe

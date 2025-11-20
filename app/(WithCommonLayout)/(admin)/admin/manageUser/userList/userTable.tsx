@@ -1,13 +1,4 @@
 "use client";
-import { DeleteIcon, EditIcon } from "@/components/icons";
-import BZModal from "@/components/modals/BZModal";
-import {
-  useCreateUser,
-  useDeleteUser,
-  useGetAllUser,
-  useUpdateUser,
-} from "@/hooks/user.hook";
-import { TUser, USER_ROLE, USER_STATUS } from "@/types";
 import {
   Table,
   TableHeader,
@@ -15,9 +6,17 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Button,
   Link,
 } from "@heroui/react";
+import {
+  FieldValues,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
+
+import { useCreateUser, useDeleteUser, useGetAllUser } from "@/hooks/user.hook";
+import { TUser } from "@/types";
 
 // interface IProps {
 //   user: TUser;
@@ -25,16 +24,7 @@ import {
 
 import BZInput from "@/components/form/BZInput";
 
-import {
-  FieldValues,
-  FormProvider,
-  SubmitHandler,
-  useForm,
-} from "react-hook-form";
 // import { useForm, SubmitHandler } from "react-hook-form";
-import axios from "axios";
-import UpdateUserForm from "@/components/UI/User/UpdateUserForm";
-import { useState } from "react";
 
 interface IUserForm {
   name: string;
@@ -48,6 +38,7 @@ export default function UserTable() {
   const { data } = useGetAllUser();
 
   const users = data?.data ?? [];
+
   console.log(users);
 
   const { mutate: handleDeleteUser, isSuccess } = useDeleteUser();
@@ -79,6 +70,7 @@ export default function UserTable() {
     const userData = {
       ...data,
     };
+
     handleCreateUser(userData as TUser); // service wraps it in { user: ... }
   };
 
@@ -92,32 +84,32 @@ export default function UserTable() {
           {/* create user form */}
           <FormProvider {...methods}>
             <form
-              onSubmit={handleSubmit(onSubmit)}
               className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              onSubmit={handleSubmit(onSubmit)}
             >
-              <BZInput name="name" label="Full Name" />
-              <BZInput name="email" label="Email" />
-              <BZInput name="password" label="Password" type="password" />
-              <BZInput name="role" label="Role" />
-              <BZInput name="status" label="Status" />
-              <BZInput name="mobileNumber" label="Mobile Number" />
+              <BZInput label="Full Name" name="name" />
+              <BZInput label="Email" name="email" />
+              <BZInput label="Password" name="password" type="password" />
+              <BZInput label="Role" name="role" />
+              <BZInput label="Status" name="status" />
+              <BZInput label="Mobile Number" name="mobileNumber" />
 
               {/* Profile photo spans full width */}
               <div className="md:col-span-2">
-                <BZInput name="profilePhoto" label="Profile Photo (URL)" />
+                <BZInput label="Profile Photo (URL)" name="profilePhoto" />
               </div>
 
               {/* Submit Button spans full width on mobile, centered on desktop */}
               <div className="md:col-span-2 flex justify-center mt-4">
                 <button
-                  type="submit"
-                  disabled={createUserLoading}
                   className={`w-full md:w-1/2  bg-gradient-to-r from-[#c9a14a] to-[#a17c37] hover:from-[#a17c37] hover:to-[#8b6d2f] text-white font-semibold py-3 px-6 rounded-xl border shadow-md 
       ${
         createUserLoading
           ? "bg-gray-400 cursor-not-allowed"
           : " bg-gradient-to-r from-[#c9a14a] to-[#a17c37] hover:from-[#a17c37] hover:to-[#8b6d2f] text-white  transition-all"
       }`}
+                  disabled={createUserLoading}
+                  type="submit"
                 >
                   {createUserLoading ? "Creating..." : "Create User"}
                 </button>

@@ -30,6 +30,7 @@ export default function BZForm({
   const methods = useForm(formConfig);
 
   const submitHandler = methods.handleSubmit;
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={submitHandler(onSubmit)}>{children}</form>

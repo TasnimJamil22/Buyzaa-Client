@@ -1,24 +1,22 @@
 "use client";
-import BZDatePicker from "@/components/form/BZDatePicker";
-import BZForm from "@/components/form/BZForm";
-import BZInput from "@/components/form/BZInput";
-import BZSelect from "@/components/form/BZSelect";
-import { useCart } from "@/context/cart.provider";
-import { useUser } from "@/context/user.provider";
-import { useCreateOrder } from "@/hooks/checkout.hook";
-import { TItem, TOrder } from "@/types";
-import { dateToISO, IDate } from "@/utils/dateToISO";
 import { allDistict } from "@bangladeshi/bangladesh-address";
 import { Button } from "@heroui/button";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 import {
   FieldValues,
   FormProvider,
   SubmitHandler,
   useForm,
 } from "react-hook-form";
+
+import BZDatePicker from "@/components/form/BZDatePicker";
+import BZInput from "@/components/form/BZInput";
+import BZSelect from "@/components/form/BZSelect";
+import { useCart } from "@/context/cart.provider";
+import { useUser } from "@/context/user.provider";
+import { useCreateOrder } from "@/hooks/checkout.hook";
+import { TOrder } from "@/types";
+import { dateToISO, IDate } from "@/utils/dateToISO";
 
 export default function CheckoutForm() {
   const { mutate: handleCreateOrder } = useCreateOrder();
@@ -37,7 +35,7 @@ export default function CheckoutForm() {
 
   const totalAmount = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
   const methods = useForm({
     defaultValues: {
@@ -57,6 +55,7 @@ export default function CheckoutForm() {
       cartItems,
       totalAmount,
     };
+
     console.log(formData);
     handleCreateOrder(formData);
     router.push("/profile/orders");
@@ -71,25 +70,25 @@ export default function CheckoutForm() {
       <div className="w-full flex justify-center items-center mt-2 rounded-2xl shadow-md">
         <FormProvider {...methods}>
           <form
-            onSubmit={handleSubmit(onSubmit)}
             className="w-full max-w-3xl p-6"
+            onSubmit={handleSubmit(onSubmit)}
           >
             <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 ">
-              <BZInput name="name" label="Name" />
+              <BZInput label="Name" name="name" />
               <BZInput
-                name="email"
-                label="Email"
-                type="email"
                 disabled={true}
+                label="Email"
+                name="email"
+                type="email"
                 variant="faded"
               />
-              <BZInput name="mobileNo" label="Mobile Number" />
-              <BZInput name="address" label="Address" />
-              <BZSelect name="city" label="City" options={cityOptions} />
-              <BZDatePicker name="deliveryDate" label="Delivery Date" />
+              <BZInput label="Mobile Number" name="mobileNo" />
+              <BZInput label="Address" name="address" />
+              <BZSelect label="City" name="city" options={cityOptions} />
+              <BZDatePicker label="Delivery Date" name="deliveryDate" />
             </div>
 
-            <Button type="submit" className="w-full bg-accent my-4">
+            <Button className="w-full bg-accent my-4" type="submit">
               {/* <Link href="/profile/orders"> */}
               Proceed ${totalAmount.toFixed(2)}
               {/* </Link> */}

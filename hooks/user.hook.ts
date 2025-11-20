@@ -2,6 +2,9 @@
 // import { createPost } from "../services/post"
 // import { toast } from "sonner"
 
+import { addToast } from "@heroui/toast";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
 import {
   createUser,
   deleteUser,
@@ -9,8 +12,6 @@ import {
   updateUser,
 } from "@/services/User";
 import { TUser } from "@/types";
-import { addToast } from "@heroui/toast";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //get all user
 export const useGetAllUser = () => {
@@ -54,6 +55,7 @@ export const useCreateUser = () => {
 // 👇 argument 'userId' comes from the component that called useDeleteUser(userId)
 export const useDeleteUser = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     // mutationKey: ["DELETE-USER"],
     mutationFn: async (userId: string) => await deleteUser(userId),
@@ -79,6 +81,7 @@ export const useDeleteUser = () => {
 //partial = it makes each property optional
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["UPDATE-USER"],
     mutationFn: async (payload: {
@@ -86,6 +89,7 @@ export const useUpdateUser = () => {
       updatedData: Partial<TUser> | FormData;
     }) => {
       const { userId, updatedData } = payload;
+
       return await updateUser(userId, updatedData);
     },
     onSuccess: () => {

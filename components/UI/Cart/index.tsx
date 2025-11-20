@@ -1,11 +1,8 @@
 "use client";
-import { useCart } from "@/context/cart.provider";
 import { Divider } from "@heroui/divider";
-import { useState } from "react";
-import CartQuantity from "./CartQuantity";
 import Link from "next/link";
-import { Button } from "@heroui/button";
-import { TItem } from "@/types";
+
+import { useCart } from "@/context/cart.provider";
 import { useUser } from "@/context/user.provider";
 
 export default function MyCart() {
@@ -21,7 +18,7 @@ export default function MyCart() {
   //  Calculate total
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
-    0
+    0,
   );
 
   return (
@@ -48,8 +45,8 @@ export default function MyCart() {
               <div className="flex items-center gap-3">
                 <div className="flex flex-col items-center  px-2 py-1">
                   <button
-                    onClick={() => increaseQuantity(item.productId)}
                     className="w-6 h-6 flex items-center justify-center hover:bg-gray-100 rounded "
+                    onClick={() => increaseQuantity(item.productId)}
                   >
                     +
                   </button>
@@ -60,8 +57,8 @@ export default function MyCart() {
                   </span>
 
                   <button
-                    onClick={() => decreaseQuantity(item.productId)}
                     className="w-6 h-6 flex items-center justify-center hover:bg-gray-100 rounded"
+                    onClick={() => decreaseQuantity(item.productId)}
                   >
                     −
                   </button>
@@ -85,9 +82,9 @@ export default function MyCart() {
                 </div>
                 {/* Remove button */}
                 <button
-                  onClick={() => removeFromCart(item.productId)}
                   className="text-red-500 hover:text-red-700"
                   title="Remove item"
+                  onClick={() => removeFromCart(item.productId)}
                 >
                   X
                 </button>

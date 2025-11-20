@@ -1,3 +1,6 @@
+import { addToast } from "@heroui/toast";
+import { useMutation, useQuery } from "@tanstack/react-query";
+
 import {
   createProduct,
   deleteProduct,
@@ -5,8 +8,6 @@ import {
   updateProduct,
 } from "@/services/Product";
 import { TProduct } from "@/types";
-import { addToast } from "@heroui/toast";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //create a product
 export const useCreateProduct = () => {
@@ -15,6 +16,7 @@ export const useCreateProduct = () => {
     mutationKey: ["CREATE-PRODUCT"],
     mutationFn: async (payload: { products: TProduct }) => {
       const { products } = payload;
+
       return await createProduct(products);
     },
     onSuccess: () => {
@@ -50,6 +52,7 @@ export const useUpdateProduct = () => {
       updatedData: Partial<TProduct>;
     }) => {
       const { productId, updatedData } = payload;
+
       return await updateProduct(productId, updatedData);
     },
     onSuccess: () => {

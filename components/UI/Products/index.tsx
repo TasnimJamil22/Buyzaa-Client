@@ -76,10 +76,12 @@
 
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
-import { TProduct } from "@/types";
 import { Link } from "@heroui/link";
 import { useState } from "react";
+
 import CartQuantity from "../Cart/CartQuantity";
+
+import { TProduct } from "@/types";
 import { useUser } from "@/context/user.provider";
 
 interface IProps {
@@ -98,6 +100,7 @@ export default function ProductCard({ product }: IProps) {
 
   const handleAddToCart = (name: string, quantity: number) => {
     const newItem = { name: product.name, quantity };
+
     setCartItems((prev) => [...prev, newItem]);
   };
 
@@ -111,18 +114,18 @@ export default function ProductCard({ product }: IProps) {
       <CardHeader>
         <Image
           alt="Sunglasses"
-          src={images && images.length > 0 ? images[0] : undefined}
           className="w-96 h-48 object-cover mx-auto transition-transform duration-500 hover:scale-105"
+          src={images && images.length > 0 ? images[0] : undefined}
         />
       </CardHeader>
 
       {/* Product Info */}
       <CardBody className="px-4 py-3">
         <Link
-          href={`/products/${_id}`}
           className="relative px-4 py-2 text-lg font-medium text-[#a17c37] hover:text-[#8b6d2f] transition-all duration-300 
                    after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r from-[#e0c066] to-[#a17c37]
                    hover:after:w-full after:transition-all after:duration-300"
+          href={`/products/${_id}`}
         >
           <h3 className="font-semibold text-2xl">{name}</h3>
         </Link>

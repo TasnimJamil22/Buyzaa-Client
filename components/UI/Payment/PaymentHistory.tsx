@@ -1,10 +1,11 @@
 //dynamically fetched getAllPayments() and getMyPayments()...so both can use it
 "use client";
+import { useState } from "react";
+
 import BZModal from "@/components/modals/BZModal";
 import { useUser } from "@/context/user.provider";
 import { useGetMyPayments, useGetAllPayments } from "@/hooks/payment.hook";
 import { TPayment } from "@/types";
-import { useState } from "react";
 
 interface PaymentHistoryProps {
   type?: "my" | "all"; // default = "my"
@@ -13,9 +14,17 @@ interface PaymentHistoryProps {
 export default function PaymentHistory({ type }: PaymentHistoryProps) {
   const { user } = useUser();
   const [selectedPayment, setSelectedPayment] = useState<TPayment | null>(null);
-
+  // 1. React Hook called conditionally
+  // ❌ This is illegal in React.
+  // Hooks cannot be inside conditions, ternaries, loops, OR called dynamically.
   // dynamic fetch based on type
-  const { data } = type === "all" ? useGetAllPayments() : useGetMyPayments();
+  // const { data } = type === "all" ? useGetAllPayments() : useGetMyPayments();
+  //so
+  // Calling the hooks unconditionally, then choose the data afterward:
+  const allPayments = useGetAllPayments();
+  const myPayments = useGetMyPayments();
+
+  const data = type === "all" ? allPayments.data : myPayments.data;
 
   const payments: TPayment[] = data?.data || [];
 
@@ -79,8 +88,6 @@ export default function PaymentHistory({ type }: PaymentHistoryProps) {
 
                   <td className="py-3 px-4">
                     <BZModal
-                      buttonText="View"
-                      title="Payment Details"
                       body={
                         <div className="space-y-2 text-sm">
                           <p>
@@ -89,22 +96,20 @@ export default function PaymentHistory({ type }: PaymentHistoryProps) {
                             </span>{" "}
                             {p.transactionId}
                           </p>
-                          {user?.role === "ADMIN" && (
-                            <>
-                              <p>
-                                <span className="font-semibold">
-                                  User's Email :{" "}
-                                </span>
-                                {p.email}
-                              </p>
-                              <p>
-                                <span className="font-semibold">
-                                  Order Id:{" "}
-                                </span>
-                                {(p.orderId as any)?.orderNumber ?? "N/A"}
-                              </p>
-                            </>
-                          )}
+                          {/* {user?.role === "ADMIN" && (
+                            <> */}
+                          <p>
+                            <span className="font-semibold">
+                              {"User's Email :"}
+                            </span>
+                            {p.email}
+                          </p>
+                          <p>
+                            <span className="font-semibold">Order Id:</span>
+                            {(p.orderId as any)?.orderNumber ?? "N/A"}
+                          </p>
+                          {/* </>
+                          )} */}
 
                           <p>
                             <span className="font-semibold">
@@ -122,7 +127,7 @@ export default function PaymentHistory({ type }: PaymentHistoryProps) {
                           </p>
 
                           <p>
-                            <span className="font-semibold">Status:</span>{" "}
+                            <span className="font-semibold">Status:</span>
                             {p.status}
                           </p>
 
@@ -134,6 +139,8 @@ export default function PaymentHistory({ type }: PaymentHistoryProps) {
                           </p>
                         </div>
                       }
+                      buttonText="View"
+                      title="Payment Details"
                     />
                   </td>
                 </tr>

@@ -1,8 +1,4 @@
 "use client";
-import BZModal from "@/components/modals/BZModal";
-import PaymentHistory from "@/components/UI/Payment/PaymentHistory";
-import { useGetAllOrders, useGetMyOrders } from "@/hooks/checkout.hook";
-import { TItem, TOrder } from "@/types";
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
 import {
@@ -14,11 +10,18 @@ import {
   TableRow,
 } from "@heroui/table";
 
+import BZModal from "@/components/modals/BZModal";
+import PaymentHistory from "@/components/UI/Payment/PaymentHistory";
+import { useGetMyOrders } from "@/hooks/checkout.hook";
+import { TItem, TOrder } from "@/types";
+
 export default function Orders() {
   // const { data } = useGetAllOrders();
   const { data } = useGetMyOrders();
   const orders: TOrder[] = data?.data || [];
+
   console.log(orders);
+
   return (
     <>
       <div>
@@ -60,8 +63,6 @@ export default function Orders() {
                 <TableCell>${order.totalAmount}</TableCell>
                 <TableCell>
                   <BZModal
-                    buttonText="View"
-                    title="Order Details"
                     body={
                       <div className="space-y-3 p-4  rounded-md text-sm">
                         <p>
@@ -116,6 +117,8 @@ export default function Orders() {
                         </p>
                       </div>
                     }
+                    buttonText="View"
+                    title="Order Details"
                   />
                 </TableCell>
                 <TableCell>

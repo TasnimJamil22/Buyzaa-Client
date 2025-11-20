@@ -22,18 +22,18 @@ export default function BannerSearch({ onSearch }: BannerSearchProps) {
 
   return (
     <div className="max-w-xl mx-auto w-full px-4">
-      <form onSubmit={handleSubmit} className="flex-1">
+      <form className="flex-1" onSubmit={handleSubmit}>
         <Input
-          placeholder="Search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
           classNames={{
             inputWrapper:
               "bg-default-100 focus-within:ring-2 focus-within:ring-indigo-400",
             input: "text-sm",
           }}
+          placeholder="Search"
           startContent={<SearchIcon className="text-gray-400" />}
           type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
         />
       </form>
     </div>

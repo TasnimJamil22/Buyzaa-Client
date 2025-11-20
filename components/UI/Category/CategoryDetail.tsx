@@ -1,10 +1,39 @@
+// categoryDetailes page : [categoryId]-> page.tsx
+// import CategoryDetail from "@/components/UI/Category/CategoryDetail";
+// import { getASingleCategory } from "@/services/Category";
+
+// interface IProps {
+//   params: {
+//     categoryId: string;
+//   };
+// }
+// export default async function CategoryDetailsPage({
+//   params: { categoryId },
+// }: IProps) {
+//   // const { categoryId } = params;
+//   const { data: category } = await getASingleCategory(categoryId);
+
+//   console.log(category);
+
+//   return (
+//     <div>
+//       {/* <h1>Category:{categoryId}</h1> */}
+//       <div>
+//         <CategoryDetail key={category?._id} category={category} />
+//       </div>
+//       {/* <div>category:{category._id}</div> */}
+//     </div>
+//   );
+// }
+
 "use client";
+
+import UpdateCategoryForm from "./UpdateCategoryForm";
 
 import BZModal from "@/components/modals/BZModal";
 import { TCategory } from "@/types";
 // import { useGetCategoryById } from "@/hooks/category.hook";
 
-import UpdateCategoryForm from "./UpdateCategoryForm";
 import { useDeleteCategory } from "@/hooks/category.hook";
 
 interface IProps {
@@ -53,14 +82,14 @@ export default function CategoryDetail({ category }: IProps) {
       {/* Action Buttons */}
       <div className="flex gap-4">
         <BZModal
-          buttonText="Update Category"
           body={<UpdateCategoryForm category={category} />}
+          buttonText="Update Category"
         />
 
         <BZModal
+          body={`Are you sure you want to delete ${category?.name}?`}
           buttonText="Delete Category"
           title="Delete Confirmation"
-          body={`Are you sure you want to delete ${category?.name}?`}
           onAction={() => handleDeleteCategory(category?._id as string)}
         />
       </div>

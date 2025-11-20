@@ -1,8 +1,9 @@
-import { loginUser, registerUser } from "@/services/AuthService";
-import { TUser } from "@/types";
 import { addToast } from "@heroui/toast";
 import { useMutation } from "@tanstack/react-query";
 import { FieldValues } from "react-hook-form";
+
+import { TUser } from "@/types";
+import { loginUser, registerUser } from "@/services/AuthService";
 
 export const useRegisterUser = () => {
   return useMutation({

@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastProvider } from "@heroui/toast";
+
 import UserProvider from "@/context/user.provider";
 import { CartProvider } from "@/context/cart.provider";
 

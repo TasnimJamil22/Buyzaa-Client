@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import { NextRequest, NextResponse } from "next/server";
+
 import envConfig from "@/config/envConfig";
 
 const stripe = new Stripe(envConfig.paymentGatewayKey as string, {
@@ -15,7 +16,7 @@ export async function POST(req: NextRequest) {
     if (!amountInCents) {
       return NextResponse.json(
         { error: "Amount is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -26,6 +27,7 @@ export async function POST(req: NextRequest) {
       currency: "usd",
       payment_method_types: ["card"],
     });
+
     return NextResponse.json({ clientSecret: paymentIntent.client_secret });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });

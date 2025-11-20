@@ -20,10 +20,10 @@ export default function SidebarOptions({ links }: { links: LinkItem[] }) {
       {links.map((link, index) => (
         <li key={index}>
           <Link
-            href={link.href}
             className="relative px-4 py-2 text-lg font-medium text-[#a17c37] hover:text-[#8b6d2f] transition-all duration-300 
                    after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r from-[#e0c066] to-[#a17c37]
                    hover:after:w-full after:transition-all after:duration-300"
+            href={link.href}
           >
             {link.label}
           </Link>

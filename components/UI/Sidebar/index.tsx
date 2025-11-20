@@ -43,8 +43,10 @@
 "use client";
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
+
 import SidebarOptions from "./SidebarOptions";
 import { adminLinks, userLinks } from "./constants";
+
 import { useUser } from "@/context/user.provider";
 
 export default function Sidebar() {
@@ -63,9 +65,16 @@ export default function Sidebar() {
 
       {/* 🔹 Overlay when sidebar is open on mobile */}
       {isOpen && (
+        // <div
+        //   className="fixed inset-0 bg-black bg-opacity-40 z-30 md:hidden"
+        //   onClick={() => setIsOpen(false)}
+        // />
         <div
           className="fixed inset-0 bg-black bg-opacity-40 z-30 md:hidden"
+          role="button"
+          tabIndex={0}
           onClick={() => setIsOpen(false)}
+          onKeyDown={() => setIsOpen(false)} // accessibility for keyboard
         />
       )}
 
@@ -73,11 +82,11 @@ export default function Sidebar() {
       <aside
         className={`
     fixed left-0 top-16 h-[calc(100%-4rem)] w-72 md:w-84
-    bg-default-50 border-r border-gray-300 rounded-xl shadow-lg p-4
+    bg-default-50 border-r border-default-100 rounded-xl shadow-lg p-4
     transform transition-transform duration-300 ease-in-out
     ${isOpen ? "translate-x-0" : "-translate-x-full"}
     md:translate-x-0 md:relative md:h-full md:top-0
-    z-40
+    z-20
   `}
       >
         {/* Sidebar content */}
@@ -88,12 +97,12 @@ export default function Sidebar() {
               {/* Inner circle for shadow effect */}
               <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
                 <img
+                  alt=""
+                  className="w-full h-full object-cover object-center rounded-full transition-transform duration-300 hover:scale-105"
                   src={
                     user?.profilePhoto ||
                     "https://cdn-icons-png.flaticon.com/512/847/847969.png" // fallback
                   }
-                  alt="Profile Image"
-                  className="w-full h-full object-cover object-center rounded-full transition-transform duration-300 hover:scale-105"
                 />
               </div>
             </div>

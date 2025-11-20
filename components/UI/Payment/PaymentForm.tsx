@@ -1,16 +1,14 @@
 "use client";
-import BZForm from "@/components/form/BZForm";
-import BZInput from "@/components/form/BZInput";
-import BZModal from "@/components/modals/BZModal";
+import { Button } from "@heroui/button";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useState } from "react";
+
+import PaymentSuccess from "./SuccessfulPayment";
+
 import { useUser } from "@/context/user.provider";
 import { useCreatePaymentRecord } from "@/hooks/payment.hook";
 import { createPaymentIntent } from "@/services/Payment";
 import { TOrder, TPayment } from "@/types";
-
-import { Button } from "@heroui/button";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useState } from "react";
-import PaymentSuccess from "./SuccessfulPayment";
 
 interface IProps {
   order: TOrder;
@@ -20,6 +18,7 @@ export default function PaymentForm({ order, isLoading }: IProps) {
   const { user } = useUser();
   const { mutate: handleCreatePaymentRecord, isSuccess } =
     useCreatePaymentRecord();
+
   console.log("totalamout", order.totalAmount);
   console.log(order);
   const [error, setError] = useState<string | undefined>("");
@@ -33,6 +32,7 @@ export default function PaymentForm({ order, isLoading }: IProps) {
       return;
     }
     const card = elements?.getElement(CardElement);
+
     if (!card) {
       return;
     }
@@ -43,6 +43,7 @@ export default function PaymentForm({ order, isLoading }: IProps) {
       type: "card",
       card, //card data
     });
+
     if (error) {
       setError(error?.message);
       // console.log("error:", error);
@@ -74,6 +75,7 @@ export default function PaymentForm({ order, isLoading }: IProps) {
           },
         },
       });
+
     //🔹 Step 4: Handle success or error
     if (confirmError) {
       setError(confirmError.message);
@@ -94,12 +96,14 @@ export default function PaymentForm({ order, isLoading }: IProps) {
           status: paymentIntent.status,
           isPaid: true,
         };
+
         console.log(paymentData);
         handleCreatePaymentRecord(paymentData);
         setTransactionId(paymentIntent.id); // store transaction id
       }
     }
   };
+
   //
   if (isLoading) {
     return <div>Loading.......</div>;
@@ -116,14 +120,14 @@ export default function PaymentForm({ order, isLoading }: IProps) {
           <div>
             {/* <BZForm onSubmit={onsubmit}> */}
             <form
-              onSubmit={handleSubmit}
               className="max-w-md mx-auto   border border-gray-200 rounded-xl p-5 shadow-sm space-y-5"
+              onSubmit={handleSubmit}
             >
               <CardElement />
 
               {/* <BZInput /> */}
 
-              <Button type="submit" disabled={!stripe}>
+              <Button disabled={!stripe} type="submit">
                 Confirm Order Payment ${order?.totalAmount}
                 {/* {isSuccess && (
               <BZModal

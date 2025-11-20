@@ -2,10 +2,11 @@
 //
 //
 //this is localstorage settings
+import { Button } from "@heroui/button";
+import { useState } from "react";
+
 import { useCart } from "@/context/cart.provider";
 import { TProduct } from "@/types";
-import { Button } from "@heroui/button";
-import { useEffect, useState } from "react";
 
 interface IProps {
   product: TProduct;
@@ -39,10 +40,12 @@ export default function CartQuantity({ product }: IProps) {
         // <div className="flex items-center gap-3">
         <div className="flex items-center  py-1 rounded-md overflow-hidden w-full bg-red-400">
           <button
+            className="px-3 py-1 text-gray-600 hover:bg-gray-100 transition rounded-sm"
             onClick={() => {
               const existingItem = cartItems.find(
-                (item) => item.productId === product._id
+                (item) => item.productId === product._id,
               );
+
               existingItem?.quantity! > 1
                 ? decreaseQuantity(product._id || "")
                 : removeFromCart(product._id || "");
@@ -54,17 +57,18 @@ export default function CartQuantity({ product }: IProps) {
               //   setSelectQuantity((prev) => (prev > 1 ? prev - 1 : 1));
               // }
             }}
-            className="px-3 py-1 text-gray-600 hover:bg-gray-100 transition rounded-sm"
           >
             −
           </button>
 
           <span className=" mx-auto">{existingItem.quantity} in bag</span>
           <button
+            className="px-3 py-1 text-gray-600 hover:bg-gray-100 transition rounded-sm"
             onClick={() => {
               const existingItem = cartItems.find(
-                (item) => item.productId === product._id
+                (item) => item.productId === product._id,
               );
+
               if (existingItem) {
                 // increase quantity in cart
                 increaseQuantity(product._id || "");
@@ -73,7 +77,6 @@ export default function CartQuantity({ product }: IProps) {
                 setSelectQuantity((prev) => prev + 1);
               }
             }}
-            className="px-3 py-1 text-gray-600 hover:bg-gray-100 transition rounded-sm"
           >
             +
           </button>
@@ -81,9 +84,9 @@ export default function CartQuantity({ product }: IProps) {
       ) : (
         // </div>
         <Button
-          onClick={handleAddToCart}
-          color="primary"
           className="w-full bg-accent hover:bg-orange-300  text-default-700 rounded-lg font-medium px-6 py-2 transition-all shadow-sm text-center mx-auto"
+          color="primary"
+          onClick={handleAddToCart}
         >
           {/* Add to Cart */}
           {product.quantity <= 0 ? "Out of Stock" : "🛒 Add to Cart"}

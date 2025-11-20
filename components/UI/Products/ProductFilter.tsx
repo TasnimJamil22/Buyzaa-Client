@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Input } from "@heroui/react";
+
 import ProductCard from "@/components/UI/Products";
 import { getAllProducts } from "@/services/Product";
-import { Input, Select, SelectItem } from "@heroui/react";
-import { getAllCategories } from "@/services/Category";
 import { TCategory } from "@/types";
 
 interface ProductFilterProps {
@@ -21,6 +21,7 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
   useEffect(() => {
     async function fetchProducts() {
       const res = await getAllProducts(); // { success, messagee, data }
+
       setProducts(res.data || []);
       setFilteredProducts(res.data || []);
     }
@@ -45,7 +46,7 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
     //Keep only products whose name includes that search word.
     if (search) {
       temp = temp.filter((p) =>
-        p.name.toLowerCase().includes(search.toLowerCase())
+        p.name.toLowerCase().includes(search.toLowerCase()),
       );
     }
     //👉 If the user selected a specific category:
@@ -99,7 +100,7 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
           <option value="">Price</option>
           {products
             .filter(
-              (p, i, arr) => arr.findIndex((x) => x.price === p.price) === i
+              (p, i, arr) => arr.findIndex((x) => x.price === p.price) === i,
             ) // remove duplicate prices
             .sort((a, b) => a.price - b.price) // sort low → high
 

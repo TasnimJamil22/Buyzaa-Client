@@ -1,6 +1,4 @@
 import Container from "@/components/UI/Container";
-import ProductCard from "@/components/UI/Products";
-
 import ProductDetail from "@/components/UI/Products/ProductDetail";
 import ProductReview from "@/components/UI/Products/ProductReview";
 import { getAProdudctById } from "@/services/Product";
@@ -12,7 +10,9 @@ interface IProps {
 }
 const ProductDetailPage = async ({ params: { productId } }: IProps) => {
   const { data: product } = await getAProdudctById(productId);
+
   console.log(product);
+
   return (
     <Container>
       <div className="mx-auto bg-default-100 rounded-lg">
@@ -25,4 +25,5 @@ const ProductDetailPage = async ({ params: { productId } }: IProps) => {
     </Container>
   );
 };
+
 export default ProductDetailPage;

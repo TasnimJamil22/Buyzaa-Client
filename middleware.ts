@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { getCurrentUser } from "./services/AuthService";
 
 const AuthRoutes = ["/login", "/register"];
+
 type Role = keyof typeof roleBasedRoutes;
 
 //   /^\/profile/ → matches any URL that starts with /profile
@@ -13,10 +15,12 @@ const roleBasedRoutes = {
   USER: [/^\/profile/],
   ADMIN: [/^\/admin/],
 };
+
 export default async function middleware(request: NextRequest) {
   const user = await getCurrentUser();
   //current pathname
   const { pathname } = request.nextUrl;
+
   //if no user:
   if (!user) {
     //user directly goes to login/register page .so let him go to that page.
@@ -25,7 +29,7 @@ export default async function middleware(request: NextRequest) {
     } else {
       //user doesn't directly go to the login page,wanated to go another protected page.but needs to login first.After login   he can go to that page,so we redirect them to that page he wanted to go
       return NextResponse.redirect(
-        new URL(`/login?redirect=${pathname}`, request.url)
+        new URL(`/login?redirect=${pathname}`, request.url),
       );
     }
   }

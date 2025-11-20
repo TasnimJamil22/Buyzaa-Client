@@ -1,6 +1,9 @@
 //get all categories hook (for using in react components)
 //no async
 
+import { addToast } from "@heroui/toast";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
 import {
   createCategory,
   deleteCategory,
@@ -8,9 +11,7 @@ import {
   updateCategory,
 } from "@/services/Category";
 import { TCategory } from "@/types";
-import { addToast } from "@heroui/toast";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 //get all categories
 export const useGetAllCategories = () => {
   return useQuery({
@@ -22,6 +23,7 @@ export const useGetAllCategories = () => {
 //create category
 export const useCreateCategory = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (category: TCategory) => {
       return await createCategory(category);
@@ -64,6 +66,7 @@ export const useUpdateCategory = () => {
     }) => {
       const { categoryId, updatedCategory } = payload;
       const data = await updateCategory(categoryId, updatedCategory);
+
       return data;
     },
   });

@@ -1,14 +1,15 @@
 // import axiosInstance from "@/lib/AxiosInstance";
 
+import axios from "axios";
+
 import axiosInstance from "@/lib/AxiosInstance";
 import { TPayment } from "@/types";
-import axios from "axios";
 
 //with nextjs server api
 // 2️⃣ Create payment intent (calls your server route)
 export const createPaymentIntent = async (
   amountInCents: number,
-  orderId: string
+  orderId: string,
 ) => {
   try {
     //we are sending ..to backend/api
@@ -19,10 +20,13 @@ export const createPaymentIntent = async (
       orderId,
     });
     const clientSecret = data.clientSecret;
+
     console.log("res from intent", data);
+
     return clientSecret; // client secret from backend
   } catch (err: any) {
     console.log(err.message);
+
     return null;
   }
 };
@@ -33,6 +37,7 @@ export const createPaymentRecord = async (paymentData: TPayment) => {
     const { data } = await axiosInstance.post("/payment/payment-success", {
       payment: paymentData,
     });
+
     return data;
   } catch (err: any) {
     console.log(err.message);
@@ -43,6 +48,7 @@ export const createPaymentRecord = async (paymentData: TPayment) => {
 export const getAllPayments = async () => {
   try {
     const { data } = await axiosInstance.get("/payment");
+
     return data;
   } catch (err: any) {
     console.log(err.message);
@@ -53,6 +59,7 @@ export const getAllPayments = async () => {
 export const getMyPayments = async () => {
   try {
     const { data } = await axiosInstance.get("/payment/my-payments");
+
     return data;
   } catch (err: any) {
     console.log(err.message);

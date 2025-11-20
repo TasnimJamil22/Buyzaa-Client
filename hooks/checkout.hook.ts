@@ -1,3 +1,6 @@
+import { addToast } from "@heroui/toast";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
 import {
   createOrder,
   deleteOrder,
@@ -6,8 +9,6 @@ import {
   getMyOrders,
 } from "@/services/Checkout";
 import { TOrder } from "@/types";
-import { addToast } from "@heroui/toast";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useCreateOrder = () => {
   return useMutation({
@@ -116,6 +117,7 @@ export const useGetASingleOrder = (orderId: string) => {
 //delete an order hook
 export const useDeleteOrder = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["DELETE-AN-ORDER"],
     mutationFn: async (orderId: string) => {

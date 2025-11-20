@@ -1,7 +1,4 @@
 import ProfileCard from "@/components/UI/Profile/ProfileCard";
-import { getCurrentUser } from "@/services/AuthService";
-import { getMyProfile } from "@/services/Profile";
-import { TUser } from "@/types";
 
 export default function ProfilePage() {
   return (

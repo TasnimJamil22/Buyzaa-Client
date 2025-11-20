@@ -1,9 +1,10 @@
-import envConfig from "@/config/envConfig";
 import axios from "axios";
 // import { cookies } from "next/headers";
 // Using js-cookie
 
 import Cookies from "js-cookie";
+
+import envConfig from "@/config/envConfig";
 const axiosInstance = axios.create({
   baseURL: envConfig.baseApi,
   // withCredentials: true, // ✅ send cookies automatically
@@ -13,9 +14,11 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use((config) => {
   // const token = localStorage.getItem("accessToken"); // or use cookie
   const token = Cookies.get("accessToken"); // must be defined
+
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+
   return config;
 });
 

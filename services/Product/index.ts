@@ -16,6 +16,7 @@ export const getAllProducts = async () => {
   if (!res.ok) {
     throw new Error("failed to fetch products");
   }
+
   return res.json();
 };
 
@@ -26,6 +27,7 @@ export const getAProdudctById = async (productId: string): Promise<any> => {
   if (!res.ok) {
     throw new Error("failed to fetch product");
   }
+
   return res.json();
 };
 
@@ -34,21 +36,23 @@ export const createProduct = async (productData: TProduct) => {
   const payload = { product: productData };
   const { data } = await axiosInstance.post(
     "/products/create-product",
-    payload
+    payload,
   );
+
   return data;
 };
 
 //update a product by id
 export const updateProduct = async (
   productId: string,
-  productData: Partial<TProduct>
+  productData: Partial<TProduct>,
 ) => {
   try {
     const data = await axiosInstance.patch(
       `/products/${productId}`,
-      productData
+      productData,
     );
+
     return data;
   } catch (err: any) {
     throw new Error(err.message);
@@ -58,6 +62,7 @@ export const updateProduct = async (
 export const deleteProduct = async (productId: string) => {
   try {
     const { data } = await axiosInstance.delete(`/products/${productId}`);
+
     return data;
   } catch (err: any) {
     throw new Error(err.message);

@@ -1,11 +1,12 @@
 "use client";
 
-import PaymentForm from "@/components/UI/Payment/PaymentForm";
-import envConfig from "@/config/envConfig";
-import { useGetASingleOrder } from "@/hooks/checkout.hook";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import React, { use } from "react";
+
+import PaymentForm from "@/components/UI/Payment/PaymentForm";
+import envConfig from "@/config/envConfig";
+import { useGetASingleOrder } from "@/hooks/checkout.hook";
 
 const stripePromise = loadStripe(envConfig.paymentKey as string);
 
@@ -23,7 +24,7 @@ export default function PaymentDetailPage({
 
   return (
     <Elements stripe={stripePromise}>
-      <PaymentForm key={order._id} order={order} isLoading={isLoading} />
+      <PaymentForm key={order._id} isLoading={isLoading} order={order} />
     </Elements>
   );
 }

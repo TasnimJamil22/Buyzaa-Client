@@ -1,11 +1,12 @@
 "use client";
 
-import BZModal from "@/components/modals/BZModal";
-import { useCreateCategory, useGetAllCategories } from "@/hooks/category.hook";
-import { TCategory } from "@/types";
-import CreaateCategoryForm from "./CreateCategoryForm";
-import UpdateCategoryForm from "./UpdateCategoryForm";
 import Link from "next/link";
+
+import CreaateCategoryForm from "./CreateCategoryForm";
+
+import BZModal from "@/components/modals/BZModal";
+import { useGetAllCategories } from "@/hooks/category.hook";
+import { TCategory } from "@/types";
 
 interface IProps {
   categories: TCategory[];
@@ -40,18 +41,18 @@ export default function CategoryList() {
             {/* Category Image (optional) */}
             {category.image && (
               <img
-                src={category.image}
                 alt={category.name}
                 className="w-full h-40 object-cover rounded-xl mb-3"
+                src={category.image}
               />
             )}
 
             <h2 className="text-lg font-semibold text-gray-800">
               <Link
-                href={`/admin/categories/${category?._id}`}
                 className="relative px-4 py-2 text-lg font-medium text-[#a17c37] hover:text-[#8b6d2f] transition-all duration-300 
                    after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gradient-to-r from-[#e0c066] to-[#a17c37]
                    hover:after:w-full after:transition-all after:duration-300"
+                href={`/admin/categories/${category?._id}`}
               >
                 {category.name}
               </Link>
@@ -68,8 +69,8 @@ export default function CategoryList() {
       </div>
       <div className="flex gap-5">
         <BZModal
-          buttonText="Create New Category"
           body={<CreaateCategoryForm />}
+          buttonText="Create New Category"
         />
       </div>
     </div>

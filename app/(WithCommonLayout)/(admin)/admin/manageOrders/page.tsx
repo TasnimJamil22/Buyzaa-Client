@@ -1,10 +1,5 @@
 "use client";
-import BZModal from "@/components/modals/BZModal";
-import PaymentHistory from "@/components/UI/Payment/PaymentHistory";
-import { useDeleteOrder, useGetAllOrders } from "@/hooks/checkout.hook";
-import { TItem, TOrder } from "@/types";
 import { Button } from "@heroui/button";
-import { Link } from "@heroui/link";
 import {
   Table,
   TableBody,
@@ -15,11 +10,18 @@ import {
 } from "@heroui/table";
 import { DeleteIcon } from "lucide-react";
 
+import BZModal from "@/components/modals/BZModal";
+import PaymentHistory from "@/components/UI/Payment/PaymentHistory";
+import { useDeleteOrder, useGetAllOrders } from "@/hooks/checkout.hook";
+import { TItem, TOrder } from "@/types";
+
 export default function Orders() {
   const { data } = useGetAllOrders();
   const orders: TOrder[] = data?.data || [];
+
   console.log(orders);
   const { mutate: deleteOrder } = useDeleteOrder();
+
   return (
     <>
       <div>
@@ -62,8 +64,6 @@ export default function Orders() {
                 <TableCell>${order.totalAmount}</TableCell>
                 <TableCell>
                   <BZModal
-                    buttonText="View"
-                    title="Order Details"
                     body={
                       <div className="space-y-3 p-4 bg-gray-50 rounded-md text-sm">
                         <p>
@@ -115,6 +115,8 @@ export default function Orders() {
                         </p>
                       </div>
                     }
+                    buttonText="View"
+                    title="Order Details"
                   />
                 </TableCell>
                 <TableCell>
@@ -138,7 +140,7 @@ export default function Orders() {
                     onClick={() => {
                       if (
                         window.confirm(
-                          "Are you sure you want to delete this order?"
+                          "Are you sure you want to delete this order?",
                         )
                       ) {
                         deleteOrder(order._id);

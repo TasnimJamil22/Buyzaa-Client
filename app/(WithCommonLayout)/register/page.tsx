@@ -1,16 +1,17 @@
 "use client";
+import { Button } from "@heroui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { SubmitHandler } from "react-hook-form";
+
 import BZForm from "@/components/form/BZForm";
 import BZInput from "@/components/form/BZInput";
 import { useUser } from "@/context/user.provider";
 import { useRegisterUser } from "@/hooks/auth.hook";
 import registerValidationSchema from "@/schemas/register.schema";
 import { TUser } from "@/types";
-import { Button } from "@heroui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { FieldValues, SubmitHandler } from "react-hook-form";
 
 export default function RegisterPage() {
   const searchParams = useSearchParams();
@@ -28,10 +29,12 @@ export default function RegisterPage() {
     const userData = {
       ...data,
     };
+
     handleRegisterUser(userData);
     console.log(userData);
     setIsLoading(true);
   };
+
   //This is for: if we go direct login, that means no redirect from url like /profile, /create-post, /settings etc so it will take us to home page after login . But when we wanted to go in /profile etc but we needed to login then it after login it will take us to that .... /profile page
   useEffect(() => {
     if (!isPending && isSuccess) {
@@ -42,6 +45,7 @@ export default function RegisterPage() {
       }
     }
   }, [isPending, isSuccess]);
+
   return (
     <div className=" w-full max-w-md mx-auto my-32 ">
       <div className="w-full max-w-md  py-12 px-8 rounded-2xl shadow-md items-center">
@@ -49,17 +53,17 @@ export default function RegisterPage() {
           Please Register
         </h1>
         <BZForm
-          onSubmit={onSubmit}
           resolver={zodResolver(registerValidationSchema)}
+          onSubmit={onSubmit}
         >
           <div className="flex flex-col gap-4">
-            <BZInput name="name" label="Name" />
-            <BZInput name="email" label="Email" type="email" />
-            <BZInput name="password" label="Password" type="password" />
-            <BZInput name="mobileNumber" label="Mobile Number" />
+            <BZInput label="Name" name="name" />
+            <BZInput label="Email" name="email" type="email" />
+            <BZInput label="Password" name="password" type="password" />
+            <BZInput label="Mobile Number" name="mobileNumber" />
           </div>
           <div className="mt-4">
-            <Button type="submit" className="w-full bg-accent">
+            <Button className="w-full bg-accent" type="submit">
               Register
             </Button>
             <p className="text-default-500 py-3">

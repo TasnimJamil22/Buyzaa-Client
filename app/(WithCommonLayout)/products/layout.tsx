@@ -1,8 +1,6 @@
 // import { Navbar } from "@/components/navbar";
-import Navbar from "@/components/navbar";
-import Container from "@/components/UI/Container";
-import Sidebar from "@/components/UI/Sidebar";
 import { ReactNode } from "react";
+
 import Cart from "../(user)/profile/cart/page";
 
 export default function Layout({ children }: { children: ReactNode }) {

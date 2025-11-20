@@ -1,13 +1,13 @@
 "use client";
+import { Button } from "@heroui/button";
+import { SubmitHandler } from "react-hook-form";
+
 import BZForm from "@/components/form/BZForm";
 import BZInput from "@/components/form/BZInput";
 import BZSelect from "@/components/form/BZSelect";
 import { useGetAllCategories } from "@/hooks/category.hook";
 import { useCreateProduct } from "@/hooks/product.hook";
 import { TCategory, TProduct } from "@/types";
-import { Button } from "@heroui/button";
-import { useEffect } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 interface IProps {
   products: TProduct;
@@ -16,6 +16,7 @@ export default function CreateProductForm({ products }: IProps) {
   const { mutate: handleCreateProduct, isPending } = useCreateProduct();
   const { data, isLoading, isSuccess } = useGetAllCategories();
   const categories: TCategory[] = data?.data || [];
+
   console.log(categories);
   //2
   // const { register, handleSubmit, reset } = useForm(); // ✅ this line gives you register
@@ -40,20 +41,20 @@ export default function CreateProductForm({ products }: IProps) {
 
       <BZForm onSubmit={onSubmit}>
         {/* Product Name */}
-        <BZInput name="name" label="Name" />
+        <BZInput label="Name" name="name" />
 
         {/* Description */}
-        <BZInput name="description" label="Description" />
+        <BZInput label="Description" name="description" />
 
         {/* Price */}
-        <BZInput name="price" label="Price" type="number" />
+        <BZInput label="Price" name="price" type="number" />
 
         {/* Quantity */}
-        <BZInput name="quantity" label="Quantity" type="number" />
+        <BZInput label="Quantity" name="quantity" type="number" />
         {/* category */}
         <BZSelect
-          name="category"
           label="Category"
+          name="category"
           options={categories.map((cat) => ({
             key: cat._id!, // ! tells TS "_id is definitely string"
             label: cat.name,
@@ -72,12 +73,12 @@ export default function CreateProductForm({ products }: IProps) {
         )} */}
 
         {/* Images (optional) */}
-        <BZInput name="images" label="Image URLs" />
+        <BZInput label="Image URLs" name="images" />
 
         <Button
-          type="submit"
-          isLoading={isPending}
           className="w-full mt-4 bg-yellow-400"
+          isLoading={isPending}
+          type="submit"
         >
           Create Product
         </Button>

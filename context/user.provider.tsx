@@ -1,6 +1,4 @@
 "use client";
-import { getCurrentUser } from "@/services/AuthService";
-import { TUser } from "@/types";
 import {
   createContext,
   Dispatch,
@@ -11,8 +9,12 @@ import {
   useState,
 } from "react";
 
+import { getCurrentUser } from "@/services/AuthService";
+import { TUser } from "@/types";
+
 //✅ Step 1: Creating the context
 const UserContext = createContext<IUserProviderValues | undefined>(undefined);
+
 interface IUserProviderValues {
   user: TUser | null;
   setUser: (user: TUser | null) => void;
@@ -27,13 +29,16 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
   //   Fetching the current user
   const handleUser = async () => {
     const user = await getCurrentUser();
+
     setUser(user as TUser);
     setIsLoading(false);
   };
+
   //   Fetches user info on first render
   useEffect(() => {
     handleUser();
   }, [isLoading]);
+
   return (
     //2.making provider
     <UserContext.Provider value={{ user, setUser, isLoading, setIsLoading }}>
@@ -41,13 +46,16 @@ const UserProvider = ({ children }: { children: ReactNode }) => {
     </UserContext.Provider>
   );
 };
+
 //now its time to consume the user provider and we can make a hook(useUser).which is generally used in this place
 export const useUser = () => {
   //3.using or consuming user= the UserContext to get the user data
   const context = useContext(UserContext);
+
   if (context === undefined) {
     throw new Error("useUser must be used within the UserProvider context");
   }
+
   return context;
 };
 

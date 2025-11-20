@@ -1,9 +1,9 @@
 "use client";
 
-import { useCart } from "@/context/cart.provider";
-import { TOrder } from "@/types";
 import Link from "next/link";
 import React, { useEffect } from "react";
+
+import { useCart } from "@/context/cart.provider";
 
 interface IProps {
   transactionId: string;
@@ -11,6 +11,7 @@ interface IProps {
 
 export default function PaymentSuccess({ transactionId }: IProps) {
   const { clearCart } = useCart();
+
   useEffect(() => {
     // Payment success → clear the cart
     clearCart();
@@ -22,17 +23,17 @@ export default function PaymentSuccess({ transactionId }: IProps) {
       <div className="flex justify-center mb-4">
         <div className="bg-green-100 rounded-full p-4">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
             className="h-14 w-14 text-green-600"
             fill="none"
-            viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
         </div>

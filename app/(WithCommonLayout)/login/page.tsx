@@ -1,17 +1,15 @@
 "use client";
+import { Button } from "@heroui/button";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import BZForm from "@/components/form/BZForm";
 import BZInput from "@/components/form/BZInput";
 import { useUser } from "@/context/user.provider";
-import { useLoginUser, useRegisterUser } from "@/hooks/auth.hook";
-import { loginUser } from "@/services/AuthService";
-import { TUser } from "@/types";
-import { Button } from "@heroui/button";
-
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { FieldValues, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useLoginUser } from "@/hooks/auth.hook";
 import loginValidationSchema from "@/schemas/login.schema";
 
 export default function LoginPage() {
@@ -90,16 +88,16 @@ export default function LoginPage() {
 
       <div className="w-full max-w-md  p-8 rounded-2xl shadow-md">
         <BZForm
-          onSubmit={onSubmit}
           resolver={zodResolver(loginValidationSchema)}
+          onSubmit={onSubmit}
         >
           <div className="flex flex-col gap-4">
-            <BZInput name="email" label="Email" type="email" required />
+            <BZInput required label="Email" name="email" type="email" />
             <BZInput
-              name="password"
-              label="Password"
-              type="password"
               required
+              label="Password"
+              name="password"
+              type="password"
             />
             {/* error from backend like pass not matched,user not found etc */}
             {/* {error && <p className="text-red-500 text-sm">{errorMessage}</p>} */}
@@ -108,7 +106,7 @@ export default function LoginPage() {
                 {(error as Error)?.message}
               </p>
             )}
-            <Button type="submit" className="w-full bg-accent">
+            <Button className="w-full bg-accent" type="submit">
               {isPending ? "Logging in..." : "Login"}
             </Button>
             <p className="text-default-500 py-3">

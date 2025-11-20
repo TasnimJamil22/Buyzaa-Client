@@ -1,10 +1,11 @@
 "use client";
 
-import { IInput } from "@/types";
 import { Input } from "@heroui/react";
 // import { Input } from "@heroui/input";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+
+import { IInput } from "@/types";
 
 interface IProps extends IInput {}
 
@@ -37,15 +38,6 @@ export default function BZInput({
   return (
     <Input
       {...register(name)}
-      errorMessage={errors[name] ? (errors[name].message as string) : ""}
-      isInvalid={!!errors[name]} // it’s a shorthand for: isInvalid={errors[name] ? true : false} ----> errors["email"],errors["password"] etc
-      variant={variant}
-      size={size}
-      // isRequired={required}
-      required={required}
-      type={type}
-      label={label}
-      disabled={disabled}
       className={`
         w-full
         mb-4
@@ -61,6 +53,15 @@ export default function BZInput({
         ${disabled ? "opacity-60 cursor-not-allowed" : ""}
       `}
       defaultValue={defaultValue}
+      disabled={disabled}
+      errorMessage={errors[name] ? (errors[name].message as string) : ""}
+      isInvalid={!!errors[name]} // it’s a shorthand for: isInvalid={errors[name] ? true : false} ----> errors["email"],errors["password"] etc
+      label={label}
+      type={type}
+      variant={variant}
+      size={size}
+      // isRequired={required}
+      required={required}
     />
   );
 }

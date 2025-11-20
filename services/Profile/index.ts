@@ -1,8 +1,8 @@
 import axiosInstance from "@/lib/AxiosInstance";
-import { TUser, TUserProfileUpdate } from "@/types";
 
 export const getMyProfile = async () => {
   const { data } = await axiosInstance.get("/profile/");
+
   return data;
 };
 //upload image

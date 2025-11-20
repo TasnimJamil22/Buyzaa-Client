@@ -4,9 +4,13 @@
 
 /* @import "tailwindcss"; */
 
-/* @config "../tailwind.config.js" */
-
+@config "../tailwind.config.js";
+@import "tailwindcss";
 .font-dancing {
   font-family: "Dancing Script", cursive;
-  font-weight: 700; /* boldest available */
+  font-weight: 700;
+  /* boldest available */
+}
+[data-slot="menu-toggle"] span {
+  display: none !important;
 }

@@ -3,7 +3,6 @@
 import envConfig from "@/config/envConfig";
 import axiosInstance from "@/lib/AxiosInstance";
 import { TUser } from "@/types";
-import { revalidateTag } from "next/cache";
 
 //get all user
 //data fetching : using fetch
@@ -14,6 +13,7 @@ export const getAllUser = async () => {
   if (!res.ok) {
     throw new Error("failed to fetch users");
   }
+
   return res.json();
 };
 //get a single user
@@ -24,6 +24,7 @@ export const getASingleUser = async (userId: string) => {
   if (!res.ok) {
     throw new Error("failed to fetch user");
   }
+
   return res.json();
 };
 
@@ -39,7 +40,7 @@ export const createUser = async (userData: TUser) => {
   } catch (error: any) {
     console.error(
       "Error creating user:",
-      error.response?.data || error.message
+      error.response?.data || error.message,
     );
     throw new Error(error.response?.data?.message || "Failed to create user");
   }
@@ -81,7 +82,7 @@ export const deleteUser = async (userId: string) => {
 // Update user
 export const updateUser = async (
   userId: string,
-  updatedData: Partial<TUser> | FormData
+  updatedData: Partial<TUser> | FormData,
 ) => {
   try {
     const { data } = await axiosInstance.patch(
@@ -92,7 +93,7 @@ export const updateUser = async (
           updatedData instanceof FormData
             ? { "Content-Type": "multipart/form-data" }
             : undefined,
-      }
+      },
     );
 
     return data;
@@ -100,6 +101,7 @@ export const updateUser = async (
     // extract axios error message safely
     const message =
       error.response?.data?.message || error.message || "Something went wrong";
+
     throw new Error(message);
   }
 };

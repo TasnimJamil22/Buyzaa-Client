@@ -1,14 +1,14 @@
 "use client";
 
+import CartQuantity from "../Cart/CartQuantity";
+
+import UpdateProductForm from "./UpdateProductForm";
+
 import BZModal from "@/components/modals/BZModal";
 import { TProduct } from "@/types"; // adjust path to your interface
-import CreateProductForm from "./CreateProductForm";
-import UpdateProductForm from "./UpdateProductForm";
 import { useUser } from "@/context/user.provider";
 import { useDeleteProduct } from "@/hooks/product.hook";
 import { useCart } from "@/context/cart.provider";
-import { useState } from "react";
-import CartQuantity from "../Cart/CartQuantity";
 
 interface IProps {
   product: TProduct;
@@ -16,6 +16,7 @@ interface IProps {
 
 export default function ProductDetail({ product }: IProps) {
   const { user } = useUser();
+
   console.log(product);
   console.log(product?.category?.name);
   const { addToCart } = useCart();
@@ -41,9 +42,9 @@ export default function ProductDetail({ product }: IProps) {
             {/* Left: Product Image */}
             <div className="flex items-center justify-center   rounded-2xl overflow-hidden shadow-inner">
               <img
-                src={product.images?.[0] || "/placeholder.jpg"}
                 alt={product.name}
                 className="w-full h-auto max-h-[500px] object-contain rounded-xl hover:scale-105 transition-transform duration-300"
+                src={product.images?.[0] || "/placeholder.jpg"}
               />
             </div>
 
@@ -103,8 +104,8 @@ export default function ProductDetail({ product }: IProps) {
               <div className="flex flex-col md:flex-row justify-center items-center gap-6">
                 <div className="w-full md:w-auto text-center">
                   <BZModal
-                    buttonText="🎨 Update Product"
                     body={<UpdateProductForm product={product} />}
+                    buttonText="🎨 Update Product"
                   />
                 </div>
 

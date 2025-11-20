@@ -44,9 +44,6 @@ export default function BZModal({
               <ModalBody>{body}</ModalBody>
               <ModalFooter>
                 <Button
-                  color="danger"
-                  variant="light"
-                  onPress={onClose}
                   className="
     px-6 py-2 rounded-lg 
     bg-gradient-to-r from-[#d4af37] to-[#b8860b] 
@@ -55,6 +52,9 @@ export default function BZModal({
     hover:from-[#c6a134] hover:to-[#9b7605] 
     transition-all duration-300
   "
+                  color="danger"
+                  variant="light"
+                  onPress={onClose}
                 >
                   Close
                 </Button>

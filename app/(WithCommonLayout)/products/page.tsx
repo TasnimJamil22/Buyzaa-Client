@@ -1,6 +1,3 @@
-import Landing from "@/components/modules/home/LandPage";
-import ProductCard from "@/components/UI/Products";
-import CreateProductForm from "@/components/UI/Products/CreateProductForm";
 import ProductFilter from "@/components/UI/Products/ProductFilter";
 import { getAllCategories } from "@/services/Category";
 import { getAllProducts } from "@/services/Product";
@@ -8,8 +5,10 @@ import { getAllProducts } from "@/services/Product";
 export default async function Products() {
   const { data: products } = await getAllProducts();
   const { data: categories } = await getAllCategories();
+
   console.log("the:", products);
   console.log("the:", categories);
+
   return (
     <div>
       <div>

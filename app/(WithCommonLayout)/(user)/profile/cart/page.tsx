@@ -40,11 +40,6 @@
 // }
 
 "use client";
-import { CartIcon } from "@/components/icons";
-import MyCart from "@/components/UI/Cart";
-import { useCart } from "@/context/cart.provider";
-import { useUser } from "@/context/user.provider";
-import { TOrder } from "@/types";
 import { Badge } from "@heroui/badge";
 import { Button } from "@heroui/button";
 import {
@@ -55,14 +50,18 @@ import {
   DrawerHeader,
 } from "@heroui/drawer";
 import { useDisclosure } from "@heroui/modal";
-import Link from "next/link";
-import { useParams } from "next/navigation";
 import React from "react";
+
+import { useUser } from "@/context/user.provider";
+import { useCart } from "@/context/cart.provider";
+import MyCart from "@/components/UI/Cart";
+import { CartIcon } from "@/components/icons";
 
 export default function Cart() {
   const { user } = useUser();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   type DrawerSize =
     | "xs"
     | "sm"
@@ -107,7 +106,7 @@ export default function Cart() {
 
         {user?.role === "USER" && (
           <Button key={size} onPress={() => handleOpen(size)}>
-            <Badge content={cartItems.length} color="danger">
+            <Badge color="danger" content={cartItems.length}>
               <CartIcon />
             </Badge>
           </Button>

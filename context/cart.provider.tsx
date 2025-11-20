@@ -31,6 +31,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // ✅ Load cart from localStorage when the component mounts
   useEffect(() => {
     const savedCart = localStorage.getItem("my-cart");
+
     if (savedCart) {
       setCartItems(JSON.parse(savedCart));
     }
@@ -44,13 +45,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const addToCart = (item: CartItem) => {
     setCartItems((prev) => {
       const existing = prev.find((i) => i.productId === item.productId);
+
       if (existing) {
         return prev.map((i) =>
           i.productId === item.productId
             ? { ...i, quantity: i.quantity + item.quantity }
-            : i
+            : i,
         );
       }
+
       return [...prev, item];
     });
   };
@@ -62,8 +65,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const increaseQuantity = (productId: string) => {
     setCartItems((prev) =>
       prev.map((i) =>
-        i.productId === productId ? { ...i, quantity: i.quantity + 1 } : i
-      )
+        i.productId === productId ? { ...i, quantity: i.quantity + 1 } : i,
+      ),
     );
   };
 
@@ -72,8 +75,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       prev.map((i) =>
         i.productId === productId
           ? { ...i, quantity: i.quantity > 1 ? i.quantity - 1 : 1 }
-          : i
-      )
+          : i,
+      ),
     );
   };
 
@@ -99,7 +102,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
 export const useCart = () => {
   const context = useContext(CartContext);
+
   if (!context) throw new Error("useCart must be used within CartProvider");
+
   return context;
 };
 

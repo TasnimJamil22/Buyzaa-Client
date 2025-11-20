@@ -1,11 +1,12 @@
+import { Button } from "@heroui/button";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+
 import BZForm from "@/components/form/BZForm";
 import BZInput from "@/components/form/BZInput";
 import BZSelect from "@/components/form/BZSelect";
 import { useGetAllCategories } from "@/hooks/category.hook";
 import { useUpdateProduct } from "@/hooks/product.hook";
 import { TProduct, TCategory } from "@/types";
-import { Button } from "@heroui/button";
-import { FieldValues, SubmitHandler } from "react-hook-form";
 
 interface IProps {
   product: TProduct;
@@ -16,7 +17,7 @@ export default function UpdateProductForm({ product }: IProps) {
   const { data, isLoading, isSuccess } = useGetAllCategories();
   const categories: TCategory[] = data?.data || [];
   const onSubmit: SubmitHandler<FieldValues> = async (
-    data: Partial<TProduct>
+    data: Partial<TProduct>,
   ) => {
     handleUpdateProduct({
       productId: data?._id as string,
@@ -24,6 +25,7 @@ export default function UpdateProductForm({ product }: IProps) {
     });
     console.log(data);
   };
+
   return (
     // <div className="max-w-xl mx-auto bg-white p-6 rounded-2xl shadow-md">
     //   <h2 className="text-2xl font-semibold mb-4 text-gray-700">
@@ -82,24 +84,24 @@ export default function UpdateProductForm({ product }: IProps) {
         Update Product
       </h2>
 
-      <BZForm onSubmit={onSubmit} defaultValues={product}>
+      <BZForm defaultValues={product} onSubmit={onSubmit}>
         {/* Product Name */}
-        <BZInput name="name" label="Product Name" />
+        <BZInput label="Product Name" name="name" />
 
         {/* Description */}
-        <BZInput name="description" label="Description" />
+        <BZInput label="Description" name="description" />
 
         {/* Price */}
-        <BZInput name="price" label="Price ($)" type="number" />
+        <BZInput label="Price ($)" name="price" type="number" />
 
         {/* Quantity */}
-        <BZInput name="quantity" label="Quantity" type="number" />
+        <BZInput label="Quantity" name="quantity" type="number" />
 
         {/* Category */}
         <BZSelect
-          name="category"
-          label="Category"
           defaultValue={product?.category?._id || ""}
+          label="Category"
+          name="category"
           options={categories.map((cat) => ({
             key: cat._id!,
             label: cat.name,
@@ -107,11 +109,10 @@ export default function UpdateProductForm({ product }: IProps) {
         />
 
         {/* Images (optional) */}
-        <BZInput name="images" label="Image URLs" />
+        <BZInput label="Image URLs" name="images" />
 
         {/* Submit Button */}
         <Button
-          type="submit"
           className="
     px-6 py-3 rounded-lg 
     bg-gradient-to-r from-[#d4af37] to-[#b8860b] 
@@ -120,6 +121,7 @@ export default function UpdateProductForm({ product }: IProps) {
     hover:from-[#c6a134] hover:to-[#9b7605] 
     transition-all duration-300
   "
+          type="submit"
         >
           Update Product
         </Button>

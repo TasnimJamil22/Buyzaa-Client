@@ -1,16 +1,17 @@
 import Image from "next/image";
+
 import img from "../../../assets/aboutUs/pic3.png";
 
 export default function AboutBanner() {
   return (
     <section className="relative w-full h-[500px] overflow-hidden rounded-b-3xl">
       <Image
-        src={img}
-        alt="About Us Banner"
         fill
+        alt="About Us Banner"
         className="object-cover filter brightness-90"
+        src={img}
       />
-      <div className="absolute inset-0 bg-black/30"></div>
+      <div className="absolute inset-0 bg-black/30" />
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
         <h1 className="text-5xl font-bold text-white drop-shadow-lg mb-4">
           About Our Art Studio

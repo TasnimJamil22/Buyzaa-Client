@@ -2,10 +2,9 @@
 
 import { Input } from "@heroui/input";
 import { SearchIcon } from "lucide-react";
-import BannerSearch from "./BannerSearch";
-import { useGetAllProducts } from "@/hooks/product.hook";
+
 import { TProduct } from "@/types";
-import { useState } from "react";
+
 interface IProps {
   products: TProduct[];
 }
@@ -13,7 +12,7 @@ export default function Landing({ products }: IProps) {
   return (
     <div className="relative h-[calc(100vh-100px)] w-full bg-[url('/bannerImg2.png')] bg-cover bg-no-repeat bg-center flex items-center justify-center rounded-lg">
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50 rounded-lg"></div>
+      <div className="absolute inset-0 bg-black/50 rounded-lg" />
 
       {/* Content */}
       <div className="relative z-10 text-center px-4">
@@ -30,11 +29,11 @@ export default function Landing({ products }: IProps) {
         <div className="max-w-xl mx-auto w-full px-4">
           <form className="flex-1">
             <Input
-              placeholder="Search"
               classNames={{
                 inputWrapper: "bg-default-100",
                 input: "text-sm",
               }}
+              placeholder="Search"
               startContent={<SearchIcon />}
               type="text"
             />

@@ -65,16 +65,16 @@
 
 "use client";
 
+import ProfileUpdate from "./ProfileUpdate";
+
 import BZModal from "@/components/modals/BZModal";
 import { useUser } from "@/context/user.provider";
-import { TUser, TUserProfileUpdate } from "@/types";
-import UpdateUserForm from "../User/UpdateUserForm";
-import ProfileUpdate from "./ProfileUpdate";
 import { uploadImage } from "@/services/Profile";
 // import { uploadImage } from "@/services/Profile";
 
 export default function ProfileCard() {
   const { user, setUser } = useUser();
+
   console.log(user?.name);
   const handleUpload = async (file: File) => {
     if (!user?._id) return;
@@ -82,6 +82,7 @@ export default function ProfileCard() {
     try {
       // 1️⃣ Upload file to backend (Multer + Cloudinary)
       const formData = new FormData();
+
       formData.append("profilePhoto", file);
 
       // This endpoint must exist in your backend
@@ -98,11 +99,12 @@ export default function ProfileCard() {
 
   console.log("pro pic", user?.profilePhoto);
   console.log(user);
+
   return (
     <div className=" border rounded-2xl shadow-xl p-8 max-w-md mx-auto flex flex-col items-center transition-transform transform hover:scale-105 hover:shadow-2xl">
       {/* Profile Photo with gradient border */}
       <div className="w-32 h-32 mb-6 relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-full p-1 animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-full p-1 animate-pulse" />
         {/* <img
           src={user?.profilePhoto || "/default-profile.png"}
           alt="Profile Photo"
@@ -111,30 +113,31 @@ export default function ProfileCard() {
         <div className="relative w-32 h-32 mx-auto">
           {/* Profile Image */}
           <img
+            alt=""
+            className="w-full h-full object-cover rounded-full border-4 border-white"
             src={
               user?.profilePhoto ||
               "https://cdn-icons-png.flaticon.com/512/847/847969.png"
             }
-            alt="Profile Photo"
-            className="w-full h-full object-cover rounded-full border-4 border-white"
           />
 
           {/* Upload Button */}
           <label
-            htmlFor="profileUpload"
             className="absolute bottom-0 right-0 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-3 py-1 rounded-full shadow-lg cursor-pointer transition-all duration-300 flex items-center space-x-1"
+            htmlFor="profileUpload"
           >
             <span>Upload</span>
           </label>
 
           {/* Hidden File Input */}
           <input
-            id="profileUpload"
-            type="file"
             accept="image/*"
             className="hidden"
+            id="profileUpload"
+            type="file"
             onChange={(e) => {
               const file = e.target.files?.[0];
+
               if (file) {
                 handleUpload(file); // just call your function
               }
@@ -156,8 +159,8 @@ export default function ProfileCard() {
       </div>
       <div>
         <BZModal
-          buttonText="Update profile info"
           body={user && <ProfileUpdate user={user} />}
+          buttonText="Update profile info"
         />
       </div>
 

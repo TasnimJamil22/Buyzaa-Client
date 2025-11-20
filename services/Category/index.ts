@@ -14,28 +14,32 @@ export const getASingleCategory = async (categoryId: string): Promise<any> => {
   if (!res.ok) {
     throw new Error("failed to fetch category");
   }
+
   return res.json();
 };
 //create category
 export const createCategory = async (categoryData: TCategory) => {
   const payload = { category: categoryData };
   const data = await axiosInstance.post("/categories/create-category", payload);
+
   return data;
 };
 
 //delete a category by id
 export const deleteCategory = async (categoryId: string) => {
   const { data } = await axiosInstance.delete(`/categories/${categoryId}`);
+
   return data;
 };
 //update category by id
 export const updateCategory = async (
   categoryId: string,
-  updatedCategory: Partial<TCategory>
+  updatedCategory: Partial<TCategory>,
 ) => {
   const data = await axiosInstance.patch(
     `/categories/${categoryId}`,
-    updatedCategory
+    updatedCategory,
   );
+
   return data;
 };

@@ -1,6 +1,5 @@
 import Container from "@/components/UI/Container";
 import UserDetail from "@/components/UI/User/UserDetail";
-
 import { getASingleUser } from "@/services/User";
 
 interface IProps {
@@ -10,7 +9,9 @@ interface IProps {
 }
 const UserDetailsPage = async ({ params: { userId } }: IProps) => {
   const { data: user } = await getASingleUser(userId);
+
   console.log(user);
+
   return (
     <Container>
       <div className="mx-auto  ">
@@ -19,4 +20,5 @@ const UserDetailsPage = async ({ params: { userId } }: IProps) => {
     </Container>
   );
 };
+
 export default UserDetailsPage;

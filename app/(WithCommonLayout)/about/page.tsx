@@ -11,12 +11,13 @@
 "use client";
 
 import Image from "next/image";
+
 import img1 from "../../../assets/aboutUs/pic1.png";
 import img2 from "../../../assets/aboutUs/pic2.png";
-import img3 from "../../../assets/aboutUs/pic3.png";
 import img4 from "../../../assets/aboutUs/pic4.png";
 import img5 from "../../../assets/aboutUs/pic5.png";
 import img6 from "../../../assets/aboutUs/pic6.png";
+
 import AboutBanner from "@/components/UI/AboutBanner";
 
 export default function About() {
@@ -25,8 +26,8 @@ export default function About() {
       <AboutBanner />
       <section className="relative   py-24 lg:py-32 overflow-hidden">
         {/* Decorative floating elements */}
-        <div className="absolute -top-20 -left-20 w-60 h-60   rounded-full opacity-30 blur-3xl animate-pulse-slow"></div>
-        <div className="absolute -bottom-32 -right-32 w-72 h-72   rounded-full opacity-20 blur-3xl animate-pulse-slow"></div>
+        <div className="absolute -top-20 -left-20 w-60 h-60   rounded-full opacity-30 blur-3xl animate-pulse-slow" />
+        <div className="absolute -bottom-32 -right-32 w-72 h-72   rounded-full opacity-20 blur-3xl animate-pulse-slow" />
 
         <div className="max-w-7xl mx-auto px-6 lg:flex lg:items-center lg:gap-16">
           {/* Text Content */}
@@ -59,34 +60,34 @@ export default function About() {
           <div className="lg:w-1/2 mt-10 lg:mt-0 grid grid-cols-2 gap-4">
             <div className="relative w-full h-48 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-500">
               <Image
+                fill
+                alt="Art Example"
+                className="object-cover"
                 src={img1} // main image
-                alt="Art Example"
-                fill
-                className="object-cover"
               />
             </div>
             <div className="relative w-full h-48 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-500">
               <Image
+                fill
+                alt="Art Example"
+                className="object-cover"
                 src={img4} // secondary image
-                alt="Art Example"
-                fill
-                className="object-cover"
               />
             </div>
             <div className="relative w-full h-48 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-500">
               <Image
+                fill
+                alt="Art Example"
+                className="object-cover"
                 src={img5} // another art
-                alt="Art Example"
-                fill
-                className="object-cover"
               />
             </div>
             <div className="relative w-full h-48 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-500">
               <Image
-                src={img6} // another art
-                alt="Art Example"
                 fill
+                alt="Art Example"
                 className="object-cover"
+                src={img6} // another art
               />
             </div>
           </div>
@@ -97,10 +98,10 @@ export default function About() {
       <section className="py-28 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center bg-default-100 rounded-lg">
         <div className="relative w-full h-80 rounded-xl overflow-hidden shadow-lg">
           <Image
-            src={img2}
-            alt="Our Story Image"
             fill
+            alt="Our Story Image"
             className="object-cover"
+            src={img2}
           />
         </div>
         <div>
@@ -167,11 +168,11 @@ export default function About() {
           <div className=" border p-8 rounded-2xl shadow-lg hover:shadow-xl transition text-center">
             <div className="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden shadow-lg">
               <Image
-                src="/team1.jpg"
                 alt="Team member"
-                width={144}
-                height={144}
                 className="object-cover"
+                height={144}
+                src="/team1.jpg"
+                width={144}
               />
             </div>
             <h3 className="text-2xl font-semibold mb-1 text-default-700">
@@ -187,11 +188,11 @@ export default function About() {
           <div className=" border p-8 rounded-2xl shadow-lg hover:shadow-xl transition text-center">
             <div className="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden shadow-lg">
               <Image
-                src="/team2.jpg"
                 alt="Team member"
-                width={144}
-                height={144}
                 className="object-cover"
+                height={144}
+                src="/team2.jpg"
+                width={144}
               />
             </div>
             <h3 className="text-2xl font-semibold mb-1 text-default-700">
@@ -207,11 +208,11 @@ export default function About() {
           <div className=" border p-8 rounded-2xl shadow-lg hover:shadow-xl transition text-center">
             <div className="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden shadow-lg">
               <Image
-                src="/team3.jpg"
                 alt="Team member"
-                width={144}
-                height={144}
                 className="object-cover border"
+                height={144}
+                src="/team3.jpg"
+                width={144}
               />
             </div>
             <h3 className="text-2xl font-semibold mb-1 text-default-700">

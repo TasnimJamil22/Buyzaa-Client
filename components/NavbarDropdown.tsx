@@ -1,9 +1,5 @@
 "use client";
 
-import { protectedRoutes } from "@/constant";
-import { useUser } from "@/context/user.provider";
-import { logoutUser } from "@/services/AuthService";
-
 import { Avatar } from "@heroui/avatar";
 import {
   Dropdown,
@@ -13,6 +9,10 @@ import {
 } from "@heroui/dropdown";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+
+import { logoutUser } from "@/services/AuthService";
+import { useUser } from "@/context/user.provider";
+import { protectedRoutes } from "@/constant";
 
 // import { Link } from "@heroui/link";
 
@@ -49,10 +49,10 @@ export default function NavbarDropdown() {
             <Link href="/profile/create-post">Creat Post</Link>
           </DropdownItem> */}
           <DropdownItem
-            onClick={() => handleLogout()}
             key="delete"
             className="text-danger"
             color="danger"
+            onClick={() => handleLogout()}
           >
             Logout
           </DropdownItem>
@@ -73,10 +73,10 @@ export default function NavbarDropdown() {
             <Link href="/profile/create-post">Creat Post</Link>
           </DropdownItem> */}
           <DropdownItem
-            onClick={() => handleLogout()}
             key="delete"
             className="text-danger"
             color="danger"
+            onClick={() => handleLogout()}
           >
             Logout
           </DropdownItem>

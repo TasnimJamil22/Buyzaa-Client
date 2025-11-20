@@ -63,13 +63,13 @@ export default function ProductReview() {
 
       {/* Add Review Form */}
       <form
-        onSubmit={handleSubmit}
         className="mt-6 p-4 border rounded-lg space-y-4"
+        onSubmit={handleSubmit}
       >
         <h3 className="text-lg font-semibold">Write a Review</h3>
         <Input
-          type="text"
           placeholder="Your Name"
+          type="text"
           value={newReview.name}
           onChange={(e) => setNewReview({ ...newReview, name: e.target.value })}
         />
@@ -80,7 +80,7 @@ export default function ProductReview() {
             setNewReview({ ...newReview, comment: e.target.value })
           }
         />
-        <Button type="submit" className="w-full">
+        <Button className="w-full" type="submit">
           Submit Review
         </Button>
       </form>
