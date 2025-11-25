@@ -95,6 +95,7 @@ export default function PaymentForm({ order, isLoading }: IProps) {
           paymentMethod: paymentIntent.payment_method_types,
           status: paymentIntent.status,
           isPaid: true,
+          userId: user?._id as string,
         };
 
         console.log(paymentData);

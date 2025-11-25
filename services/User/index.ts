@@ -1,4 +1,4 @@
-"use server";
+// "use server";
 
 import envConfig from "@/config/envConfig";
 import axiosInstance from "@/lib/AxiosInstance";
@@ -40,7 +40,7 @@ export const createUser = async (userData: TUser) => {
   } catch (error: any) {
     console.error(
       "Error creating user:",
-      error.response?.data || error.message,
+      error.response?.data || error.message
     );
     throw new Error(error.response?.data?.message || "Failed to create user");
   }
@@ -82,7 +82,7 @@ export const deleteUser = async (userId: string) => {
 // Update user
 export const updateUser = async (
   userId: string,
-  updatedData: Partial<TUser> | FormData,
+  updatedData: Partial<TUser> | FormData
 ) => {
   try {
     const { data } = await axiosInstance.patch(
@@ -93,7 +93,7 @@ export const updateUser = async (
           updatedData instanceof FormData
             ? { "Content-Type": "multipart/form-data" }
             : undefined,
-      },
+      }
     );
 
     return data;

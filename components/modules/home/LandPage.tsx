@@ -5,10 +5,10 @@ import { SearchIcon } from "lucide-react";
 
 import { TProduct } from "@/types";
 
-interface IProps {
-  products: TProduct[];
-}
-export default function Landing({ products }: IProps) {
+// interface IProps {
+//   products: TProduct[];
+// }
+export default function Landing() {
   return (
     <div className="relative h-[calc(100vh-100px)] w-full bg-[url('/bannerImg2.png')] bg-cover bg-no-repeat bg-center flex items-center justify-center rounded-lg">
       {/* Overlay */}

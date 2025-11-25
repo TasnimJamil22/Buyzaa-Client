@@ -13,7 +13,7 @@ interface IProps {
   variant?: "flat" | "bordered" | "faded" | "underlined";
   size?: "sm" | "md" | "lg";
   required?: boolean;
-  type?: "text" | "email" | "url" | "password";
+  type?: "text" | "email" | "url" | "password" | "number";
   label: string;
   name: string;
   defaultValue?: string;

@@ -9,6 +9,7 @@ import {
   createUser,
   deleteUser,
   getAllUser,
+  getASingleUser,
   updateUser,
 } from "@/services/User";
 import { TUser } from "@/types";
@@ -112,3 +113,4 @@ export const useUpdateUser = () => {
     },
   });
 };
+ 
