@@ -46,7 +46,7 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
     //Keep only products whose name includes that search word.
     if (search) {
       temp = temp.filter((p) =>
-        p.name.toLowerCase().includes(search.toLowerCase()),
+        p.name.toLowerCase().includes(search.toLowerCase())
       );
     }
     //👉 If the user selected a specific category:
@@ -81,7 +81,7 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
           // className="w-full md:w-64" // full width on mobile, 16rem on desktop
         />
         <select
-          className="border rounded p-2"
+          className="border rounded p-2 bg-default-100"
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
         >
@@ -93,14 +93,14 @@ export default function ProductFilter({ categories }: ProductFilterProps) {
           ))}
         </select>
         <select
-          className="border rounded p-2"
+          className="border rounded p-2 bg-default-100"
           value={priceFilter}
           onChange={(e) => setPriceFilter(e.target.value)}
         >
           <option value="">Price</option>
           {products
             .filter(
-              (p, i, arr) => arr.findIndex((x) => x.price === p.price) === i,
+              (p, i, arr) => arr.findIndex((x) => x.price === p.price) === i
             ) // remove duplicate prices
             .sort((a, b) => a.price - b.price) // sort low → high
 

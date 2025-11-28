@@ -1,34 +1,52 @@
-import Container from "@/components/UI/Container";
 import ProductDetail from "@/components/UI/Products/ProductDetail";
-import ProductReview from "@/components/UI/Products/ProductReview";
 import { getAProdudctById } from "@/services/Product";
 
-interface PageProps {
-  searchParams: Promise<{
-    [key: string]: string;
-  }>;
-}
-const ProductDetailPage = async({ searchParams }: PageProps) => {
-   const resolvedSearchParams = await searchParams;
-  const { productId } = resolvedSearchParams;
+export default async function ProductDetailsPage({
+  params,
+}: {
+  params: Promise<{ productId: string }>;
+}) {
+  const { productId } = await params;
   const { data: product } = await getAProdudctById(productId);
-
-  console.log(product);
-
+  // console.log("hello single product", product);
   return (
-    <Container>
-      <div className="mx-auto bg-default-100 rounded-lg">
-        {/* <h1>{product.name}</h1> */}
-        <ProductDetail key={product?._id} product={product} />
-      </div>
-      <div className="my-12">
-        <ProductReview />
-      </div>
-    </Container>
+    <div>
+      <ProductDetail key={product?._id} product={product} />
+    </div>
   );
-};
+}
+//
+// import Container from "@/components/UI/Container";
+// import ProductDetail from "@/components/UI/Products/ProductDetail";
+// import ProductReview from "@/components/UI/Products/ProductReview";
+// import { getAProdudctById } from "@/services/Product";
 
-export default ProductDetailPage;
+// interface PageProps {
+//   searchParams: Promise<{
+//     [key: string]: string;
+//   }>;
+// }
+// const ProductDetailPage = async ({ searchParams }: PageProps) => {
+//   const resolvedSearchParams = await searchParams;
+//   const { productId } = resolvedSearchParams;
+//   const { data: product } = await getAProdudctById(productId);
+
+//   console.log("hey product", product);
+
+//   return (
+//     <Container>
+//       <div className="mx-auto bg-default-100 rounded-lg">
+//         {/* <h1>{product.name}</h1> */}
+//         <ProductDetail key={product?._id} product={product} />
+//       </div>
+//       <div className="my-12">
+//         <ProductReview />
+//       </div>
+//     </Container>
+//   );
+// };
+
+// export default ProductDetailPage;
 
 //
 // import Container from "@/components/UI/Container";

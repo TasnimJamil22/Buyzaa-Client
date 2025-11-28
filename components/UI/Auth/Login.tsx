@@ -50,7 +50,7 @@ export default function Login() {
     handleLoginUser(userData);
 
     setIsLoading(true);
-    console.log(userData);
+    // console.log(userData);
   };
 
   // const onSubmit: SubmitHandler<FieldValues> = (data) => {

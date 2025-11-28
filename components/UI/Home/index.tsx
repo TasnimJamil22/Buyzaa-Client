@@ -32,7 +32,7 @@ export default function HomePage() {
                 className="object-cover w-full h-72 transform group-hover:scale-110 transition"
                 src={col.img}
               />
-              <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+              <div className="absolute inset-0  bg-opacity-90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
                 <Link
                   className="bg-[#d4af37] text-white px-5 py-2 rounded-lg font-medium"
                   href={`/collection/${col.name.toLowerCase()}`}

@@ -65,7 +65,7 @@ export default function Orders() {
                 <TableCell>
                   <BZModal
                     body={
-                      <div className="space-y-3 p-4 bg-gray-50 rounded-md text-sm">
+                      <div className="space-y-3 p-4   rounded-md text-sm">
                         <p>
                           <span className="font-semibold">Order ID:</span>
                           {order.orderNumber}
@@ -140,7 +140,7 @@ export default function Orders() {
                     onClick={() => {
                       if (
                         window.confirm(
-                          "Are you sure you want to delete this order?",
+                          "Are you sure you want to delete this order?"
                         )
                       ) {
                         deleteOrder(order._id);

@@ -331,10 +331,17 @@ export default function Navbar() {
       </NavbarMenu> */}
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
-          {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item.label}-${index}`}>
-              <Link
-                className={`
+          {siteConfig.navMenuItems
+            .filter((item) => {
+              if (item.label === "Cart") {
+                return user?.role !== "ADMIN"; // hiding Cart for admin, show otherwise
+              }
+              return true; // all other items always show
+            })
+            .map((item, index) => (
+              <NavbarMenuItem key={`${item.label}-${index}`}>
+                <Link
+                  className={`
             block
             text-lg
             font-medium
@@ -344,12 +351,12 @@ export default function Navbar() {
             text-default-500
             hover:bg-gray-100
           `}
-                href={item.href} // functional link
-              >
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
+                  href={item.href} // functional link
+                >
+                  {item.label}
+                </Link>
+              </NavbarMenuItem>
+            ))}
         </div>
       </NavbarMenu>
     </HeroUINavbar>

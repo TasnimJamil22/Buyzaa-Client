@@ -62,7 +62,6 @@ export default function Sidebar() {
       >
         {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
       </button>
-
       {/* 🔹 Overlay when sidebar is open on mobile */}
       {isOpen && (
         // <div
@@ -70,14 +69,13 @@ export default function Sidebar() {
         //   onClick={() => setIsOpen(false)}
         // />
         <div
-          className="fixed inset-0 bg-black bg-opacity-40 z-30 md:hidden"
+          className="fixed inset-0   bg-opacity-40 z-30 md:hidden"
           role="button"
           tabIndex={0}
           onClick={() => setIsOpen(false)}
           onKeyDown={() => setIsOpen(false)} // accessibility for keyboard
         />
       )}
-
       {/* 🔹 Sidebar */}
       <aside
         className={`
@@ -86,7 +84,7 @@ export default function Sidebar() {
     transform transition-transform duration-300 ease-in-out
     ${isOpen ? "translate-x-0" : "-translate-x-full"}
     md:translate-x-0 md:relative md:h-full md:top-0
-    z-20
+    z-40
   `}
       >
         {/* Sidebar content */}
