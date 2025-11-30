@@ -16,7 +16,7 @@ export default function NotFoundPage() {
       </h1>
 
       <p className="text-gray-300 mb-6 text-lg text-center max-w-md">
-        The page you're looking for doesn't exist or has been moved.
+        The page you&apos;re looking for doesn&apos;t exist.
       </p>
 
       <Button className="rounded-2xl px-6 py-3 text-lg font-semibold bg-gradient-to-r from-yellow-500 to-yellow-700 hover:opacity-90 shadow-xl">
