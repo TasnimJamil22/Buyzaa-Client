@@ -1,53 +1,133 @@
-# Next.js & HeroUI Template
+  
+```md
+# 🛍️ Buyzaa – Full-Stack E-commerce Platform
 
-This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
+Buyzaa is a modern full-stack e-commerce application built with **Next.js**, **Node.js**, **Express**, **MongoDB**, **Tailwind**, **HeroUI**, and **Cloudinary**.  
+It includes authentication, admin dashboard, product management, and a smooth shopping experience.
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
+---
 
-## Technologies Used
+## 🚀 Live Demo
+🔗 **https://buyzaa-client.vercel.app/**
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [HeroUI v2](https://heroui.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+---
 
-## How to Use
+## 🧑‍💼 Admin Demo Login
+Use this account to test the admin dashboard:
 
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
-
-```bash
-npx create-next-app -e https://github.com/heroui-inc/next-app-template
 ```
 
-### Install dependencies
+Email: [admin@buyzaa.com](mailto:admin@buyzaa.com)
+Password: Admin123
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+```
 
-```bash
+---
+
+## ✨ Features
+
+### 🔐 Authentication
+- JWT login & register  
+- Role-based access (Admin & User)  
+- Protected routes  
+
+### 🛍️ User Features
+- Browse products  
+- Product search & filtering  
+- Add to cart / remove from cart  
+- Product details page  
+- Responsive UI  
+
+### 🛠️ Admin Features
+- Admin-only dashboard  
+- Add/Edit/Delete products  
+- Category management  
+- View all users  
+- Cloudinary image upload  
+- Full CRUD operations  
+
+---
+
+## 🧰 Tech Stack
+
+### **Frontend**
+- Next.js (App Router)  
+- React  
+- TypeScript  
+- Tailwind CSS  
+- HeroUI  
+- React Query  
+- Axios  
+
+### **Backend**
+- Node.js  
+- Express.js  
+- MongoDB + Mongoose  
+- JWT Authentication  
+- Multer + Cloudinary  
+
+### **Deployment**
+- Vercel (Frontend)  
+- MongoDB Atlas  
+
+---
+
+
+---
+
+## 🔧 Environment Variables
+
+### **Client → `.env.local`**
+```
+
+NEXT_PUBLIC_BASE_API=https://buyzaa-server-production.up.railway.app/api/v1
+
+```
+ 
+📌 `.env` is ignored from GitHub for security.
+
+---
+
+## 🛠️ Run Locally
+
+### **Clone Projects**
+```
+
+git clone your-client-repo-link
+git clone your-server-repo-link
+
+```
+
+### **Install Dependencies**
+```
+
 npm install
+
 ```
 
-### Run the development server
+### **Run Frontend**
+```
 
-```bash
 npm run dev
+
 ```
 
-### Setup pnpm (optional)
+---
 
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@heroui/*
+## 📝 API Endpoints (Examples)
 ```
 
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
+POST /api/auth/login
+POST /api/auth/register
+GET  /api/products
+POST /api/products         (Admin)
+PUT  /api/products/:id     (Admin)
+DELETE /api/products/:id   (Admin)
 
-## License
+```
 
-Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
+ 
+
+ 
+
+ 
