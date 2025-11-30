@@ -1,7 +1,8 @@
 # Buyzaa – Full-Stack E-commerce Platform
 
-Buyzaa is a modern full-stack e-commerce application built with **Next.js**, **Node.js**, **Express**, **MongoDB**, **Tailwind**, **HeroUI**, and **Cloudinary**.  
-It includes authentication, admin dashboard, product management, and a smooth shopping experience.
+Buyzaa is a modern full-stack **art e-commerce platform** built with **Next.js**, **Node.js**, **Express**, **MongoDB**, **Tailwind CSS**, **HeroUI**, and **Cloudinary**.  
+It allows artists to showcase their art and customers to browse, purchase, and enjoy a smooth shopping experience.
+
 
 ---
 
