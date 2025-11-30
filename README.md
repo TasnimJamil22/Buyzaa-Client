@@ -1,4 +1,4 @@
-# 🛍️ Buyzaa – Full-Stack E-commerce Platform
+# Buyzaa – Full-Stack E-commerce Platform
 
 Buyzaa is a modern full-stack e-commerce application built with **Next.js**, **Node.js**, **Express**, **MongoDB**, **Tailwind**, **HeroUI**, and **Cloudinary**.  
 It includes authentication, admin dashboard, product management, and a smooth shopping experience.
@@ -10,7 +10,7 @@ It includes authentication, admin dashboard, product management, and a smooth sh
 
 ---
 
-## 🧑‍💼 Admin Demo Login
+##  Admin Demo Login
 Use this account to test the admin dashboard:
 
 ```
@@ -29,14 +29,14 @@ Password: Admin123
 - Role-based access (Admin & User)  
 - Protected routes  
 
-### 🛍️ User Features
+###  User Features
 - Browse products  
 - Product search & filtering  
 - Add to cart / remove from cart  
 - Product details page  
 - Responsive UI  
 
-### 🛠️ Admin Features
+###  Admin Features
 - Admin-only dashboard  
 - Add/Edit/Delete products  
 - Category management  
@@ -112,7 +112,7 @@ npm run dev
 
 ---
 
-## 📝 API Endpoints (Examples)
+##  API Endpoints (Examples)
 ```
 
 POST /api/auth/login
