@@ -16,8 +16,8 @@ Use this account to test the admin dashboard:
 
 ```
 
-Email: [admin@buyzaa.com](mailto:admin@buyzaa.com)
-Password: Admin123
+Email: taif@gmail.com
+Password: 123456
 
 ```
 
