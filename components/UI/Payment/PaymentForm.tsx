@@ -19,8 +19,8 @@ export default function PaymentForm({ order, isLoading }: IProps) {
   const { mutate: handleCreatePaymentRecord, isSuccess } =
     useCreatePaymentRecord();
 
-  console.log("totalamout", order.totalAmount);
-  console.log(order);
+  // console.log("totalamout", order.totalAmount);
+  // console.log(order);
   const [error, setError] = useState<string | undefined>("");
   const stripe = useStripe();
   const elements = useElements();
@@ -84,7 +84,7 @@ export default function PaymentForm({ order, isLoading }: IProps) {
 
       //step-5 mark order paid also create payment history
       if (paymentIntent.status === "succeeded") {
-        console.log("✅ Payment successful!", paymentIntent);
+        // console.log("✅ Payment successful!", paymentIntent);
         const transactionId = paymentIntent.id;
         const paymentData: TPayment = {
           orderId: orderId as string,
@@ -98,7 +98,7 @@ export default function PaymentForm({ order, isLoading }: IProps) {
           userId: user?._id as string,
         };
 
-        console.log(paymentData);
+        // console.log(paymentData);
         handleCreatePaymentRecord(paymentData);
         setTransactionId(paymentIntent.id); // store transaction id
       }

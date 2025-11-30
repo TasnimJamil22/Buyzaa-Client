@@ -19,7 +19,7 @@ export default function Orders() {
   const { data } = useGetAllOrders();
   const orders: TOrder[] = data?.data || [];
 
-  console.log(orders);
+  // console.log(orders);
   const { mutate: deleteOrder } = useDeleteOrder();
 
   return (

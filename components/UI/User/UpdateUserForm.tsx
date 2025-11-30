@@ -25,7 +25,7 @@ export default function UpdateUserForm({ user }: UpdateUserFormProps) {
       userId: user._id as string,
       updatedData: data,
     });
-    console.log(data);
+    // console.log(data);
   };
 
   return (

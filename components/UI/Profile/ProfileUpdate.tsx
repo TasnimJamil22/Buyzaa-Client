@@ -25,7 +25,7 @@ export default function ProfileUpdate({ user }: UpdateUserFormProps) {
       userId: user._id as string,
       updatedData: data,
     });
-    console.log(data);
+    // console.log(data);
   };
 
   return (

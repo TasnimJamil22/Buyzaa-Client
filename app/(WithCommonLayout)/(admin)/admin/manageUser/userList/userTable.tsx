@@ -39,7 +39,7 @@ export default function UserTable() {
 
   const users = data?.data ?? [];
 
-  console.log(users);
+  // console.log(users);
 
   const { mutate: handleDeleteUser, isSuccess } = useDeleteUser();
   const { mutate: handleCreateUser, isPending: createUserLoading } =
@@ -66,7 +66,7 @@ export default function UserTable() {
   const { handleSubmit } = methods;
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("Submitting user:", data);
+    // console.log("Submitting user:", data);
     const userData = {
       ...data,
     };

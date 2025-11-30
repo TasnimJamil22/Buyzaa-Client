@@ -23,10 +23,10 @@ export const createOrder = async (orderData: TOrder) => {
         headers: {
           Authorization: `Bearer ${token}`, // attach token
         },
-      },
+      }
     );
 
-    console.log("Response from backend:", data);
+    // console.log("Response from backend:", data);
 
     return data;
   } catch (err: any) {
@@ -42,7 +42,8 @@ export const getAllOrders = async () => {
 
     return data;
   } catch (err: any) {
-    console.log(err.message);
+    // console.log(err.message);
+    throw new Error(err.message);
   }
 };
 
@@ -53,7 +54,7 @@ export const getMyOrders = async () => {
 
     return data;
   } catch (err: any) {
-    console.log(err.message);
+    // console.log(err.message);
     throw new Error(err.message); // ✅ React Query will call onError instead of onSuccess
   }
 };
@@ -64,8 +65,9 @@ export const getASingleOrder = async (orderId: string) => {
     const { data } = await axiosInstance.get(`/checkout/${orderId}`);
 
     return data;
-  } catch (error: any) {
-    console.log(error.message);
+  } catch (err: any) {
+    // console.log(error.message);
+    throw new Error(err.message);
   }
 };
 
@@ -75,7 +77,8 @@ export const deleteOrder = async (orderId: string) => {
     const { data } = await axiosInstance.delete(`/checkout/${orderId}`);
 
     return data;
-  } catch (error: any) {
-    console.log(error.message);
+  } catch (err: any) {
+    // console.log(err.message);
+    throw new Error(err.message);
   }
 };

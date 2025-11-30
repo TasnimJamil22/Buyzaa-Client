@@ -6,8 +6,8 @@ export default async function Products() {
   const { data: products } = await getAllProducts();
   const { data: categories } = await getAllCategories();
 
-  console.log("the:", products);
-  console.log("the:", categories);
+  // console.log("the:", products);
+  // console.log("the:", categories);
 
   return (
     <div>

@@ -23,7 +23,7 @@ export default function UpdateProductForm({ product }: IProps) {
       productId: data?._id as string,
       updatedData: data,
     });
-    console.log(data);
+    // console.log(data);
   };
 
   return (

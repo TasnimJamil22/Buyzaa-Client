@@ -21,7 +21,7 @@ export default function Settings() {
   const [timezone, setTimezone] = useState("GMT+6");
 
   const handleSave = () => {
-    console.log({ username, language, notifications, timezone });
+    // console.log({ username, language, notifications, timezone });
   };
 
   return (

@@ -56,7 +56,7 @@ export default function CheckoutForm() {
       totalAmount,
     };
 
-    console.log(formData);
+    // console.log(formData);
     handleCreateOrder(formData);
     router.push("/profile/orders");
   };

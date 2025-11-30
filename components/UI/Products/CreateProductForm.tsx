@@ -17,7 +17,7 @@ export default function CreateProductForm({ products }: IProps) {
   const { data, isLoading, isSuccess } = useGetAllCategories();
   const categories: TCategory[] = data?.data || [];
 
-  console.log(categories);
+  // console.log(categories);
   //2
   // const { register, handleSubmit, reset } = useForm(); // ✅ this line gives you register
 
@@ -30,7 +30,7 @@ export default function CreateProductForm({ products }: IProps) {
     };
 
     handleCreateProduct(payload);
-    console.log(payload);
+    // console.log(payload);
   };
 
   return (

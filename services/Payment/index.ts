@@ -9,7 +9,7 @@ import { TPayment } from "@/types";
 // 2️⃣ Create payment intent (calls your server route)
 export const createPaymentIntent = async (
   amountInCents: number,
-  orderId: string,
+  orderId: string
 ) => {
   try {
     //we are sending ..to backend/api
@@ -21,11 +21,12 @@ export const createPaymentIntent = async (
     });
     const clientSecret = data.clientSecret;
 
-    console.log("res from intent", data);
+    // console.log("res from intent", data);
 
     return clientSecret; // client secret from backend
   } catch (err: any) {
-    console.log(err.message);
+    // console.log(err.message);
+    throw new Error(err.message);
 
     return null;
   }
@@ -40,7 +41,8 @@ export const createPaymentRecord = async (paymentData: TPayment) => {
 
     return data;
   } catch (err: any) {
-    console.log(err.message);
+    // console.log(err.message);
+    throw new Error(err.message);
   }
 };
 
@@ -51,7 +53,8 @@ export const getAllPayments = async () => {
 
     return data;
   } catch (err: any) {
-    console.log(err.message);
+    // console.log(err.message);
+    throw new Error(err.message);
   }
 };
 
@@ -62,6 +65,7 @@ export const getMyPayments = async () => {
 
     return data;
   } catch (err: any) {
-    console.log(err.message);
+    // console.log(err.message);
+    throw new Error(err.message);
   }
 };

@@ -20,7 +20,7 @@ export default function Orders() {
   const { data } = useGetMyOrders();
   const orders: TOrder[] = data?.data || [];
 
-  console.log(orders);
+  // console.log(orders);
 
   return (
     <>

@@ -75,7 +75,7 @@ import { uploadImage } from "@/services/Profile";
 export default function ProfileCard() {
   const { user, setUser } = useUser();
 
-  console.log(user?.name);
+  // console.log(user?.name);
   const handleUpload = async (file: File) => {
     if (!user?._id) return;
 
@@ -91,14 +91,14 @@ export default function ProfileCard() {
       // 2️⃣ Update local state with backend URL
       setUser({ ...user, profilePhoto: uploadedUrl });
 
-      console.log("✅ Profile image uploaded and saved:", uploadedUrl);
+      // console.log("✅ Profile image uploaded and saved:", uploadedUrl);
     } catch (error: any) {
       console.error("Failed to upload profile image:", error.message);
     }
   };
 
-  console.log("pro pic", user?.profilePhoto);
-  console.log(user);
+  // console.log("pro pic", user?.profilePhoto);
+  // console.log(user);
 
   return (
     <div className=" border rounded-2xl shadow-xl p-8 max-w-md mx-auto flex flex-col items-center transition-transform transform hover:scale-105 hover:shadow-2xl">

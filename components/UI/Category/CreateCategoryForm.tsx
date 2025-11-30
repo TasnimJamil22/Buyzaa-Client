@@ -14,7 +14,7 @@ export default function CreaateCategoryForm() {
     };
 
     handleCreateCategory(category);
-    console.log(category);
+    // console.log(category);
   };
 
   return (

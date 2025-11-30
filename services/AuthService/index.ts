@@ -9,7 +9,7 @@ import axiosInstance from "@/lib/AxiosInstance";
 export const registerUser = async (userData: TUser) => {
   const { data } = await axiosInstance.post("/auth/register", userData);
 
-  console.log(data);
+  // console.log(data);
 
   if (data.success) {
     const cookieStore = await cookies();
